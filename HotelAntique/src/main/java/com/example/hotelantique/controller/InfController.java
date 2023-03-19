@@ -26,4 +26,9 @@ public class InfController {
         return "admin-page";
     }
 
+    @GetMapping("/details")
+    public String details(){
+        return "details";
+    }
+
 }

@@ -17,11 +17,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfiguration {
 
-    private final UserRepository userRepository;
-
-    public SecurityConfiguration(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -43,16 +38,16 @@ public class SecurityConfiguration {
                     .formLogin()
                     .loginPage("/login")
                     .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
-                    .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY);
-//                .defaultSuccessUrl("/")
-//                .failureForwardUrl("/login-error");
+                    .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
+                .defaultSuccessUrl("/home")
+                .failureForwardUrl("/login-error");
         return http.build();
 
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
-        return new ApplicationUserDetailsService(this.userRepository);
+    public UserDetailsService userDetailsService(UserRepository userRepository){
+        return new ApplicationUserDetailsService(userRepository);
     }
 
 }
