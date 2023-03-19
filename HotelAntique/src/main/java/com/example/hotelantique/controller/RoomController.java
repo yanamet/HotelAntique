@@ -21,10 +21,11 @@ public class RoomController {
     public String allRooms(Model model){
 
         List<RoomViewDTO> allRooms = this.roomService.getAllRooms();
-        model.addAttribute(allRooms);
-
+        model.addAttribute("allRooms", allRooms);
 
         return "all-rooms";
     }
+
+
 
 }

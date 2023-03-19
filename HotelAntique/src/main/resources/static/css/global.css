@@ -60,3 +60,7 @@ label, h2{
     margin-bottom: 10%;
     background-color: rgba(224, 184, 130, 0.9);
 }
+
+.color-background{
+    background-color: #fdfaf8;
+}

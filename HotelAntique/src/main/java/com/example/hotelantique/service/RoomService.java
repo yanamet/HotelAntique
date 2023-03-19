@@ -26,8 +26,17 @@ public class RoomService {
         List<Room> allRooms = this.roomRepository.findAll();
         return allRooms
                 .stream()
-                .map(r -> this.modelMapper.map(r, RoomViewDTO.class))
+                .map(this::roomViewDtoMap)
                 .collect(Collectors.toList());
+    }
+
+    public RoomViewDTO roomViewDtoMap(Room room){
+
+        RoomViewDTO roomViewDTO = this.modelMapper.map(room, RoomViewDTO.class);
+        roomViewDTO.setType(room.getRoomType().name());
+
+        return roomViewDTO;
+
     }
 
 
