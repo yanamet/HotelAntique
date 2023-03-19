@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HotelAntique</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="/css/global.css">
+</head>
+<body>
+
+<nav th:replace="~{fragments/commons::nav}"></nav>
+
+<div class="container-fluid bg">
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+
+
+
+            <form class="form-container"
+                  th:method="post"
+                  th:action="@{/login}"
+            >
+                <h2 class="text-center">LOGIN</h2>
+
+                <div class="form-group">
+                    <div class="label-holder text-white ">
+                        <label for="username" class="h3 mb-2">Username</label>
+                    </div>
+                    <input
+                            type="text"
+                            class="form-control"
+
+
+                            id="username"
+                            name="username"/>
+                </div>
+                <small class="bg-danger text-light rounded">Username must be between 3 and 20 symbols</small>
+
+
+
+                <div class="form-group">
+                    <div class="label-holder text-white textCol d-flex">
+                        <label for="password" class="h4 mb-2">Password</label>
+                    </div>
+                    <input type="password"
+                           class="form-control"
+
+                           id="password"
+                           name="password"/>
+                    <small class="bg-danger text-light rounded">Password must be between 5 and 20 symbols</small>
+                </div>
+
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-rounded">LOGIN</button>
+                    <p>Don't have an account? <a href="/register">Register here</a></p>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12"></div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
+
+</body>
+</html>

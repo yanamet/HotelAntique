@@ -1,0 +1,26 @@
+
+$light-beige: #FAF1CB;
+$dark-beige: #D1AD7C;
+$footer: #151414;
+
+
+$white:    #fff ;
+$gray-100: #f8f9fa ;
+$gray-200: #e9ecef ;
+$gray-300: #dee2e6 ;
+$gray-400: #ced4da ;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black:    #000 ;
+
+
+$primary: $light-beige;
+$secondary: $dark-beige;
+
+$enable-shadows:  true;
+
+// IMPORT BOOTSTRAP
+@import "../node_modules/bootstrap/scss/bootstrap.scss";

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HotelAntique</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/global.css">
+</head>
+<body class="logo-background">
+
+<nav th:replace="fragments/commons::nav"></nav>
+
+
+<main class="p-5  text-center my-main">
+
+    <div class="d-flex justify-content-center">
+        <form action="/" method="POST"
+              class="text-light bg-secondary form-container">
+            <h1 class="text-light border-bottom">Reserve</h1>
+
+            <div class="form-group mx-sm-3 mb-2">
+
+
+                <div class="col">
+                    <label for="name">Guest full name</label>
+                    <input name="name" id="name" type="text" class="form-control" placeholder="Full name">
+                    <small id="nameError" class="bg-danger text-light rounded">Name must be between 3 and 20
+                        characters</small>
+                </div>
+
+                <div class="col">
+                    <label for="roomType">Room Type</label>
+                    <select name="roomType" id="roomType" class="form-select">
+                        <option value="" selected>Select room type</option>
+                        <option value="">Double Standard Room</option>
+                        <option value="">Double Deluxe Room</option>
+                        <option value="">Double Premium Room</option>
+                        <option value="">Studio</option>
+                        <option value="">Apartment</option>
+                        <option value="">VIP Apartment</option>
+                        <option value="">President Apartment</option>
+                    </select>
+                    <small id="roomTypeError" class="bg-danger text-light rounded">You must select a room type</small>
+                </div>
+
+                <div class="col">
+                    <label for="checkIn">Check in</label>
+                    <input name="checkIn" id="checkIn" type="date" class="form-control" placeholder="Check in">
+                    <small id="checkInError" class="bg-danger text-light rounded">Check in date cannot be in the
+                        past</small>
+                </div>
+
+                <div class="col">
+                    <label for="checkOut">Check out</label>
+                    <input name="checkOut" id="checkOut" type="date" class="form-control" placeholder="Check out">
+                    <small id="checkOutError" class="bg-danger text-light rounded">Check in date cannot be in the
+                        past</small>
+                </div>
+
+
+                <div class="col">
+                    <label for="email">Email</label>
+                    <input name="email" id="email" type="text" class="form-control"
+                           placeholder="example@hotel-antique.bg">
+                    <small id="emailError" class="bg-danger text-light rounded">Email is required</small>
+                </div>
+
+                <div class="col">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input name="phoneNumber" id="phoneNumber" type="text" class="form-control" placeholder="+359 ....">
+                    <small id="phoneNumberError" class="bg-danger text-light rounded">Phone number is required</small>
+                </div>
+            </div>
+
+
+            <div class="col">
+                <label for="specialWishes">Special wishes</label>
+                <textarea name="specialWishes" id="specialWishes" type="text" class="form-control"
+                          placeholder="Special wishes: early check in, etc."></textarea>
+            </div>
+
+            <div class="d-flex justify-content-center mt-4">
+                <button class=" btn-rounded btn-block w-50" type="submit">RESERVE</button>
+            </div>
+        </form>
+    </div>
+
+    </div>
+</main>
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

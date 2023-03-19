@@ -1,0 +1,49 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hotelAntique?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: root
+    password: Yana13042308
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          facebook:
+#            client-id: your-client-id-here
+#            client-secret: your-secret-here
+#  sql:
+#    init:
+#      mode: always
+app:
+  default:
+    password: 12345
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+management:
+  server:
+    port: 8081
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: "*"
+
+#mail:
+#  host: "localhost"
+#  port: 1025
+#  username: "mobilele@mobilele.com"
+#  password: ""
+

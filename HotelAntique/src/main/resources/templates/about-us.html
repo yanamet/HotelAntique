@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HotelAntique</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/global.css">
+</head>
+<body>
+
+<nav th:replace="fragments/commons::nav"></nav>
+
+<div class="row">
+
+    <div class="contact-box pt-1 d-md-block d-lg-flex d-flex   justify-content-center">
+
+    <div class="contact-box__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-booking" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M4 18v-9.5a4.5 4.5 0 0 1 4.5 -4.5h7a4.5 4.5 0 0 1 4.5 4.5v7a4.5 4.5 0 0 1 -4.5 4.5h-9.5a2 2 0 0 1 -2 -2z" />
+            <path d="M8 12h3.5a2 2 0 1 1 0 4h-3.5v-7a1 1 0 0 1 1 -1h1.5a2 2 0 1 1 0 4h-1.5" />
+            <line x1="16" y1="16" x2="16.01" y2="16" />
+        </svg>
+    </div>
+    <div class="contact-box__info">
+        <p class="contact-box__info--subtitle">Amazing - 9.1/10</p>
+    </div>
+
+</div>
+
+
+
+<div class="d-flex p-2">
+
+    <div class="align-items-center">
+        <img src="./images/largeLogo.jpeg" alt=""  class="img-fluid mb-2">
+    </div>
+
+    <div class="container rounded mt-2 welcome-page align-items-center mt-5" style="width: 50%;">
+
+
+
+        <p class="h2"> Hotel Antique is a charming boutique
+            hotel located in the heart of the historic
+            Old Town of Plovdiv, Bulgaria. The hotel
+            is housed in a beautifully restored 19th-
+            century building that retains much of its
+            original architecture and features.
+        </p>
+        <hr class="my-3 bg-white w-90"/>
+
+
+        <p class="h3"> The hotel's interior is tastefully
+            decorated with antique furnishings and
+            art pieces, creating an elegant and
+            unique atmosphere.
+        </p>
+        <hr class="my-3 bg-white w-90"/>
+
+        <p class="h3"> Hotel Antique offers a range of room
+            options to suit different needs and
+            preferences, from cozy single rooms to
+            luxurious suites with balconies
+            overlooking the Old Town.
+        </p>
+        <hr class="my-3 bg-white w-90"/>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<footer th:replace="fragments/commons::footer"></footer>
+</div>
+</body>
+</html>

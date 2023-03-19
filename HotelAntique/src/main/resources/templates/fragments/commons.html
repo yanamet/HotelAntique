@@ -1,0 +1,135 @@
+<nav class="navbar navbar-expand-lg bg-primary menu">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/images/hotelLogo.png" alt="logo image">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/reservations/add">RESERVE <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#/aboutUs">ABOUT US</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">GALLERY</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">CONTACTS</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">MY PROFILE</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">LOGIN</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">REGISTER</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">LOGOUT</a>
+                </li>
+
+            </ul>
+            <button type="button" class="rounded-pill btn-rounded">+359 87 9979883
+                <span></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- FOOTER SECTION -->
+
+<th:block th:fragment="footer">
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-lg-4 contact-box pt-1 d-md-block d-lg-flex d-flex">
+                    <div class="contact-box__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-phone-call"
+                             viewBox="0 0 24 24" stroke-width="1" fill="none" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"/>
+                            <path d="M15 7a2 2 0 0 1 2 2"/>
+                            <path d="M15 3a6 6 0 0 1 6 6"/>
+                        </svg>
+                    </div>
+                    <div class="contact-box__info">
+                        <a href="" class="contact-box__info--title">+359 87 9979883</a>
+                        <p class="contact-box__info--subtitle">Mon-Sun</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 contact-box pt-1 d-md-block d-lg-flex d-flex">
+                    <div class="contact-box__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail"
+                             viewBox="0 0 24 24" stroke-width="1" fill="none" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <rect x="3" y="5" width="18" height="14" rx="2"/>
+                            <polyline points="3 7 12 13 21 7"/>
+                        </svg>
+                    </div>
+                    <div class="contact-box__info">
+                        <a href="mailto:reservations@hotelantique.bg" class="contact-box__info--title">reservations@hotelantique.bg</a>
+                        <p class="contact-box__info--subtitle">Online support</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 contact-box pt-1 d-md-block d-lg-flex d-flex">
+                    <div class="contact-box__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin"
+                             viewBox="0 0 24 24" stroke-width="1" fill="none" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <circle cx="12" cy="11" r="3"/>
+                            <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"/>
+                        </svg>
+                    </div>
+                    <div class="contact-box__info">
+                        <a href="https://goo.gl/maps/HkM61D62qcTZHCAPA" class="contact-box__info--title">bul. "Vasil
+                            Aprilov" 1</a>
+                        <p class="contact-box__info--subtitle">Plovdiv, Bulgaria</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-sm" style="background-color: #212121;">
+            <div class="contaier">
+                <div class="row py-4 text-center text-white">
+                    <div class="col-lg-5 col-md-6 mb-2 mb-md-0">
+                        Connect with us in social media
+                    </div>
+                    <div class="col-lg-7 col-md-6">
+                        <a href="https://www.facebook.com/HotelAntiquePlovdiv"><i class="fab fa-facebook"></i></a>
+                        <a href="https://instagram.com/hotel_antique_plovdiv?igshid=YmMyMTA2M2Y="><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid text-center">
+            <div style="color: aliceblue;">
+                &copy; SoftUni Student 2023. All rights reserved.
+            </div>
+        </div>
+
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</th:block>
+

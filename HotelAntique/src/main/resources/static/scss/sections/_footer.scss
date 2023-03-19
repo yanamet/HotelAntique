@@ -1,0 +1,54 @@
+@use '../custom' as *;
+@use '../components/mixins' as *;
+
+.footer{
+    padding-top: 1rem;
+    background-color: $footer;
+}
+
+.contact-box{
+    position: relative;
+    font-weight: 600;
+
+    &__icon{
+        width: 3rem;
+        stroke: $primary;
+    }
+
+    &__info{
+        padding: 0.4rem;
+
+        &--title{
+            font-size: 1.2rem;
+            color: $white;
+            text-decoration: none;
+        }
+
+        &--subtitle{
+            font-size: 1rem;
+            color: $gray-600;
+            text-decoration: none;
+        }
+    }
+}
+
+.footer-sm{
+
+    a{
+        color: $white;
+        font-size: 1.5rem;
+
+        i{
+            font-size: 1.5rem;
+            margin-left: 1rem;
+        }
+    }
+}
+
+.fa-facebook:hover{
+ color: $gray-800;
+}
+
+.fa-instagram:hover{
+    color: $gray-800;
+}

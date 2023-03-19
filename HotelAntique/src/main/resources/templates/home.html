@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HotelAntique</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="css/global.css">
+</head>
+<body>
+
+<nav th:replace="fragments/commons::nav"></nav>
+
+<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel" style="height: 50%;">
+  <div class="carousel-inner">
+    <div class="carousel-item active" data-bs-interval="5000">
+      <img src="images/carousel1.jpg" class="d-block w-100" alt="..." style="height:30rem;">
+    </div>
+    <div class="carousel-item" data-bs-interval="5000">
+      <img src="images/carousel2.jpg" class="d-block w-100" alt="..." style="height:30rem;">
+    </div>
+    <div class="carousel-item"  data-bs-interval="5000">
+      <img src="images/carousel3.jpg" class="d-block w-100" alt="..." style="height:30rem;">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+<div> 
+  <!-- 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif  -->
+  <span style="font-family: Georgia, 'Times New Roman', Times, serif">
+    <h3 style="text-align: center;">WELCOME</h3>
+    <h4 style="text-align: center;">
+       We are happy to welcome you to our stunning hotel, where
+location and design come together to
+create an unforgettable experience. From the moment you step into our
+lobby, you'll be mesmerized by the
+unique and modern design that flows
+throughout the entire hotel. At our hotel, we are committed to
+providing exceptional service, and our
+friendly and knowledgeable staff are
+always on hand to ensure your stay is a
+memorable one. So why wait?</h4>
+  <h3 style="text-align: center;">
+    <a class="book-btn" href=""> Book your
+stay with us today and discover the
+perfect blend of style, luxury, and
+location.</a>
+    </h3>
+  </span>
+</div>
+
+<div style="background-color: #f5f3f3; text-align: center; padding-bottom: 3rem; padding-top: 2rem; 
+font-family: Georgia, 'Times New Roman', Times, serif">
+  <h1>What is offered by the hotel</h1>
+
+  <h4  style="display:inline">
+    <span class="badge bg-secondary">
+      Parking spot
+      <span class="badge bg-secondary">
+        <div class="contact-box__icon bg-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-parking" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <rect x="4" y="4" width="16" height="16" rx="2" />
+            <path d="M9 16v-8h4a2 2 0 0 1 0 4h-4" />
+          </svg>
+      </div>
+      </span>
+    </span>
+  </h4>
+
+  <h4 style="display:inline">
+    <span class="badge bg-secondary" >
+      Free Wifi
+      <span class="badge bg-secondary">
+        <div class="contact-box__icon bg-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wifi" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <line x1="12" y1="18" x2="12.01" y2="18" />
+            <path d="M9.172 15.172a4 4 0 0 1 5.656 0" />
+            <path d="M6.343 12.343a8 8 0 0 1 11.314 0" />
+            <path d="M3.515 9.515c4.686 -4.687 12.284 -4.687 17 0" />
+          </svg>
+      </div>
+      </span>
+    </span>
+  </h4>
+
+  <h4 style="display:inline">
+    <span class="badge bg-secondary" >
+      24/7 Reception
+      <span class="badge bg-secondary">
+        <div class="contact-box__icon bg-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <circle cx="12" cy="12" r="9" />
+            <polyline points="12 7 12 12 15 15" />
+          </svg>
+      </div>
+      </span>
+    </span>
+  </h4>
+
+  <h4 style="display:inline">
+    <span class="badge bg-secondary"  >
+      Smart TV
+      <span class="badge bg-secondary">
+        <div class="contact-box__icon bg-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-screen-share" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M21 12v3a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-10a1 1 0 0 1 1 -1h9" />
+            <line x1="7" y1="20" x2="17" y2="20" />
+            <line x1="9" y1="16" x2="9" y2="20" />
+            <line x1="15" y1="16" x2="15" y2="20" />
+            <path d="M17 4h4v4" />
+            <path d="M16 9l5 -5" />
+          </svg>
+      </div>
+      </span>
+    </span>
+  </h4>
+
+  <h4 style="display:inline">
+    <span class="badge bg-secondary"  >
+      Mini Bar
+      <span class="badge bg-secondary">
+        <div class="contact-box__icon bg-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-navbar" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <rect x="4" y="4" width="16" height="16" rx="2" />
+            <line x1="4" y1="9" x2="20" y2="9" />
+          </svg>
+      </div>
+      </span>
+    </span>
+  </h4>
+
+  
+<div style=" padding-top: 2rem;">
+  <span style="font-family: Georgia, 'Times New Roman', Times, serif; color: #212121; font-size: 130%;">
+    Hotel "Antik" offers its own parking with 24 hours video surveillance.
+     All rooms are air-conditioned, noise and heat insulated, which will contribute to your comfort.</span>
+</div>
+ 
+ 
+
+</div>
+
+
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

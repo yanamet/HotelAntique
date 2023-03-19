@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HotelAntique</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/payment.css">
+    <link rel="stylesheet" href="/">
+</head>
+<body>
+
+<nav th:replace="fragments/commons::nav"></nav>
+
+<div class="container">
+
+    <form method="POST" class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center form-payment">
+        <h2 class="text-center text-white">PAYMENT</h2>
+        <div class="row">
+
+
+            <div class="form-group col-md-12 mb-3">
+                <label class="text-center text-white font-weight-bold" for="paymentMethod">Payment Method</label>
+                <select id="paymentMethod" class="form-control" name="paymentMethod">
+                    <option value="" selected>Select payment method</option>
+                    <option value="">Cash</option>
+                    <option value="">Online (card)</option>
+
+                </select>
+                <small id="paymentMethodError" class="bg-danger text-light rounded">You must select payment
+                    method</small>
+            </div>
+
+
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center text-white font-weight-bold" for="cardOwner">Card Owner</label>
+                <input id="cardOwner" type="text" name="cardOwner" class="form-control" placeholder="Card owner name">
+                <small id="cardOwnerError" class="bg-danger text-light rounded">Card owner name is required</small>
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center text-white font-weight-bold" for="cvv">CVV</label>
+                <input id="cvv" type="text" maxlength="3" name="cvv" class="form-control" placeholder="CVV">
+                <small id="cvvError" class="bg-danger text-light rounded">CVV is required</small>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center text-white font-weight-bold" for="expirationMonth">Expiration date</label>
+                <select id="expirationMonth" class="form-control" name="expirationMonth">
+                    <option value="" selected>Select expiration month</option>
+                    <option value="January">01</option>
+                    <option value="February">02</option>
+                    <option value="March">03</option>
+                    <option value="April">04</option>
+                    <option value="May">05</option>
+                    <option value="June">06</option>
+                    <option value="July">07</option>
+                    <option value="August">08</option>
+                    <option value="September">09</option>
+                    <option value="October">10</option>
+                    <option value="November">11</option>
+                    <option value="December">12</option>
+
+                </select>
+                <small id="expirationMonthError" class="bg-danger text-light rounded">Expiration month is
+                    required</small>
+            </div>
+
+            <div class="form-group col-md-6 mb-3">
+                <label class="text-center text-white font-weight-bold" for="expirationYear"> </label>
+                <input id="expirationYear" type="number" min="2023" max="2099" step="1" class="form-control"
+                       placeholder="Expiration year"/>
+                <small id="expirationYearError" class="bg-danger text-light rounded">Expiration month is
+                    required</small>
+            </div>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <div class="form-group  align-items-center">
+                <label class="text-center text-white font-weight-bold" for="cardNumber">Card Number</label>
+                <input id="cardNumber" type="text" name="cardNumber" class="form-control" placeholder="Card number">
+                <small id="cardNumberError" class="bg-danger text-light rounded">Card number is required</small>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col col-md-12">
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-rounded">REGISTER</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div>
+
+
+    <footer th:replace="fragments/commons::footer"></footer>
+</div>
+</body>
+</html>

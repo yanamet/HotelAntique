@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HotelAntique</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" type="text/css" href="/css/global.css">
+</head>
+<body class="logo-background">
+
+<nav th:replace="~{fragments/commons::nav}"></nav>
+
+<div class="container rounded mt-5 welcome-page">
+    <h1>Welcome to HotelAntique App</h1>
+    <hr class="my-3 bg-white w-50"/>
+
+    <p class="h4"> Here you can easily book the perfect hotel for your upcoming trip to Plovdiv, Bulgaria.
+        We believe that every guest, big or small, deserves a memorable and enjoyable stay.
+    </p>
+    <hr class="my-3 bg-white w-75"/>
+
+    <h3>
+        To get started simply
+        <a class="text-primary" href="/login">Login</a>
+        to your account or
+        <a class="text-primary" href="/register">Register</a>
+        with us to create a new one.
+
+        Start planning your next adventure with us !
+    </h3>
+</div>
+
+
+<footer th:replace="~{fragments/commons::footer}"></footer>
+
+</body>
+</html>

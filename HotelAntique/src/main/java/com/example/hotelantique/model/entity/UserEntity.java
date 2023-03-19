@@ -1,0 +1,121 @@
+package com.example.hotelantique.model.entity;
+
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+@Entity
+@Table(name = "users")
+public class UserEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    private String phoneNumber;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles;
+
+    @OneToMany
+    private Set<ReservationRoomDetails> upcomingReservations;
+
+    @OneToMany
+    private Set<ReservationRoomDetails> previousReservations;
+
+    public UserEntity() {
+        this.roles = new ArrayList<>();
+    }
+
+    public void addRole(Role role){
+        this.roles.add(role);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Set<ReservationRoomDetails> getUpcomingReservations() {
+        return upcomingReservations;
+    }
+
+    public void setUpcomingReservations(Set<ReservationRoomDetails> upcomingReservations) {
+        this.upcomingReservations = upcomingReservations;
+    }
+
+    public Set<ReservationRoomDetails> getPreviousReservations() {
+        return previousReservations;
+    }
+
+    public void setPreviousReservations(Set<ReservationRoomDetails> previousReservations) {
+        this.previousReservations = previousReservations;
+    }
+
+}
