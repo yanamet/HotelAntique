@@ -13,7 +13,11 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "room_type", nullable = false)
+    @Column(nullable = false, unique = true)
+    private String name;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "room_type", nullable = false, unique = true)
     private RoomType roomType;
 
     @Column(name = "room_number")
@@ -68,4 +72,23 @@ public class Room {
         this.price = price;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", roomType=" + roomType +
+                ", roomNumber=" + roomNumber +
+                ", isAvailable=" + isAvailable +
+                ", price=" + price +
+                '}';
+    }
 }
