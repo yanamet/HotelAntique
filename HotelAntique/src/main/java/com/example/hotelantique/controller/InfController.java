@@ -31,4 +31,9 @@ public class InfController {
         return "details";
     }
 
+    @GetMapping("/rooms/all")
+    public String allRooms(){
+        return "all-rooms";
+    }
+
 }
