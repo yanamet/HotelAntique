@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/commons::head}"></head>
 <body>
 
@@ -10,7 +10,11 @@
             <div class="col-md-4 col-sm-4 col-xs-12"></div>
             <div class="col-md-4 col-sm-4 col-xs-12">
 
-                <form class="form-container">
+                <form
+                        class="form-container"
+                th:method="post"
+                th:action="@{/register}"
+                th:object="${registerDTO}">
                     <h2 class="text-center">REGISTER</h2>
 
                     <div class="form-group col-md-6 mb-3">
@@ -20,10 +24,25 @@
 
                         <input type="text"
                                class="form-control"
-
+                               th:field="*{username}"
+                               th:errorclass="is-invalid"
                                id="username"
                                name="username"/>
-                        <small class="bg-danger text-light rounded">Username must between 3 and 20 symbols</small>
+                        <small class="invalid-feedback bg-danger text-light rounded">Username must between 3 and 20 symbols</small>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-3">
+                        <div class="label-holder textCol d-flex">
+                            <label for="fullName" class="h4 mb-2 text-white">Full Name</label>
+                        </div>
+
+                        <input type="text"
+                               class="form-control"
+                               th:field="*{fullName}"
+                               th:errorclass="is-invalid"
+                               id="fullName"
+                               name="fullName"/>
+                        <small class="invalid-feedback bg-danger text-light rounded">Full name must between 3 and 20 symbols</small>
                     </div>
 
 
@@ -33,10 +52,11 @@
                         </div>
                         <input type="email"
                                class="form-control"
-
+                               th:field="*{email}"
+                               th:errorclass="is-invalid"
                                id="email"
                                name="email"/>
-                        <small class="bg-danger text-light rounded">Email is required and cannot be empty</small>
+                        <small class="invalid-feedback bg-danger text-light rounded">Email is required and cannot be empty</small>
                     </div>
 
                     <div class="form-group">
@@ -45,10 +65,11 @@
                         </div>
                         <input type="text"
                                class="form-control"
-
+                               th:field="*{phoneNumber}"
+                               th:errorclass="is-invalid"
                                id="phoneNumber"
                                name="phoneNumber"/>
-                        <small class="bg-danger text-light rounded">Phone number is required and cannot be empty</small>
+                        <small class="invalid-feedback bg-danger text-light rounded">Phone number is required and cannot be empty</small>
                     </div>
 
 
@@ -58,10 +79,11 @@
                         </div>
                         <input type="password"
                                class="form-control"
-
+                               th:field="*{password}"
+                               th:errorclass="is-invalid"
                                id="password"
                                name="password"/>
-                        <small class="bg-danger text-light rounded">Password must be between 5 and 20 symbols</small>
+                        <small class="invalid-feedback bg-danger text-light rounded">Password must be between 5 and 20 symbols</small>
                     </div>
 
                     <div class="form-group">
@@ -70,10 +92,11 @@
                         </div>
                         <input type="password"
                                class="form-control"
-
+                               th:field="*{confirmPassword}"
+                               th:errorclass="is-invalid"
                                id="confirmPassword"
                                name="confirmPassword"/>
-                        <small class="bg-danger text-light rounded">Confirm password must be between 5 and 20 symbols</small>
+                        <small class="invalid-feedback bg-danger text-light rounded">Confirm password must be between 5 and 20 symbols</small>
                     </div>
 
 

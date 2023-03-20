@@ -3,6 +3,7 @@ package com.example.hotelantique.model.entity;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -40,6 +41,8 @@ public class UserEntity {
 
     public UserEntity() {
         this.roles = new ArrayList<>();
+        this.previousReservations = new HashSet<>();
+        this.upcomingReservations = new HashSet<>();
     }
 
     public void addRole(Role role){
@@ -118,4 +121,18 @@ public class UserEntity {
         this.previousReservations = previousReservations;
     }
 
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", roles=" + roles +
+                ", upcomingReservations=" + upcomingReservations +
+                ", previousReservations=" + previousReservations +
+                '}';
+    }
 }

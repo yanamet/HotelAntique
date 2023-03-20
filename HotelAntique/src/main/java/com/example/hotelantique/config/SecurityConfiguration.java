@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                 //Defines which pages will be authorized
                 .authorizeHttpRequests()
                 //Static resources
+        .requestMatchers("/static/assets/**", "/static/node_modules/**", "/static/scss/**").permitAll()
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     .requestMatchers("/", "/login", "/register").permitAll()
                     .requestMatchers("/pages/admin").hasRole(RoleEnum.ADMIN.name())
@@ -39,8 +40,17 @@ public class SecurityConfiguration {
                     .loginPage("/login")
                     .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
                     .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
-                .defaultSuccessUrl("/home")
-                .failureForwardUrl("/login-error");
+                .defaultSuccessUrl("/home", true)
+                .failureForwardUrl("/login-error")
+                     .and()
+                     .logout()
+                     .logoutUrl("/logout")
+                     .logoutSuccessUrl("/")
+                     .deleteCookies("JSESSIONID")
+                     .clearAuthentication(true);
+
+
+
         return http.build();
 
     }

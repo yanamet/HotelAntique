@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -41,12 +42,40 @@ public class UserService {
             user.setPhoneNumber("+359ADMIN");
             user.setPassword(this.passwordEncoder.encode("12345"));
 
+            UserEntity secUser = new UserEntity();
+            secUser.setUsername("Moderator");
+            secUser.setFullName("Moderator Moderatorov");
+            secUser.setEmail("moderator@abv.bg");
+            secUser.setRoles(List.of(guestRole, employeeRole));
+            secUser.setPhoneNumber("+359ADMIN");
+            secUser.setPassword(this.passwordEncoder.encode("12345"));
+
+            UserEntity guest = new UserEntity();
+            guest.setUsername("GUEST");
+            guest.setFullName("GUEST GUEST");
+            guest.setEmail("GUEST@abv.bg");
+            guest.setRoles(List.of(guestRole));
+            guest.setPhoneNumber("+359ADMIN");
+            guest.setPassword(this.passwordEncoder.encode("12345"));
+
             this.userRepository.save(user);
+            this.userRepository.save(secUser);
+            this.userRepository.save(guest);
 
 
         }
 
+    }
 
+    public   Optional<UserEntity>  getByUsername(String username) {
+     return this.userRepository.findByUsername(username);
+    }
 
+    public   Optional<UserEntity> getByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+    }
+
+    public void register(UserEntity user) {
+        this.userRepository.save(user);
     }
 }
