@@ -80,4 +80,11 @@ public class RoomService {
         return room;
     }
 
+    public Room getRoomById(long id) {
+        return this.roomRepository.findById(id).get();
+    }
+
+    public RoomViewDTO getRoomDetailsViewById(long id) {
+        return this.roomViewDtoMap(this.getRoomById(id));
+    }
 }

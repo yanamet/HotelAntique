@@ -26,7 +26,17 @@ public class Reservation {
     @ManyToOne(optional = false)
     private UserEntity guest;
 
+    private boolean isActive;
+
     public Reservation() {
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public long getId() {

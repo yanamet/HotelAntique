@@ -5,6 +5,7 @@ import com.example.hotelantique.service.RoomService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -26,6 +27,12 @@ public class RoomController {
         return "all-rooms";
     }
 
-
+    @GetMapping("/rooms/details/{id}")
+    public String roomDetails(@PathVariable long id,
+                              Model model){
+        RoomViewDTO roomDetailsViewById = this.roomService.getRoomDetailsViewById(id);
+        model.addAttribute("room", roomDetailsViewById);
+        return "details";
+    }
 
 }
