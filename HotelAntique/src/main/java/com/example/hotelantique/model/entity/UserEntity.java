@@ -30,6 +30,9 @@ public class UserEntity {
     @Column(nullable = false)
     private String phoneNumber;
 
+    @Column(nullable = false)
+    private String gender;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
 
@@ -43,6 +46,14 @@ public class UserEntity {
         this.roles = new ArrayList<>();
         this.previousReservations = new HashSet<>();
         this.upcomingReservations = new HashSet<>();
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public void addRole(Role role){

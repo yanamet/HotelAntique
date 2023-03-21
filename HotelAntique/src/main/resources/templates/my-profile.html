@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HotelAntique</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/profile.css">
+</head>
+<body>
+
+
+<nav th:replace="~{fragments/commons::nav}"></nav>
+
+    
+      <section id="user-profile-page" class="user-profile">
+        <article class="user-info">
+            <img id="user-avatar-url" alt="user-profile" src="/images/gender/FEMALE.jpg">
+            <div class="user-content">
+                <p>Username: Mary</p>
+                <p>Email: mary@abv.bg</p>
+                <p>My memes count: 2</p>
+            </div>
+        </article>
+        <h1 class="user-listings-title">User Upcoming Reservations</h1>
+        <div class="user-reservation-listings">
+            <!-- Display : All upcoming reservations by this user (If any) --> 
+           
+
+            <!-- Display : If user doesn't have upcoming reservations  --> 
+            <p class="no-reservations">No upcoming reservations.</p>
+        </div>
+
+        <h1 class="user-listings-title">User Previous Reservations</h1>
+        <div class="user-reservation-listings">
+            <!-- Display : All upcoming reservations by this user (If any) --> 
+           
+
+            <!-- Display : If user doesn't have upcoming reservations  --> 
+            <p class="no-reservations">No previous reservations.</p>
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER SECTION -->
+
+
+<nav th:replace="~{fragments/commons::footer}"></nav>
+</body>
+</html>

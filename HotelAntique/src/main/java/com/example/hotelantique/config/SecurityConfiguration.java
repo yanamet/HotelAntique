@@ -6,7 +6,6 @@ import com.example.hotelantique.service.ApplicationUserDetailsService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,15 +24,13 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         http
-                //Defines which pages will be authorized
                 .authorizeHttpRequests()
-                //Static resources
-        .requestMatchers("/static/assets/**", "/static/node_modules/**", "/static/scss/**").permitAll()
-                    .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+
                     .requestMatchers("/", "/login", "/register").permitAll()
                     .requestMatchers("/pages/admin").hasRole(RoleEnum.ADMIN.name())
+                .requestMatchers("/static/scss/*", "/static/*", "/images/*").permitAll()
                 .anyRequest().authenticated()
                     .and()
                     .formLogin()

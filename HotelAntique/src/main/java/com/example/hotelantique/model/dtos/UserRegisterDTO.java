@@ -17,6 +17,9 @@ public class UserRegisterDTO {
     @Email
     private String email;
 
+    @NotEmpty
+    private String gender;
+
     @Size(min = 5, max = 20)
     @NotEmpty
     private String password;
@@ -30,6 +33,14 @@ public class UserRegisterDTO {
     private String phoneNumber;
 
     public UserRegisterDTO() {
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getUsername() {

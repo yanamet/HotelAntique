@@ -40,6 +40,7 @@ public class UserService {
             user.setEmail("admin@abv.bg");
             user.setRoles(List.of(adminRole, guestRole, employeeRole));
             user.setPhoneNumber("+359ADMIN");
+            user.setGender("FEMALE");
             user.setPassword(this.passwordEncoder.encode("12345"));
 
             UserEntity secUser = new UserEntity();
@@ -48,6 +49,7 @@ public class UserService {
             secUser.setEmail("moderator@abv.bg");
             secUser.setRoles(List.of(guestRole, employeeRole));
             secUser.setPhoneNumber("+359ADMIN");
+            secUser.setGender("MALE");
             secUser.setPassword(this.passwordEncoder.encode("12345"));
 
             UserEntity guest = new UserEntity();
@@ -55,6 +57,7 @@ public class UserService {
             guest.setFullName("GUEST GUEST");
             guest.setEmail("GUEST@abv.bg");
             guest.setRoles(List.of(guestRole));
+            guest.setGender("FEMALE");
             guest.setPhoneNumber("+359ADMIN");
             guest.setPassword(this.passwordEncoder.encode("12345"));
 
