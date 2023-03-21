@@ -1,5 +1,6 @@
 package com.example.hotelantique.model.entity;
 
+import com.example.hotelantique.model.enums.RoleEnum;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

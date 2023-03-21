@@ -2,8 +2,11 @@ package com.example.hotelantique.controller;
 
 import com.example.hotelantique.model.dtos.UserRegisterDTO;
 import com.example.hotelantique.service.AuthService;
-import com.example.hotelantique.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,9 +19,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AuthController {
 
     private final AuthService authService;
+    private final UserDetailsService userDetailsService;
 
-    public AuthController(AuthService authService) {
+    public AuthController(AuthService authService, UserDetailsService userDetailsService) {
         this.authService = authService;
+        this.userDetailsService = userDetailsService;
     }
 
     @ModelAttribute("registerDTO")
@@ -48,16 +53,25 @@ public class AuthController {
 
             return "redirect:/register";
         }
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(registerDTO.getUsername());
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+            userDetails,
+                userDetails.getPassword(),
+                userDetails.getAuthorities()
+        );
+
         return "login";
     }
 
-    @PostMapping("/login-error")
+    @PostMapping("/users/login-error")
     public String onFailedLogin(
             @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String username,
-            RedirectAttributes redirectAttributes){
+            RedirectAttributes redirectAttributes) {
 
-        redirectAttributes.addFlashAttribute("username", username);
-        redirectAttributes.addFlashAttribute("badCredentials", true);
+        redirectAttributes.addFlashAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY, username);
+        redirectAttributes.addFlashAttribute("bad_credentials", true);
 
         return "redirect:/login";
     }

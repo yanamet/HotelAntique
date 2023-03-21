@@ -30,7 +30,7 @@ public class SecurityConfiguration {
 
                     .requestMatchers("/", "/login", "/register").permitAll()
                     .requestMatchers("/pages/admin").hasRole(RoleEnum.ADMIN.name())
-                .requestMatchers("/static/scss/*", "/static/*", "/images/*").permitAll()
+                .requestMatchers("/scss/**", "/node_modules/**", "/assets/**").permitAll()
                 .anyRequest().authenticated()
                     .and()
                     .formLogin()
@@ -38,7 +38,7 @@ public class SecurityConfiguration {
                     .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
                     .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
                 .defaultSuccessUrl("/home", true)
-                .failureForwardUrl("/login-error")
+                .failureForwardUrl("/users/login-error")
                      .and()
                      .logout()
                      .logoutUrl("/logout")

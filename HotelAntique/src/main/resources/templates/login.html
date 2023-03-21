@@ -26,7 +26,6 @@
                     <input
                             type="text"
                             class="form-control"
-                            th:value="${username}"
                             id="username"
                             name="username"/>
                 </div>
@@ -36,16 +35,12 @@
                     <div class="label-holder text-white textCol d-flex">
                         <label for="password" class="h4 mb-2">Password</label>
                     </div>
-                    <input type="password"
-                           class="form-control"
-
-                           id="password"
-                           name="password"/>
+                    <input type="password" class="form-control" id="password" name="password"/>
                 </div>
 
-                <div th:if="${badCredentials}" class="bg-danger text-light rounded mb-2">Incorrect username or password!</div>
+                <p th:if="${bad_credentials}" class="bg-danger text-light rounded mb-2">Incorrect username or password!</p>
 
-                <div class="d-grid gap-2">
+                <div class="d-grid gap-2 mt-4">
                     <button type="submit" class="btn btn-primary btn-rounded">LOGIN</button>
                     <p>Don't have an account? <a href="/register">Register here</a></p>
                 </div>
