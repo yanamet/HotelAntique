@@ -46,8 +46,6 @@ public class SecurityConfiguration {
                      .deleteCookies("JSESSIONID")
                      .clearAuthentication(true);
 
-
-
         return http.build();
 
     }

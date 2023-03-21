@@ -26,13 +26,10 @@
                     <input
                             type="text"
                             class="form-control"
-
-
+                            th:value="${username}"
                             id="username"
                             name="username"/>
                 </div>
-                <small class="bg-danger text-light rounded">Username must be between 3 and 20 symbols</small>
-
 
 
                 <div class="form-group">
@@ -44,9 +41,9 @@
 
                            id="password"
                            name="password"/>
-                    <small class="bg-danger text-light rounded">Password must be between 5 and 20 symbols</small>
                 </div>
 
+                <div th:if="${badCredentials}" class="bg-danger text-light rounded mb-2">Incorrect username or password!</div>
 
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-primary btn-rounded">LOGIN</button>
