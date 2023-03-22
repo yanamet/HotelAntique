@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,22 +17,22 @@
 <nav th:replace="~{fragments/commons::nav}"></nav>
 
     
-      <section id="user-profile-page" class="user-profile">
+      <section id="user-profile-page" class="user-profile" th:object="${user}">
         <article class="user-info">
-            <img id="user-avatar-url" alt="user-profile" src="/images/gender/FEMALE.jpg">
+            <img id="user-avatar-url" alt="user-profile" th:src="${'/images/gender/' + user.getGender() + '.jpg'}">
             <div class="user-content">
-                <p>Username: Mary</p>
-                <p>Email: mary@abv.bg</p>
-                <p>My memes count: 2</p>
+                <p th:text="|Username: ${user.username}|"></p>
+                <p th:text="|Email: ${user.email}|"></p>
             </div>
         </article>
         <h1 class="user-listings-title">User Upcoming Reservations</h1>
         <div class="user-reservation-listings">
+
             <!-- Display : All upcoming reservations by this user (If any) --> 
            
 
             <!-- Display : If user doesn't have upcoming reservations  --> 
-            <p class="no-reservations">No upcoming reservations.</p>
+            <p th:if="${user.getUpcomingReservations().size() == 0}" class="no-reservations">No upcoming reservations.</p>
         </div>
 
         <h1 class="user-listings-title">User Previous Reservations</h1>
@@ -40,7 +41,7 @@
            
 
             <!-- Display : If user doesn't have upcoming reservations  --> 
-            <p class="no-reservations">No previous reservations.</p>
+            <p  th:if="${user.getPreviousReservations().size() == 0}" class="no-reservations">No previous reservations.</p>
         </div>
 
     </section>

@@ -140,7 +140,7 @@ public class UserEntity {
                 ", username='" + username + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + (password != null ? "PROVIDED" : "no info") + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", roles=" + roles +
                 ", upcomingReservations=" + upcomingReservations +

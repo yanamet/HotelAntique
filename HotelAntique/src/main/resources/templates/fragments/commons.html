@@ -30,6 +30,9 @@
 
                     <div class="text-white nav-link welcome-message">Welcome, <th:block sec:authentication="name"></th:block>!</div>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="/aboutUs">ABOUT US</a>
+                    </li>
 
                     <li class="nav-item active">
                         <a class="nav-link" href="/reservations/add">RESERVE <span class="sr-only"></span></a>
@@ -40,9 +43,8 @@
                     </li>
 
                     <li class="nav-item">
-                        <form th:action="@{/logout}" th:method="post">
-                            <button type="submit">LOGOUT</button>
-                        </form>
+                        <a class="nav-link" onclick="document.getElementById('myLogoutForm').submit();"
+                            type="submit">LOGOUT</a>
                     </li>
 
                 </th:block>
@@ -63,12 +65,10 @@
                     </li>
                 </th:block>
 
-
-
-
-
-
             </ul>
+
+            <form id="myLogoutForm" style="color: transparent" th:action="@{/logout}" th:method="post"></form>
+
             <button type="button" class="rounded-pill btn-rounded">+359 87 9979883
                 <span></span>
             </button>
