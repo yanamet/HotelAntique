@@ -50,7 +50,7 @@ public class AuthController {
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.registerDTO", bindingResult);
 
-            return "redirect:/register";
+            return "redirect:/home";
         }
 
 
