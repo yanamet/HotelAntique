@@ -22,10 +22,19 @@ public class RoomService {
         this.modelMapper = modelMapper;
     }
 
-    public List<RoomViewDTO> getAllRooms(){
-        List<Room> allRooms = this.roomRepository.findAll();
-        return allRooms
-                .stream()
+    public List<RoomViewDTO> getAllRoomTypes(){
+
+        Room standardRoom = this.getByRoomType(RoomType.STANDARD);
+        Room deluxeRoom = this.getByRoomType(RoomType.DELUXE);
+        Room premiumRoom = this.getByRoomType(RoomType.PREMIUM);
+        Room studio = this.getByRoomType(RoomType.STUDIO);
+        Room apartment = this.getByRoomType(RoomType.APARTMENT);
+        Room vip = this.getByRoomType(RoomType.VIP);
+        Room president = this.getByRoomType(RoomType.PRESIDENT);
+
+        List<Room> rooms = List.of(standardRoom, deluxeRoom, premiumRoom, studio, apartment, vip, president);
+
+        return rooms.stream()
                 .map(this::roomViewDtoMap)
                 .collect(Collectors.toList());
     }
@@ -42,28 +51,55 @@ public class RoomService {
 
     public void initRoomsData() {
         if(this.roomRepository.count() == 0){
-            Room standard = this.createRoom("DOUBLE STANDARD ROOM", RoomType.STANDARD,
-                    101, true, BigDecimal.valueOf(90.0));
+            Room firstStandard = this.createRoom("DOUBLE STANDARD ROOM", RoomType.STANDARD,
+                    101, false, BigDecimal.valueOf(90.0));
 
-            Room deluxe = this.createRoom("DOUBLE DELUXE ROOM", RoomType.DELUXE,
-                    102, true, BigDecimal.valueOf(100.0));
+            Room secStandard = this.createRoom("DOUBLE STANDARD ROOM", RoomType.STANDARD,
+                    102, false, BigDecimal.valueOf(90.0));
 
-            Room premium = this.createRoom("DOUBLE PREMIUM ROOM", RoomType.PREMIUM,
-                    103, true, BigDecimal.valueOf(125.0));
+            Room thirdStandard = this.createRoom("DOUBLE STANDARD ROOM", RoomType.STANDARD,
+                    103, false, BigDecimal.valueOf(90.0));
 
-            Room studio = this.createRoom("STUDIO", RoomType.STUDIO,
-                    201, true, BigDecimal.valueOf(140.0));
+            Room firstDeluxe = this.createRoom("DOUBLE DELUXE ROOM", RoomType.DELUXE,
+                    104, true, BigDecimal.valueOf(100.0));
+
+            Room secondDeluxe = this.createRoom("DOUBLE DELUXE ROOM", RoomType.DELUXE,
+                    105, true, BigDecimal.valueOf(100.0));
+
+            Room thirdDeluxe = this.createRoom("DOUBLE DELUXE ROOM", RoomType.DELUXE,
+                    106, true, BigDecimal.valueOf(100.0));
+
+            Room firstPremium = this.createRoom("DOUBLE PREMIUM ROOM", RoomType.PREMIUM,
+                    201, true, BigDecimal.valueOf(125.0));
+
+            Room secondPremium = this.createRoom("DOUBLE PREMIUM ROOM", RoomType.PREMIUM,
+                    202, true, BigDecimal.valueOf(125.0));
+
+
+
+            Room firstStudio = this.createRoom("STUDIO", RoomType.STUDIO,
+                    203, true, BigDecimal.valueOf(140.0));
+
+            Room seconedStudio = this.createRoom("STUDIO", RoomType.STUDIO,
+                    204, true, BigDecimal.valueOf(140.0));
 
             Room apartment = this.createRoom("APARTMENT", RoomType.APARTMENT,
-                    202, true, BigDecimal.valueOf(160.0));
+                    301, true, BigDecimal.valueOf(160.0));
 
             Room vip = this.createRoom("VIP APARTMENT", RoomType.VIP,
-                    301, true, BigDecimal.valueOf(190.0));
+                    302, true, BigDecimal.valueOf(190.0));
 
             Room president = this.createRoom("PRESIDENT APARTMENT", RoomType.PRESIDENT,
-                    302, true, BigDecimal.valueOf(210.0));
+                    303, true, BigDecimal.valueOf(210.0));
 
-            this.roomRepository.saveAll(List.of(standard, deluxe, premium, studio, apartment, vip, president));
+            this.roomRepository.saveAll(List.of(
+                    firstStandard, secStandard, thirdStandard,
+                    firstDeluxe, secondDeluxe, thirdDeluxe,
+                    firstPremium, secondPremium,
+                    firstStudio, seconedStudio,
+                    apartment,
+                    vip,
+                    president));
 
         }
 
@@ -86,5 +122,17 @@ public class RoomService {
 
     public RoomViewDTO getRoomDetailsViewById(long id) {
         return this.roomViewDtoMap(this.getRoomById(id));
+    }
+
+    public Room getByRoomType(RoomType roomType) {
+        return this.roomRepository.findByRoomType(roomType).get(0);
+    }
+
+    public List<Room> getAllByRoomType(RoomType roomType){
+        return this.roomRepository.findByRoomTypeAndIsAvailable(roomType, true);
+    }
+
+    public Room getRoomByRoomNumber(int i) {
+        return this.roomRepository.findByRoomNumber(i);
     }
 }

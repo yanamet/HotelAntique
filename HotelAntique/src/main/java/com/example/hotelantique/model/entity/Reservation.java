@@ -1,5 +1,7 @@
 package com.example.hotelantique.model.entity;
+
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -12,7 +14,16 @@ public class Reservation {
     private long id;
 
     @ManyToOne(optional = false)
-    private ReservationRoomDetails roomDetails;
+    private Room room;
+
+    @ManyToOne(optional = false)
+    private UserEntity guest;
+
+    @Column(nullable = false)
+    private LocalDate checkIn;
+
+    @Column(nullable = false)
+    private LocalDate checkOut;
 
     @ManyToOne(optional = false)
     private Payment payment;
@@ -21,14 +32,45 @@ public class Reservation {
     private BigDecimal totalValue;
 
     @Column(nullable = false)
-    private LocalDate date;
-
-    @ManyToOne(optional = false)
-    private UserEntity guest;
+    private LocalDate createdOn;
 
     private boolean isActive;
 
     public Reservation() {
+    }
+
+
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    public BigDecimal getTotalValue() {
+        return totalValue;
+    }
+
+    public void setTotalValue(BigDecimal totalValue) {
+        this.totalValue = totalValue;
+    }
+
+    public LocalDate getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(LocalDate date) {
+        this.createdOn = date;
+    }
+
+    public UserEntity getGuest() {
+        return guest;
+    }
+
+    public void setGuest(UserEntity guest) {
+        this.guest = guest;
     }
 
     public boolean isActive() {
@@ -47,45 +89,44 @@ public class Reservation {
         this.id = id;
     }
 
-    public ReservationRoomDetails getRoomDetails() {
-        return roomDetails;
+
+    public Room getRoom() {
+        return room;
     }
 
-    public void setRoomDetails(ReservationRoomDetails roomDetails) {
-        this.roomDetails = roomDetails;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
-    public Payment getPayment() {
-        return payment;
+    public LocalDate getCheckIn() {
+        return checkIn;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public void setCheckIn(LocalDate arriving) {
+        this.checkIn = arriving;
     }
 
-    public BigDecimal getTotalValue() {
-        return totalValue;
+    public LocalDate getCheckOut() {
+        return checkOut;
     }
 
-    public void setTotalValue(BigDecimal totalValue) {
-        this.totalValue = totalValue;
+    public void setCheckOut(LocalDate departing) {
+        this.checkOut = departing;
     }
 
-    public LocalDate getDate() {
-        return date;
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "id=" + id +
+                ", room=" + room +
+                ", guest=" + guest +
+                ", checkIn=" + checkIn +
+                ", checkOut=" + checkOut +
+                ", payment=" + payment +
+                ", totalValue=" + totalValue +
+                ", createdOn=" + createdOn +
+                ", isActive=" + isActive +
+                '}';
     }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public UserEntity getGuest() {
-        return guest;
-    }
-
-    public void setGuest(UserEntity guest) {
-        this.guest = guest;
-    }
-
 
 }

@@ -21,7 +21,7 @@ public class RoomController {
     @GetMapping("/rooms/all")
     public String allRooms(Model model){
 
-        List<RoomViewDTO> allRooms = this.roomService.getAllRooms();
+        List<RoomViewDTO> allRooms = this.roomService.getAllRoomTypes();
         model.addAttribute("allRooms", allRooms);
 
         return "all-rooms";

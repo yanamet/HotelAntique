@@ -22,9 +22,6 @@ public class ReservationDTO {
     @Email
     private String email;
 
-    @Size(min = 10)
-    @NotEmpty
-    private String phoneNumber;
 
     private String specialWishes;
 
@@ -71,13 +68,7 @@ public class ReservationDTO {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     public String getSpecialWishes() {
         return specialWishes;

@@ -1,6 +1,5 @@
 package com.example.hotelantique.model.entity;
 
-import com.example.hotelantique.model.enums.RoleEnum;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -38,10 +37,10 @@ public class UserEntity {
     private List<Role> roles;
 
     @OneToMany
-    private Set<ReservationRoomDetails> upcomingReservations;
+    private Set<Reservation> upcomingReservations;
 
     @OneToMany
-    private Set<ReservationRoomDetails> previousReservations;
+    private Set<Reservation> previousReservations;
 
     public UserEntity() {
         this.roles = new ArrayList<>();
@@ -117,19 +116,19 @@ public class UserEntity {
         this.roles = roles;
     }
 
-    public Set<ReservationRoomDetails> getUpcomingReservations() {
+    public Set<Reservation> getUpcomingReservations() {
         return upcomingReservations;
     }
 
-    public void setUpcomingReservations(Set<ReservationRoomDetails> upcomingReservations) {
+    public void setUpcomingReservations(Set<Reservation> upcomingReservations) {
         this.upcomingReservations = upcomingReservations;
     }
 
-    public Set<ReservationRoomDetails> getPreviousReservations() {
+    public Set<Reservation> getPreviousReservations() {
         return previousReservations;
     }
 
-    public void setPreviousReservations(Set<ReservationRoomDetails> previousReservations) {
+    public void setPreviousReservations(Set<Reservation> previousReservations) {
         this.previousReservations = previousReservations;
     }
 

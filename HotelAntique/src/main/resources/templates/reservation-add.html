@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/commons::head}"></head>
 <body class="logo-background">
 
@@ -9,7 +10,9 @@
 <main class="p-5  text-center my-main">
 
     <div class="d-flex justify-content-center">
-        <form action="/" method="POST"
+        <form th:action="@{/reservations/add}"
+              th:method="POST"
+              th:object="${reservationDTO}"
               class="text-light bg-secondary form-container">
             <h1 class="text-light border-bottom">Reserve</h1>
 
@@ -17,60 +20,89 @@
 
 
                 <div class="col">
-                    <label for="name">Guest full name</label>
-                    <input name="name" id="name" type="text" class="form-control" placeholder="Full name">
-                    <small id="nameError" class="bg-danger text-light rounded">Name must be between 3 and 20
+                    <label for="fullName">Guest full name</label>
+                    <input name="fullName"
+                           id="fullName"
+                           th:field="*{fullName}"
+                           th:errorclass="is-invalid"
+                           type="text"
+                           class="form-control" placeholder="Full name">
+                    <small id="fullNameError" class="invalid-feedback bg-danger text-light rounded">Name must be between 3 and 20
                         characters</small>
                 </div>
 
                 <div class="col">
                     <label for="roomType">Room Type</label>
-                    <select name="roomType" id="roomType" class="form-select">
+                    <select
+                            name="roomType"
+                            th:field="*{roomType}"
+                            th:errorclass="is-invalid"
+                            id="roomType"
+                            class="form-select">
                         <option value="" selected>Select room type</option>
-                        <option value="">Double Standard Room</option>
-                        <option value="">Double Deluxe Room</option>
-                        <option value="">Double Premium Room</option>
-                        <option value="">Studio</option>
-                        <option value="">Apartment</option>
-                        <option value="">VIP Apartment</option>
-                        <option value="">President Apartment</option>
+                        <option value="STANDARD">Double Standard Room</option>
+                        <option value="DELUXE">Double Deluxe Room</option>
+                        <option value="PREMIUM">Double Premium Room</option>
+                        <option value="STUDIO">Studio</option>
+                        <option value="APARTMENT">Apartment</option>
+                        <option value="VIP">VIP Apartment</option>
+                        <option value="PRESIDENT">President Apartment</option>
                     </select>
-                    <small id="roomTypeError" class="bg-danger text-light rounded">You must select a room type</small>
+                    <small id="roomTypeError" class="invalid-feedback bg-danger text-light rounded">You must select a room type</small>
                 </div>
 
                 <div class="col">
                     <label for="checkIn">Check in</label>
-                    <input name="checkIn" id="checkIn" type="date" class="form-control" placeholder="Check in">
-                    <small id="checkInError" class="bg-danger text-light rounded">Check in date cannot be in the
-                        past</small>
+                    <input
+                            name="checkIn"
+                            id="checkIn"
+                            th:field="*{checkIn}"
+                            th:errorclass="is-invalid"
+                            type="date"
+                            class="form-control"
+                            placeholder="Check in">
+                    <small id="checkInError" class="invalid-feedback bg-danger text-light rounded">Check in date cannot
+                        be in the past</small>
                 </div>
 
                 <div class="col">
                     <label for="checkOut">Check out</label>
-                    <input name="checkOut" id="checkOut" type="date" class="form-control" placeholder="Check out">
-                    <small id="checkOutError" class="bg-danger text-light rounded">Check in date cannot be in the
+                    <input name="checkOut"
+                           id="checkOut"
+                           th:field="*{checkOut}"
+                           th:errorclass="is-invalid"
+                           type="date"
+                           class="form-control"
+                           placeholder="Check out">
+                    <small id="checkOutError" class="invalid-feedback bg-danger text-light rounded">Check in date cannot be in the
                         past</small>
                 </div>
 
 
                 <div class="col">
                     <label for="email">Email</label>
-                    <input name="email" id="email" type="text" class="form-control"
+                    <input name="email"
+                           id="email"
+                           th:field="*{email}"
+                           th:errorclass="is-invalid"
+                           type="text"
+                           class="form-control"
                            placeholder="example@hotel-antique.bg">
-                    <small id="emailError" class="bg-danger text-light rounded">Email is required</small>
+                    <small id="emailError" class="invalid-feedback bg-danger text-light rounded">Email is required</small>
                 </div>
 
-                <div class="col">
-                    <label for="phoneNumber">Phone Number</label>
-                    <input name="phoneNumber" id="phoneNumber" type="text" class="form-control" placeholder="+359 ....">
-                    <small id="phoneNumberError" class="bg-danger text-light rounded">Phone number is required</small>
-                </div>
+
             </div>
 
 
             <div class="col">
                 <label for="specialWishes">Special wishes</label>
-                <textarea name="specialWishes" id="specialWishes" type="text" class="form-control"
+                <textarea name="specialWishes"
+                          id="specialWishes"
+                          th:field="*{specialWishes}"
+                          th:errorclass="is-invalid"
+                          type="text"
+                          class="form-control"
                           placeholder="Special wishes: early check in, etc."></textarea>
             </div>
 

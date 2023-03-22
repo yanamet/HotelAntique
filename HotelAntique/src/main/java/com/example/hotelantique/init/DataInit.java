@@ -1,5 +1,6 @@
 package com.example.hotelantique.init;
 
+import com.example.hotelantique.service.ReservationService;
 import com.example.hotelantique.service.RoleService;
 import com.example.hotelantique.service.RoomService;
 import com.example.hotelantique.service.UserService;
@@ -16,13 +17,18 @@ public class DataInit implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
     private final RoomService roomService;
 
+    private final ReservationService reservationService;
+
     public DataInit(RoleService roleService, UserService userService,
                     PasswordEncoder passwordEncoder,
-                    @Value("${app.default.password}") String defaultPassword, RoomService roomService) {
+                    @Value("${app.default.password}") String defaultPassword, RoomService roomService,
+                    ReservationService reservationService) {
         this.roleService = roleService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
         this.roomService = roomService;
+        this.reservationService = reservationService;
+
     }
 
     @Override
@@ -30,6 +36,8 @@ public class DataInit implements CommandLineRunner {
         this.roleService.seedRoleData();
         this.userService.initFirstUser();
         this.roomService.initRoomsData();
+        this.reservationService.initReservationTries();
+
     }
 
 }

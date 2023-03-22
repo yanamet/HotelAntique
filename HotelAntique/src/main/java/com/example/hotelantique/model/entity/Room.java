@@ -13,14 +13,14 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "room_type", nullable = false, unique = true)
+    @Column(name = "room_type", nullable = false)
     private RoomType roomType;
 
-    @Column(name = "room_number")
+    @Column(name = "room_number", unique = true)
     private int roomNumber;
 
     @Column(name = "is_available")
@@ -28,6 +28,7 @@ public class Room {
 
     @Column(nullable = false)
     private BigDecimal price;
+
 
     public Room() {
     }
