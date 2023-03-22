@@ -50,13 +50,13 @@ public class AuthController {
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.registerDTO", bindingResult);
 
-            return "redirect:/home";
+            return "redirect:/register";
         }
 
 
 
 
-        return "login";
+        return "home";
     }
 
     @PostMapping("/login-error")
