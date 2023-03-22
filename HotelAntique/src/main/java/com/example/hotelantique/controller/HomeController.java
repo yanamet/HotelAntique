@@ -1,5 +1,7 @@
 package com.example.hotelantique.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,20 +17,13 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String index(Model model, Principal principal){
-//        String name = "";
-//        if (principal.getName() == null) {
-//            name = "Anony";
-//        }else{
-//            name = principal.getName();
-//        }
-//        model.addAttribute("principal", name);
+    public String index(@AuthenticationPrincipal UserDetails userDetails){
+        if(userDetails != null){
+            return "home";
+        }
         return "index";
     }
 
-    @GetMapping("/reservations/add")
-    public String addReserve(){
-        return "reservation-add";
-    }
+
 
 }

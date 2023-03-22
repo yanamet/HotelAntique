@@ -1,27 +1,31 @@
 package com.example.hotelantique.service;
 
+import com.example.hotelantique.model.dtos.userDTO.UserAdminPageDTO;
 import com.example.hotelantique.model.entity.Role;
 import com.example.hotelantique.model.entity.UserEntity;
 import com.example.hotelantique.model.enums.RoleEnum;
 import com.example.hotelantique.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
     private final RoleService roleService;
-
+    private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository, RoleService roleService,
-                       PasswordEncoder passwordEncoder) {
+                       ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleService = roleService;
+        this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -80,5 +84,14 @@ public class UserService {
 
     public void register(UserEntity user) {
         this.userRepository.save(user);
+    }
+
+    public List<UserAdminPageDTO> getAllUsersOtherThan(long id) {
+       List<UserEntity> users = this.userRepository.findByIdNot(id);
+
+        return users
+                .stream()
+                .map(u -> this.modelMapper.map(u, UserAdminPageDTO.class))
+                .collect(Collectors.toList());
     }
 }

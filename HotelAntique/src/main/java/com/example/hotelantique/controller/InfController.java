@@ -21,10 +21,7 @@ public class InfController {
         return "card-details";
     }
 
-    @GetMapping("/pages/admin")
-    public String adminPage(){
-        return "admin-page";
-    }
+
 
     @GetMapping("/details")
     public String details(){

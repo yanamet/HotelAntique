@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html >
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/commons::head}"></head>
 <body>
 
@@ -10,44 +11,6 @@
     <h1>ADMIN PAGE</h1>
     <h3 >Admin can change the roles of the different users and to look over all of the reservations</h3>
 </div>
-
-
-
-
-
-<table class="table table-striped mb-4 ">
-    <h4 class="text-center mt-10">USERS</h4>
-    <thead>
-    <tr>
-        <th scope="col">ID</th>
-        <th scope="col">USERNAME</th>
-        <th scope="col">CURRENT ROLES</th>
-        <th scope="col">Handle</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>
-            <a href="/" class="btn btn-secondary">Change roles</a>
-        </td>
-    </tr>
-    <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-    </tr>
-    </tbody>
-</table>
 
 
 <table class="table table-striped table-dark mt-4">
@@ -81,6 +44,34 @@
     </tr>
     </tbody>
 </table>
+
+
+<table class="table table-striped mb-4"  >
+    <h4 class="text-center mt-10">USERS</h4>
+
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">USERNAME</th>
+        <th scope="col">CURRENT ROLES</th>
+        <th scope="col">Handle</th>
+    </tr>
+    </thead>
+    <tbody th:each="u: ${otherUsers}" th:object="${u}">
+    <tr>
+        <th scope="row" th:text="${u.id}"></th>
+        <td th:text="${u.username}"></td>
+        <td></td>
+        <td>
+            <a th:href="@{/user/changeRole/{id}(id = *{id})}" class="btn btn-secondary">Change roles</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+
 
 
 

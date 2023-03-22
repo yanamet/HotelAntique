@@ -9,6 +9,7 @@
     <title>HotelAntique</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/fontawesome.css">
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/details.css">
 </head>
@@ -34,12 +35,20 @@
                         <a class="nav-link" href="/aboutUs">ABOUT US</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="/rooms/all">ALL ROOMS</a>
+                    </li>
+
                     <li class="nav-item active">
                         <a class="nav-link" href="/reservations/add">RESERVE <span class="sr-only"></span></a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="/user/profile">MY PROFILE</a>
+                    </li>
+
+                    <li class="nav-item" sec:authorize='hasRole("ADMIN")'>
+                        <a class="nav-link" href="/pages/admin">ADMIN PAGE</a>
                     </li>
 
                     <li class="nav-item">
@@ -140,8 +149,9 @@
                     </div>
                     <div class="col-lg-7 col-md-6">
                         <a href="https://www.facebook.com/HotelAntiquePlovdiv"><i class="fab fa-facebook"></i></a>
-                        <a href="https://instagram.com/hotel_antique_plovdiv?igshid=YmMyMTA2M2Y="><i
-                                class="fab fa-instagram"></i></a>
+
+                        <a href="https://instagram.com/hotel_antique_plovdiv?igshid=YmMyMTA2M2Y=">
+                            <i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>

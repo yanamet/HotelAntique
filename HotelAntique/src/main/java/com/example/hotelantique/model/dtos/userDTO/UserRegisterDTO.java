@@ -1,4 +1,4 @@
-package com.example.hotelantique.model.dtos;
+package com.example.hotelantique.model.dtos.userDTO;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;

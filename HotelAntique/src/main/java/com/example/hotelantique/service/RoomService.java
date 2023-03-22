@@ -1,6 +1,6 @@
 package com.example.hotelantique.service;
 
-import com.example.hotelantique.model.dtos.RoomViewDTO;
+import com.example.hotelantique.model.dtos.roomDTO.RoomViewDTO;
 import com.example.hotelantique.model.entity.Room;
 import com.example.hotelantique.model.enums.RoomType;
 import com.example.hotelantique.repository.RoomRepository;

@@ -1,4 +1,4 @@
-package com.example.hotelantique.model.dtos;
+package com.example.hotelantique.model.dtos.roomDTO;
 
 import java.math.BigDecimal;
 

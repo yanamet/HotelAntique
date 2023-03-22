@@ -1,6 +1,6 @@
 package com.example.hotelantique.controller;
 
-import com.example.hotelantique.model.dtos.RoomViewDTO;
+import com.example.hotelantique.model.dtos.roomDTO.RoomViewDTO;
 import com.example.hotelantique.service.RoomService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

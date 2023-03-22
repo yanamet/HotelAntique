@@ -1,6 +1,6 @@
 package com.example.hotelantique.service;
 
-import com.example.hotelantique.model.dtos.UserRegisterDTO;
+import com.example.hotelantique.model.dtos.userDTO.UserRegisterDTO;
 import com.example.hotelantique.model.entity.UserEntity;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,7 +17,6 @@ import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.function.Consumer;
 
 @Service
 public class AuthService {

@@ -1,11 +1,10 @@
 package com.example.hotelantique.controller;
 
-import com.example.hotelantique.model.dtos.UserRegisterDTO;
+import com.example.hotelantique.model.dtos.userDTO.UserRegisterDTO;
 import com.example.hotelantique.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
