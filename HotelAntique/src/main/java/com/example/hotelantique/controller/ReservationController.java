@@ -52,4 +52,14 @@ public class ReservationController {
         return "successful-reservation";
     }
 
+    @GetMapping("/reservations/successful")
+    public String successfulReservation(){
+        return "successful-reservation";
+    }
+
+    @GetMapping("/payment/card")
+    public String cardPayment(){
+        return "card-details";
+    }
+
 }

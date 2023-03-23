@@ -52,11 +52,10 @@ public class AuthController {
             return "redirect:/register";
         }
 
-
-
-
         return "home";
     }
+
+
 
     @PostMapping("/login-error")
     public String onFailedLogin(

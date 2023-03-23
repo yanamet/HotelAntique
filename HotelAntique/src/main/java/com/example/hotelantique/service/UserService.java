@@ -94,4 +94,17 @@ public class UserService {
                 .map(u -> this.modelMapper.map(u, UserAdminPageDTO.class))
                 .collect(Collectors.toList());
     }
+
+    public  Optional<UserEntity>  getUserById(long id) {
+        return this.userRepository.findById(id);
+    }
+
+    public  Optional<UserAdminPageDTO>  getUserAdminDTOById(long id) {
+        return this.userRepository.findById(id)
+                .map(u -> this.modelMapper.map(u, UserAdminPageDTO.class));
+    }
+
+    public void deleteById(long id) {
+        this.userRepository.deleteById(id);
+    }
 }
