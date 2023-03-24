@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class RoomDetailsViewDTO {
 
+    private long id;
     private String name;
 
     private BigDecimal price;
@@ -11,6 +12,14 @@ public class RoomDetailsViewDTO {
     private String type;
 
     public RoomDetailsViewDTO() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {

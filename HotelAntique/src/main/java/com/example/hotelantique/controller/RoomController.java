@@ -1,10 +1,14 @@
 package com.example.hotelantique.controller;
 
+import com.example.hotelantique.model.dtos.roomDTO.AvailableRoomSearchDTO;
 import com.example.hotelantique.model.dtos.roomDTO.RoomViewDTO;
 import com.example.hotelantique.service.RoomService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
@@ -16,6 +20,11 @@ public class RoomController {
 
     public RoomController(RoomService roomService) {
         this.roomService = roomService;
+    }
+
+    @ModelAttribute("availableRoomDTO")
+    public AvailableRoomSearchDTO initAvailableRoom(){
+        return new AvailableRoomSearchDTO();
     }
 
     @GetMapping("/rooms/all")
@@ -33,6 +42,25 @@ public class RoomController {
         RoomViewDTO roomDetailsViewById = this.roomService.getRoomDetailsViewById(id);
         model.addAttribute("room", roomDetailsViewById);
         return "details";
+    }
+
+    @GetMapping("/rooms/available/search")
+    public String availableRooms(@Valid AvailableRoomSearchDTO availableRoomDTO,
+                                 BindingResult bindingResult,
+                                 Model model){
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("availableRoomDTO", availableRoomDTO);
+            model.addAttribute(
+                    "org.springframework.validation.BindingResult.availableRoomDTO",
+                    bindingResult);
+            return "/rooms/available/search";
+        }
+
+        System.out.println(availableRoomDTO);
+
+
+        return "available-rooms-search";
     }
 
 }

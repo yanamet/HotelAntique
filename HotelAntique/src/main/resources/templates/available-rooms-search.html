@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+
+<nav th:replace="fragments/commons::nav"></nav>
+
+      <div class="container ">
+        <h2 class="text-secondary text-center">Search for available rooms</h2>
+        <h3 class="text-secondary text-center">Please enter check-in and check-out days</h3>
+
+          <div th:each="error: ${#fields.errors()}" th:text="${error}"
+               class="invalid-feedback bg-danger text-light rounded"></div>
+
+        <form
+                th:method="GET"
+                th:action="@{/rooms/available/search}"
+                th:object="${availableRoomDTO}"
+
+                class="form-inline"
+                style="justify-content: center; margin-top: 20px;"
+        >
+          <div class="justify-content-center d-flex">
+            <div>
+                <input class="form-control mr-sm-2"
+                style="width: 280px;"
+                th:field="*{checkIn}"
+                th:errorclass="is-invalid"
+                type="date"
+                placeholder="CHECK-IN DATE"
+                aria-label="Search"
+                id="checkIn"
+                name="checkIn"/>
+            </div>
+           
+            <div>
+                <input class="form-control mr-sm-2"
+                style="width: 280px;"
+                type="date"
+                th:field="*{checkOut}"
+                th:errorclass="is-invalid"
+                placeholder="CHECK-OUT DATE"
+                aria-label="Search"
+                id="checkOut"
+                name="checkOut"/>
+            </div>
+
+              <div>
+                  <select
+                          name="roomType"
+                          th:field="*{roomType}"
+                          th:errorclass="is-invalid"
+                          style="width: 280px;"
+                          id="roomType"
+                          class="form-select">
+                      <option value="" selected>Select room type</option>
+                      <option value="STANDARD">Double Standard Room</option>
+                      <option value="DELUXE">Double Deluxe Room</option>
+                      <option value="PREMIUM">Double Premium Room</option>
+                      <option value="STUDIO">Studio</option>
+                      <option value="APARTMENT">Apartment</option>
+                      <option value="VIP">VIP Apartment</option>
+                      <option value="PRESIDENT">President Apartment</option>
+                  </select>
+              </div>
+
+    
+    
+    <small
+            id="searchOfferHelpInline"
+            class="bg-danger text-light rounded invalid-feedback"
+            style="width: 97%; position: absolute; padding: 3px 15px; text-align: center;"
+    >
+        Try writing something this time.
+    </small>
+          </div>
+              
+          <div  class="d-grid w-60 mt-4">
+            <button type="submit" class="btn btn-primary btn-rounded ">SEARCH</button>
+        </div>
+        </form>
+    </div>
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>
