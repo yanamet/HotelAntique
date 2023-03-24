@@ -1,6 +1,7 @@
 package com.example.hotelantique.service;
 
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationDTO;
+import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewAdminPageDTO;
 import com.example.hotelantique.model.entity.Payment;
 import com.example.hotelantique.model.entity.Reservation;
 import com.example.hotelantique.model.entity.Room;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
@@ -135,4 +137,26 @@ public class ReservationService {
         }
 
     }
+
+    public List<ReservationViewAdminPageDTO> getAllReservations() {
+        List<Reservation> reservations = this.reservationRepository.findByIsActiveOrderByCheckInAsc(true);
+        return reservations
+                .stream()
+                .map(this::reservationViewMapper)
+                .collect(Collectors.toList());
+    }
+
+    private ReservationViewAdminPageDTO reservationViewMapper(Reservation reservation){
+        ReservationViewAdminPageDTO reservationViewDTO = this.modelMapper
+                .map(reservation, ReservationViewAdminPageDTO.class);
+
+        reservationViewDTO.setId(reservation.getId());
+        reservationViewDTO.setGuestUsername(reservation.getGuest().getUsername());
+        reservationViewDTO.setGuestFullName(reservation.getGuest().getFullName());
+        reservationViewDTO.setCheckInAndCheckOut(reservation.getCheckIn() + "-" + reservation.getCheckOut());
+
+        return reservationViewDTO;
+
+    }
+
 }

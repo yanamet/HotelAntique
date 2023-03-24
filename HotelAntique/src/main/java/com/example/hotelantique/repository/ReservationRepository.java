@@ -20,4 +20,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
                                                                  @Param("checkOut") LocalDate checkOut,
                                                                  @Param("roomType") RoomType roomType);
 
+    List<Reservation> findByIsActiveOrderByCheckInAsc(boolean b);
 }

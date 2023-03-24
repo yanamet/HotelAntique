@@ -1,16 +1,14 @@
 package com.example.hotelantique.controller;
 
-import com.example.hotelantique.init.DataInit;
+import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewAdminPageDTO;
 import com.example.hotelantique.model.dtos.userDTO.UserAdminPageDTO;
 import com.example.hotelantique.model.entity.UserEntity;
+import com.example.hotelantique.service.ReservationService;
 import com.example.hotelantique.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,17 +20,22 @@ public class AdminPageController {
 
 
     private final UserService userService;
-    private final RestTemplate restTemplate;
+    private final ReservationService reservationService;
 
-    public AdminPageController(UserService userService, RestTemplate restTemplate) {
+    public AdminPageController(UserService userService, ReservationService reservationService) {
         this.userService = userService;
-        this.restTemplate = restTemplate;
+        this.reservationService = reservationService;
     }
 
     @GetMapping("/users")
     public ResponseEntity<List<UserAdminPageDTO>> getAllUsers(@AuthenticationPrincipal UserDetails userDetails){
         UserEntity admin = this.userService.getByUsername(userDetails.getUsername()).get();
         return ResponseEntity.ok(userService.getAllUsersOtherThan(admin.getId()));
+    }
+
+    @GetMapping("/reservations")
+    public ResponseEntity<List<ReservationViewAdminPageDTO>> getAllReservations(){
+        return ResponseEntity.ok(this.reservationService.getAllReservations());
     }
 
     @GetMapping("/users/{id}")
