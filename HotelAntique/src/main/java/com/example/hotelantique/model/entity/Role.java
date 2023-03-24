@@ -37,4 +37,9 @@ public class Role {
     public void setName(RoleEnum role) {
         this.name = role;
     }
+
+    @Override
+    public String toString() {
+        return this.name.name();
+    }
 }

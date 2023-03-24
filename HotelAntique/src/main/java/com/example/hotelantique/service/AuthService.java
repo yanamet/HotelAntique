@@ -2,6 +2,7 @@ package com.example.hotelantique.service;
 
 import com.example.hotelantique.model.dtos.userDTO.UserRegisterDTO;
 import com.example.hotelantique.model.entity.UserEntity;
+import com.example.hotelantique.model.enums.RoleEnum;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.modelmapper.ModelMapper;
@@ -26,22 +27,22 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
     private final SecurityContextRepository securityContextRepository;
-
+    private final RoleService roleService;
 
     public AuthService(UserService userService, ModelMapper modelMapper,
                        PasswordEncoder passwordEncoder, UserDetailsService userDetailsService,
-                       SecurityContextRepository securityContextRepository) {
+                       SecurityContextRepository securityContextRepository, RoleService roleService) {
         this.userService = userService;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
         this.securityContextRepository = securityContextRepository;
+        this.roleService = roleService;
     }
 
     public boolean register(UserRegisterDTO registerDTO,
                             HttpServletRequest request,
                             HttpServletResponse response) {
-
 
         if(!registerDTO.getPassword().equals(registerDTO.getConfirmPassword())){
             return false;
@@ -59,8 +60,9 @@ public class AuthService {
 
         UserEntity user = this.modelMapper.map(registerDTO, UserEntity.class);
         user.setPassword(this.passwordEncoder.encode(user.getPassword()));
-        this.userService.register(user);
+        user.addRole(this.roleService.getRoleByName(RoleEnum.GUEST));
 
+        this.userService.register(user);
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(registerDTO.getUsername());
 
@@ -69,9 +71,6 @@ public class AuthService {
                 userDetails.getPassword(),
                 userDetails.getAuthorities()
         );
-
-//        successfulLoginProcessor.accept(authentication);
-
 
         SecurityContextHolderStrategy strategy = SecurityContextHolder.getContextHolderStrategy();
         SecurityContext context = strategy.createEmptyContext();

@@ -22,7 +22,8 @@ function reloadUsers(event){
             let resultRoles = '';
             let currentRoles = document.createElement('td');
             for (let role in user.roles) {
-                resultRoles = resultRoles + role + " ";
+                resultRoles = resultRoles + role.toString() + " ";
+                console.log("i am in");
             }
             currentRoles.textContent = resultRoles;
 
