@@ -36,16 +36,10 @@ public class UserEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
 
-    @OneToMany
-    private Set<Reservation> upcomingReservations;
-
-    @OneToMany
-    private Set<Reservation> previousReservations;
 
     public UserEntity() {
         this.roles = new ArrayList<>();
-        this.previousReservations = new HashSet<>();
-        this.upcomingReservations = new HashSet<>();
+
     }
 
     public String getGender() {
@@ -116,21 +110,7 @@ public class UserEntity {
         this.roles = roles;
     }
 
-    public Set<Reservation> getUpcomingReservations() {
-        return upcomingReservations;
-    }
 
-    public void setUpcomingReservations(Set<Reservation> upcomingReservations) {
-        this.upcomingReservations = upcomingReservations;
-    }
-
-    public Set<Reservation> getPreviousReservations() {
-        return previousReservations;
-    }
-
-    public void setPreviousReservations(Set<Reservation> previousReservations) {
-        this.previousReservations = previousReservations;
-    }
 
     @Override
     public String toString() {
@@ -141,9 +121,6 @@ public class UserEntity {
                 ", email='" + email + '\'' +
                 ", password='" + (password != null ? "PROVIDED" : "no info") + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", roles=" + roles +
-                ", upcomingReservations=" + upcomingReservations +
-                ", previousReservations=" + previousReservations +
-                '}';
+                ", roles=" + roles;
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -45,9 +46,18 @@ public class RoomController {
     }
 
     @GetMapping("/rooms/available/search")
+    public String availableRooms(){
+
+        return "available-rooms-search";
+    }
+
+
+    @PostMapping("/rooms/available/search")
     public String availableRooms(@Valid AvailableRoomSearchDTO availableRoomDTO,
                                  BindingResult bindingResult,
                                  Model model){
+
+        System.out.println("I am in PostMapping available rooms");
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("availableRoomDTO", availableRoomDTO);

@@ -159,4 +159,19 @@ public class ReservationService {
 
     }
 
+    public List<ReservationViewAdminPageDTO> getPreviousReservations(UserEntity user, LocalDate today) {
+        return this.reservationRepository
+                .findByGuestAndCheckInBefore(user, today)
+                .stream()
+                .map(this::reservationViewMapper)
+                .collect(Collectors.toList());
+    }
+
+    public List<ReservationViewAdminPageDTO> getUpcomingReservations(UserEntity user, LocalDate today) {
+        return this.reservationRepository
+                .findByGuestAndCheckInAfterAndIsActive(user, today, true)
+                .stream()
+                .map(this::reservationViewMapper)
+                .collect(Collectors.toList());
+    }
 }

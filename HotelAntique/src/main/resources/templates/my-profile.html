@@ -27,21 +27,58 @@
         </article>
         <h1 class="user-listings-title">User Upcoming Reservations</h1>
         <div class="user-reservation-listings">
+            <p th:if="${upcomingReservations.size() == 0}" class="no-reservations">No upcoming reservations.</p>
 
-            <!-- Display : All upcoming reservations by this user (If any) --> 
-           
+            <table th:if="${upcomingReservations.size() > 0}" class="table table-striped mb-4"  >
+                <thead>
+                <tr>
+                    <th scope="col">Reservation Number</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Check-in - Check-out</th>
+                    <th scope="col">Active status</th>
+                </tr>
+                </thead>
+                <tbody>
 
-            <!-- Display : If user doesn't have upcoming reservations  --> 
-            <p th:if="${user.getUpcomingReservations().size() == 0}" class="no-reservations">No upcoming reservations.</p>
+                <tr th:each="r: ${upcomingReservations}" th:object="${r}">
+                    <th scope="row" th:text="${r.id}"></th>
+                    <td th:text="${r.getGuestUsername()}"></td>
+                    <td th:text="${r.checkInAndCheckOut}"></td>
+                    <td th:text="${r.isActive()}"></td>
+                </tr>
+
+                </tbody>
+            </table>
+
         </div>
 
         <h1 class="user-listings-title">User Previous Reservations</h1>
         <div class="user-reservation-listings">
-            <!-- Display : All upcoming reservations by this user (If any) --> 
-           
 
-            <!-- Display : If user doesn't have upcoming reservations  --> 
-            <p  th:if="${user.getPreviousReservations().size() == 0}" class="no-reservations">No previous reservations.</p>
+            <p  th:if="${previousReservations.size() == 0}" class="no-reservations">No previous reservations.</p>
+
+            <table th:if="${previousReservations.size() > 0}" class="table table-striped mb-4"  >
+                <tbody>
+
+                <thead>
+                <tr>
+                    <th scope="col">Reservation Number</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Check-in - Check-out</th>
+                    <th scope="col">Active status</th>
+                </tr>
+                </thead>
+
+                <tr th:each="r: ${previousReservations}" th:object="${r}">
+                    <th scope="row" th:text="${r.id}"></th>
+                    <td th:text="${r.getGuestUsername()}"></td>
+                    <td th:text="${r.checkInAndCheckOut}"></td>
+                    <td th:text="${r.isActive()}"></td>
+                </tr>
+
+                </tbody>
+            </table>
+
         </div>
 
     </section>

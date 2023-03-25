@@ -1,7 +1,9 @@
 package com.example.hotelantique.repository;
 
+import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewAdminPageDTO;
 import com.example.hotelantique.model.entity.Reservation;
 import com.example.hotelantique.model.entity.Room;
+import com.example.hotelantique.model.entity.UserEntity;
 import com.example.hotelantique.model.enums.RoomType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -9,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -21,4 +24,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
                                                                  @Param("roomType") RoomType roomType);
 
     List<Reservation> findByIsActiveOrderByCheckInAsc(boolean b);
+
+    List<Reservation> findByGuestAndCheckInBefore(UserEntity user, LocalDate today);
+
+    List<Reservation> findByGuestAndCheckInAfterAndIsActive(UserEntity user, LocalDate today, boolean isActive);
 }
