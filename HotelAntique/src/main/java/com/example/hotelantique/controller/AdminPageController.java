@@ -1,6 +1,6 @@
 package com.example.hotelantique.controller;
 
-import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewAdminPageDTO;
+import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewDTO;
 import com.example.hotelantique.model.dtos.userDTO.UserAdminPageDTO;
 import com.example.hotelantique.model.entity.UserEntity;
 import com.example.hotelantique.service.ReservationService;
@@ -34,7 +34,7 @@ public class AdminPageController {
     }
 
     @GetMapping("/reservations")
-    public ResponseEntity<List<ReservationViewAdminPageDTO>> getAllReservations(){
+    public ResponseEntity<List<ReservationViewDTO>> getAllReservations(){
         return ResponseEntity.ok(this.reservationService.getAllReservations());
     }
 

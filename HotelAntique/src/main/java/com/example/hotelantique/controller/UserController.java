@@ -1,6 +1,6 @@
 package com.example.hotelantique.controller;
 
-import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewAdminPageDTO;
+import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewDTO;
 import com.example.hotelantique.model.dtos.userDTO.UserAdminPageDTO;
 import com.example.hotelantique.model.entity.UserEntity;
 import com.example.hotelantique.service.ReservationService;
@@ -34,10 +34,10 @@ public class UserController {
 
         model.addAttribute("user", user);
 
-       List<ReservationViewAdminPageDTO> previousReservations = this.reservationService
+       List<ReservationViewDTO> previousReservations = this.reservationService
                .getPreviousReservations(user, LocalDate.now());
 
-       List<ReservationViewAdminPageDTO> upcomingReservations = this.reservationService
+       List<ReservationViewDTO> upcomingReservations = this.reservationService
                .getUpcomingReservations(user, LocalDate.now());
 
        model.addAttribute("previousReservations", previousReservations);

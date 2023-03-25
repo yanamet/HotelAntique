@@ -1,13 +1,13 @@
 package com.example.hotelantique.model.dtos.reservationDTO;
 
-public class ReservationViewAdminPageDTO {
+public class ReservationViewDTO {
     private long id;
     private String guestUsername;
     private String guestFullName;
     private String checkInAndCheckOut;
     private boolean isActive;
 
-    public ReservationViewAdminPageDTO() {
+    public ReservationViewDTO() {
     }
 
     public long getId() {

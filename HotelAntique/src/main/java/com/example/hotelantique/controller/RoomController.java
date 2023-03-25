@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -55,16 +56,17 @@ public class RoomController {
     @PostMapping("/rooms/available/search")
     public String availableRooms(@Valid AvailableRoomSearchDTO availableRoomDTO,
                                  BindingResult bindingResult,
+                                 RedirectAttributes redirectAttributes,
                                  Model model){
 
-        System.out.println("I am in PostMapping available rooms");
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("availableRoomDTO", availableRoomDTO);
-            model.addAttribute(
+
+            redirectAttributes.addFlashAttribute("availableRoomDTO", availableRoomDTO);
+            redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.availableRoomDTO",
                     bindingResult);
-            return "/rooms/available/search";
+            return "redirect:/rooms/available/search";
         }
 
         System.out.println(availableRoomDTO);

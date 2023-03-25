@@ -1,7 +1,7 @@
 package com.example.hotelantique.service;
 
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationDTO;
-import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewAdminPageDTO;
+import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewDTO;
 import com.example.hotelantique.model.entity.Payment;
 import com.example.hotelantique.model.entity.Reservation;
 import com.example.hotelantique.model.entity.Room;
@@ -138,7 +138,7 @@ public class ReservationService {
 
     }
 
-    public List<ReservationViewAdminPageDTO> getAllReservations() {
+    public List<ReservationViewDTO> getAllReservations() {
         List<Reservation> reservations = this.reservationRepository.findByIsActiveOrderByCheckInAsc(true);
         return reservations
                 .stream()
@@ -146,9 +146,9 @@ public class ReservationService {
                 .collect(Collectors.toList());
     }
 
-    private ReservationViewAdminPageDTO reservationViewMapper(Reservation reservation){
-        ReservationViewAdminPageDTO reservationViewDTO = this.modelMapper
-                .map(reservation, ReservationViewAdminPageDTO.class);
+    private ReservationViewDTO reservationViewMapper(Reservation reservation){
+        ReservationViewDTO reservationViewDTO = this.modelMapper
+                .map(reservation, ReservationViewDTO.class);
 
         reservationViewDTO.setId(reservation.getId());
         reservationViewDTO.setGuestUsername(reservation.getGuest().getUsername());
@@ -159,7 +159,7 @@ public class ReservationService {
 
     }
 
-    public List<ReservationViewAdminPageDTO> getPreviousReservations(UserEntity user, LocalDate today) {
+    public List<ReservationViewDTO> getPreviousReservations(UserEntity user, LocalDate today) {
         return this.reservationRepository
                 .findByGuestAndCheckInBefore(user, today)
                 .stream()
@@ -167,7 +167,7 @@ public class ReservationService {
                 .collect(Collectors.toList());
     }
 
-    public List<ReservationViewAdminPageDTO> getUpcomingReservations(UserEntity user, LocalDate today) {
+    public List<ReservationViewDTO> getUpcomingReservations(UserEntity user, LocalDate today) {
         return this.reservationRepository
                 .findByGuestAndCheckInAfterAndIsActive(user, today, true)
                 .stream()

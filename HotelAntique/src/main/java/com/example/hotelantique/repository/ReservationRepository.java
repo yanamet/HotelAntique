@@ -1,6 +1,5 @@
 package com.example.hotelantique.repository;
 
-import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewAdminPageDTO;
 import com.example.hotelantique.model.entity.Reservation;
 import com.example.hotelantique.model.entity.Room;
 import com.example.hotelantique.model.entity.UserEntity;
@@ -11,7 +10,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 
 @Repository
