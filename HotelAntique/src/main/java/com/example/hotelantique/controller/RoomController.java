@@ -56,8 +56,7 @@ public class RoomController {
     @PostMapping("/rooms/available/search")
     public String availableRooms(@Valid AvailableRoomSearchDTO availableRoomDTO,
                                  BindingResult bindingResult,
-                                 RedirectAttributes redirectAttributes,
-                                 Model model){
+                                 RedirectAttributes redirectAttributes){
 
 
         if (bindingResult.hasErrors()) {
