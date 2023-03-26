@@ -2,6 +2,7 @@ package com.example.hotelantique.service;
 
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationDTO;
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewDTO;
+import com.example.hotelantique.model.dtos.roomDTO.AvailableRoomFoundDTO;
 import com.example.hotelantique.model.entity.Payment;
 import com.example.hotelantique.model.entity.Reservation;
 import com.example.hotelantique.model.entity.Room;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,24 +40,9 @@ public class ReservationService {
 
     public boolean saveReservation(ReservationDTO reservationDTO, String loggedUserUsername) {
 
-        System.out.println("I AM IN ");
 
 
         UserEntity user = this.userService.getByUsername(loggedUserUsername).get();
-
-        RoomType roomType = RoomType.valueOf(reservationDTO.getRoomType());
-        List<Room> roomToReserve = this.roomService.getAllByRoomType(roomType);
-
-        if(roomToReserve.isEmpty()){
-            List<Room> byTypeAndCheckInAndCheckOut = this.reservationRepository
-                    .getByCheckInLessThanAndCheckOutGreaterThan(reservationDTO.getCheckIn(), reservationDTO.getCheckOut(), roomType);
-
-            System.out.println("Hello");
-
-        }
-
-        Room room = roomToReserve.get(0);
-        System.out.println(room);
 
         Reservation reservation = this.modelMapper.map(reservationDTO, Reservation.class);
 
@@ -68,18 +55,37 @@ public class ReservationService {
         return true;
     }
 
-//    public List<Room> getAllReservation(){
-//       return this.reservationRepository.getByTypeAndCheckInAndCheckOut(RoomType.STANDARD,
-//                LocalDate.of(2023, 4, 24),
-//                LocalDate.of(2023, 4, 28));
-//
-//    }
+    public List<AvailableRoomFoundDTO> getAvailableRoomsInPeriod(LocalDate checkIn, LocalDate checkOut, String roomTypeString){
+        RoomType roomType = RoomType.valueOf(roomTypeString);
+        List<Room> roomToReserve = this.roomService.getAllByRoomType(roomType);
+
+
+        if(roomToReserve.isEmpty()){
+            List<Room> byTypeAndCheckInAndCheckOut = this.reservationRepository
+                    .getByCheckInLessThanAndCheckOutGreaterThan(checkIn, checkOut, roomType);
+
+
+            return mapListRoomToFoundAvailableDTOList(byTypeAndCheckInAndCheckOut);
+
+        }
+
+        return mapListRoomToFoundAvailableDTOList(roomToReserve);
+    }
+
+    private List<AvailableRoomFoundDTO> mapListRoomToFoundAvailableDTOList(List<Room> rooms){
+       return  rooms.stream()
+                .map(r -> this.modelMapper.map(r, AvailableRoomFoundDTO.class))
+                .collect(Collectors.toList());
+    }
+
 
     public void initReservationTries() {
         if(this.reservationRepository.count() == 0){
 
             Room room = this.roomService.getRoomByRoomNumber(101);
             room.setAvailable(false);
+            this.roomService.saveRoom(room);
+
             Payment payment = new Payment();
             payment.setPaymentMethod(PaymentMethod.CASH);
 
@@ -100,6 +106,9 @@ public class ReservationService {
 
             Room room2 = this.roomService.getRoomByRoomNumber(102);
             room2.setAvailable(false);
+            this.roomService.saveRoom(room2);
+
+
             Payment payment2 = new Payment();
             payment2.setPaymentMethod(PaymentMethod.CASH);
 
@@ -119,6 +128,8 @@ public class ReservationService {
 
             Room room4 = this.roomService.getRoomByRoomNumber(303);
             room4.setAvailable(false);
+            this.roomService.saveRoom(room4);
+
 
             Reservation reservation4 = new Reservation();
             reservation4.setGuest(admin);

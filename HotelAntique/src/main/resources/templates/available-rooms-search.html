@@ -72,22 +72,30 @@
                   </small>
               </div>
 
-    
-    
-    <small
-            id="searchOfferHelpInline"
-            class="bg-danger text-light rounded invalid-feedback"
-            style="width: 97%; position: absolute; padding: 3px 15px; text-align: center;"
-    >
-        Try writing something this time.
-    </small>
           </div>
               
           <div  class="d-grid w-60 mt-4">
-            <button type="submit" class="btn btn-primary btn-rounded ">SEARCH</button>
+            <button type="submit" class="btn btn-secondary btn-rounded ">SEARCH</button>
         </div>
         </form>
     </div>
+
+
+<div class=" mt-5" th:if="${availableRooms != null}">
+    <h2 class="text-center text-secondary">AVAILABLE ROOMS:</h2>
+    <div>
+        <a th:each="r: ${availableRooms}" th:object="${r}"
+           class="btn btn-primary btn-rounded room-btn mb-2"
+           th:text="|${r.name},   №${r.getRoomNumber()}|"
+           th:href="@{/reservations/add/{id}(id = *{id})}"></a>
+
+    </div>
+
+</div>
+
+<h3 th:if="${availableRooms != null && availableRooms.size == 0}"
+    class="text-center">There are no available rooms of this type for this period.
+</h3>
 
 <footer th:replace="fragments/commons::footer"></footer>
 </body>

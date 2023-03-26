@@ -70,3 +70,9 @@ label, h2{
 .color-background{
     background-color: #fdfaf8;
 }
+
+
+.room-btn{
+    margin-left: 5rem;
+    width: 40%;
+}

@@ -5,9 +5,11 @@ import com.example.hotelantique.model.entity.Room;
 import com.example.hotelantique.model.enums.RoomType;
 import com.example.hotelantique.repository.RoomRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,12 +17,19 @@ import java.util.stream.Collectors;
 public class RoomService {
 
     private final RoomRepository roomRepository;
+
     private final ModelMapper modelMapper;
 
     public RoomService(RoomRepository roomRepository, ModelMapper modelMapper) {
         this.roomRepository = roomRepository;
         this.modelMapper = modelMapper;
     }
+
+//    public List<Room> findAvailableRooms(LocalDate checkIn, LocalDate checkOut, String roomType){
+//        return this.reservationService.getAvailableRoomsInPeriod(checkIn, checkOut, roomType);
+//
+//
+//    }
 
     public List<RoomViewDTO> getAllRoomTypes(){
 
@@ -52,13 +61,13 @@ public class RoomService {
     public void initRoomsData() {
         if(this.roomRepository.count() == 0){
             Room firstStandard = this.createRoom("DOUBLE STANDARD ROOM", RoomType.STANDARD,
-                    101, false, BigDecimal.valueOf(90.0));
+                    101, true, BigDecimal.valueOf(90.0));
 
             Room secStandard = this.createRoom("DOUBLE STANDARD ROOM", RoomType.STANDARD,
-                    102, false, BigDecimal.valueOf(90.0));
+                    102, true, BigDecimal.valueOf(90.0));
 
             Room thirdStandard = this.createRoom("DOUBLE STANDARD ROOM", RoomType.STANDARD,
-                    103, false, BigDecimal.valueOf(90.0));
+                    103, true, BigDecimal.valueOf(90.0));
 
             Room firstDeluxe = this.createRoom("DOUBLE DELUXE ROOM", RoomType.DELUXE,
                     104, true, BigDecimal.valueOf(100.0));
@@ -134,5 +143,9 @@ public class RoomService {
 
     public Room getRoomByRoomNumber(int i) {
         return this.roomRepository.findByRoomNumber(i);
+    }
+
+    public void saveRoom(Room room) {
+        this.roomRepository.save(room);
     }
 }
