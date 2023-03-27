@@ -26,16 +26,19 @@ public class AuthService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
+    private final EmailService emailService;
     private final SecurityContextRepository securityContextRepository;
     private final RoleService roleService;
 
     public AuthService(UserService userService, ModelMapper modelMapper,
                        PasswordEncoder passwordEncoder, UserDetailsService userDetailsService,
-                       SecurityContextRepository securityContextRepository, RoleService roleService) {
+                       EmailService emailService, SecurityContextRepository securityContextRepository,
+                       RoleService roleService) {
         this.userService = userService;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
+        this.emailService = emailService;
         this.securityContextRepository = securityContextRepository;
         this.roleService = roleService;
     }
@@ -63,6 +66,8 @@ public class AuthService {
         user.addRole(this.roleService.getRoleByName(RoleEnum.GUEST));
 
         this.userService.register(user);
+
+        this.emailService.sendRegistrationEmail(user.getUsername(), user.getEmail());
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(registerDTO.getUsername());
 

@@ -41,9 +41,9 @@ management:
       exposure:
         include: "*"
 
-#mail:
-#  host: "localhost"
-#  port: 1025
-#  username: "mobilele@mobilele.com"
-#  password: ""
+mail:
+  host: "localhost"
+  port: 1025
+  username: "hotel_antik_yana@hotel.bg"
+  password: ""
 

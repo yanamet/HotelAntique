@@ -145,7 +145,7 @@ public class ReservationService {
 
             reservation5.setGuest(admin);
             reservation5.setCheckIn(LocalDate.of(2023, 3, 20));
-            reservation5.setCheckOut(LocalDate.of(2023, 3, 26));
+            reservation5.setCheckOut(LocalDate.of(2023, 3, 27));
             reservation5.setPayment(payment2);
             reservation5.setActive(true);
             reservation5.setCreatedOn(LocalDate.now());
