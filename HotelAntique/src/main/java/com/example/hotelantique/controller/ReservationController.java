@@ -1,6 +1,7 @@
 package com.example.hotelantique.controller;
 
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationDTO;
+import com.example.hotelantique.model.dtos.reservationDTO.ReservationDetailsDTO;
 import com.example.hotelantique.model.entity.Room;
 import com.example.hotelantique.model.entity.UserEntity;
 import com.example.hotelantique.service.ReservationService;
@@ -75,6 +76,20 @@ public class ReservationController {
     @GetMapping("/reservations/successful")
     public String successfulReservation(){
         return "successful-reservation";
+    }
+
+    @GetMapping("/reservations/details/{id}")
+    public String reservationsDetails(@PathVariable("id") long id,
+                                      Model model){
+        ReservationDetailsDTO reservation =  this.reservationService.getReservationById(id);
+        model.addAttribute("reservation", reservation);
+        return "reservation-details";
+    }
+
+    @GetMapping("/reservations/anulate/{id}")
+    public String anulateReservation(@PathVariable("id") long id){
+        this.reservationService.anulateReservation(id);
+        return "redirect:/user/profile";
     }
 
     @GetMapping("/payment/card")

@@ -35,7 +35,7 @@
                     <th scope="col">Reservation Number</th>
                     <th scope="col">Username</th>
                     <th scope="col">Check-in - Check-out</th>
-                    <th scope="col">Active status</th>
+                    <th scope="col">Reservation Details</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,7 +44,9 @@
                     <th scope="row" th:text="${r.id}"></th>
                     <td th:text="${r.getGuestUsername()}"></td>
                     <td th:text="${r.checkInAndCheckOut}"></td>
-                    <td th:text="${r.isActive()}"></td>
+                    <td>
+                        <a th:href="@{/reservations/details/{id}(id = *{id})}" class="btn btn-primary btn-rounded">Details</a>
+                    </td>
                 </tr>
 
                 </tbody>

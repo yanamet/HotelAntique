@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body class="logo-background">
+
+<nav th:replace="fragments/commons::nav"></nav>
+     
+    
+
+    <div class="container rounded mt-5 welcome-page" th:object="${reservation}" >
+        <img th:src="@{/images/hotelLogo.png}" alt="image">
+        <h1 th:text="|HOTEL ANTIK RESERVATION ID: ${reservation.id}|"> </h1>
+        <h3 th:text="|Room type: ${reservation.roomType}|"></h3>
+        <h3 th:text="|Guest username: ${reservation.guestUsername}|"></h3>
+        <h3 th:text="|Check-in: ${reservation.checkIn}|"></h3>
+        <h3 th:text="|Check-out: ${reservation.checkOut}|"></h3>
+        <h3 th:text="|Status: ${reservation.reservationStatus()}|"></h3>
+        <div th:if="${reservation.isActive()}" class="d-grid gap-2">
+            <a th:href="@{/reservations/anulate/{id}(id = *{id})}" class="btn btn-primary btn-rounded">ANULATE</a>
+        </div>
+    </div>
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

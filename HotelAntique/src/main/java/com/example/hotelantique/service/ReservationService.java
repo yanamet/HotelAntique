@@ -1,6 +1,7 @@
 package com.example.hotelantique.service;
 
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationDTO;
+import com.example.hotelantique.model.dtos.reservationDTO.ReservationDetailsDTO;
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewDTO;
 import com.example.hotelantique.model.dtos.roomDTO.AvailableRoomFoundDTO;
 import com.example.hotelantique.model.entity.Payment;
@@ -217,5 +218,18 @@ public class ReservationService {
             this.roomService.saveRoom(room);
         }
 
+    }
+
+    public ReservationDetailsDTO getReservationById(long id) {
+        Reservation reservation = this.reservationRepository.findById(id).get();
+        return this.modelMapper
+                .map(reservation, ReservationDetailsDTO.class);
+    }
+
+    public void anulateReservation(long id) {
+        Reservation reservation = this.reservationRepository.findById(id).get();
+        reservation.setActive(false);
+
+        this.reservationRepository.save(reservation);
     }
 }
