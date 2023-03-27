@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Email Message</title>
+</head>
+<body>
+
+<h1 class="text-center">HOTEL ANTIK APPLICATION</h1>
+
+<p>
+    Hello, <th:block th:text="${username}"></th:block>!
+</p>
+
+<p>
+    We confirm that we have received your reservation details.
+</p>
+
+<table class="table table-striped mb-4"  >
+    <thead>
+    <tr>
+        <th scope="col">Reservation Number</th>
+        <th> </th>
+        <th scope="col">Username</th>
+        <th> </th>
+        <th scope="col">Check-in - Check-out</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+        <th scope="row" th:text="${id}"></th>
+        <td> </td>
+        <td th:text="${username}"></td>
+        <td> </td>
+        <td th:text="${stayPeriod}"></td>
+    </tr>
+
+    </tbody>
+</table>
+
+<p>
+    Best regards,
+    Hotel Antik
+</p>
+</body>
+</html>

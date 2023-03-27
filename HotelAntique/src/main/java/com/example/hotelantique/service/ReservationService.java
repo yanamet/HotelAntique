@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,15 +26,18 @@ public class ReservationService {
     private final UserService userService;
     private final PaymentService paymentService;
     private final ModelMapper modelMapper;
+    private final EmailService emailService;
 
     public ReservationService(ReservationRepository reservationRepository,
                               RoomService roomService, UserService userService,
-                              PaymentService paymentService, ModelMapper modelMapper) {
+                              PaymentService paymentService, ModelMapper modelMapper,
+                              EmailService emailService) {
         this.reservationRepository = reservationRepository;
         this.roomService = roomService;
         this.userService = userService;
         this.paymentService = paymentService;
         this.modelMapper = modelMapper;
+        this.emailService = emailService;
     }
 
     public boolean saveReservation(ReservationDTO reservationDTO, String loggedUserUsername) {
@@ -44,6 +46,7 @@ public class ReservationService {
 
         Reservation reservation = this.modelMapper.map(reservationDTO, Reservation.class);
 
+        this.emailService.sendSuccessfulReservationEmail(user.getUsername(), user.getEmail(), reservation);
 
         System.out.println(reservation.toString());
 
@@ -52,6 +55,8 @@ public class ReservationService {
 
         return true;
     }
+
+
 
     public List<AvailableRoomFoundDTO> getAvailableRoomsInPeriod(LocalDate checkIn, LocalDate checkOut, String roomTypeString){
         RoomType roomType = RoomType.valueOf(roomTypeString);
