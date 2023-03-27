@@ -2,8 +2,10 @@ package com.example.hotelantique.controller;
 
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationDTO;
 import com.example.hotelantique.model.entity.Room;
+import com.example.hotelantique.model.entity.UserEntity;
 import com.example.hotelantique.service.ReservationService;
 import com.example.hotelantique.service.RoomService;
+import com.example.hotelantique.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,11 +23,13 @@ public class ReservationController {
 
     private final ReservationService reservationService;
     private final RoomService roomService;
+    private final UserService userService;
 
     public ReservationController(ReservationService reservationService,
-                                 RoomService roomService) {
+                                 RoomService roomService, UserService userService) {
         this.reservationService = reservationService;
         this.roomService = roomService;
+        this.userService = userService;
     }
 
     @ModelAttribute("reservationDTO")
@@ -33,23 +37,27 @@ public class ReservationController {
         return new ReservationDTO();
     }
 
-    @GetMapping("/reservations/add")
-    public String addReserve(){
-//        Room room = this.roomService.getRoomById(roomId);
-//        model.addAttribute("room", room);
+    @GetMapping("/reservations/add/{id}")
+    public String addReserve(@PathVariable("id") long roomId,
+                             @AuthenticationPrincipal UserDetails userDetails,
+                             Model model){
+        Room room = this.roomService.getRoomById(roomId);
+        UserEntity user = this.userService.getByUsername(userDetails.getUsername()).get();
 
-//        @PathVariable long roomId,
-//        Model model)
+        model.addAttribute("user", user);
+        model.addAttribute("roomType", room.getRoomType().name());
+
         return "reservation-add";
     }
 
-    @PostMapping("/reservations/add")
+    @PostMapping("/reservations/add/{id}")
     public String addReserve(@Valid ReservationDTO reservationDTO,
+                             @PathVariable("id") long roomId,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes,
                              @AuthenticationPrincipal UserDetails userDetails){
 
-
+        System.out.println(reservationDTO);
 
         if(bindingResult.hasErrors() || !this.reservationService.saveReservation(reservationDTO, userDetails.getUsername()) ){
 

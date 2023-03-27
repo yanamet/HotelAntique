@@ -26,4 +26,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findByGuestAndCheckInBefore(UserEntity user, LocalDate today);
 
     List<Reservation> findByGuestAndCheckInAfterAndIsActive(UserEntity user, LocalDate today, boolean isActive);
+
+    List<Reservation> findByIsActiveAndCheckOutBefore(boolean isActive, LocalDate now);
 }

@@ -40,8 +40,6 @@ public class ReservationService {
 
     public boolean saveReservation(ReservationDTO reservationDTO, String loggedUserUsername) {
 
-
-
         UserEntity user = this.userService.getByUsername(loggedUserUsername).get();
 
         Reservation reservation = this.modelMapper.map(reservationDTO, Reservation.class);
@@ -59,16 +57,12 @@ public class ReservationService {
         RoomType roomType = RoomType.valueOf(roomTypeString);
         List<Room> roomToReserve = this.roomService.getAllByRoomType(roomType);
 
-
         if(roomToReserve.isEmpty()){
             List<Room> byTypeAndCheckInAndCheckOut = this.reservationRepository
                     .getByCheckInLessThanAndCheckOutGreaterThan(checkIn, checkOut, roomType);
 
-
             return mapListRoomToFoundAvailableDTOList(byTypeAndCheckInAndCheckOut);
-
         }
-
         return mapListRoomToFoundAvailableDTOList(roomToReserve);
     }
 
@@ -143,6 +137,23 @@ public class ReservationService {
 
             this.reservationRepository.save(reservation4);
 
+            Reservation reservation5 = new Reservation();
+
+            Room room5 = this.roomService.getRoomByRoomNumber(103);
+            room5.setAvailable(false);
+            this.roomService.saveRoom(room5);
+
+            reservation5.setGuest(admin);
+            reservation5.setCheckIn(LocalDate.of(2023, 3, 20));
+            reservation5.setCheckOut(LocalDate.of(2023, 3, 26));
+            reservation5.setPayment(payment2);
+            reservation5.setActive(true);
+            reservation5.setCreatedOn(LocalDate.now());
+            reservation5.setTotalValue(BigDecimal.valueOf(90.0));
+            reservation5.setRoom(room5);
+
+            this.reservationRepository.save(reservation5);
+
 
 
         }
@@ -184,5 +195,22 @@ public class ReservationService {
                 .stream()
                 .map(this::reservationViewMapper)
                 .collect(Collectors.toList());
+    }
+
+    public void deactivatePastReservations() {
+
+        List<Reservation>  reservations = this.reservationRepository
+              .findByIsActiveAndCheckOutBefore(true, LocalDate.now());
+
+        for (Reservation reservation : reservations) {
+            reservation.setActive(false);
+
+            Room room = reservation.getRoom();
+            room.setAvailable(true);
+
+            this.reservationRepository.save(reservation);
+            this.roomService.saveRoom(room);
+        }
+
     }
 }

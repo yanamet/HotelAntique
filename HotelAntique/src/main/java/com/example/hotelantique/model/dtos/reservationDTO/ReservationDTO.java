@@ -77,4 +77,16 @@ public class ReservationDTO {
     public void setSpecialWishes(String specialWishes) {
         this.specialWishes = specialWishes;
     }
+
+    @Override
+    public String toString() {
+        return "ReservationDTO{" +
+                "fullName='" + fullName + '\'' +
+                ", roomType='" + roomType + '\'' +
+                ", checkIn=" + checkIn +
+                ", checkOut=" + checkOut +
+                ", email='" + email + '\'' +
+                ", specialWishes='" + specialWishes + '\'' +
+                '}';
+    }
 }

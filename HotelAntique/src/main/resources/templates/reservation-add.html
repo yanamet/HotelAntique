@@ -23,10 +23,11 @@
                     <label for="fullName">Guest full name</label>
                     <input name="fullName"
                            id="fullName"
+                           th:value="${user.fullName}"
                            th:field="*{fullName}"
                            th:errorclass="is-invalid"
                            type="text"
-                           class="form-control" placeholder="Full name">
+                           class="form-control" th:placeholder="${user.fullName}">
                     <small id="fullNameError" class="invalid-feedback bg-danger text-light rounded">Name must be between 3 and 20
                         characters</small>
                 </div>
@@ -39,14 +40,7 @@
                             th:errorclass="is-invalid"
                             id="roomType"
                             class="form-select">
-                        <option value="" selected>Select room type</option>
-                        <option value="STANDARD">Double Standard Room</option>
-                        <option value="DELUXE">Double Deluxe Room</option>
-                        <option value="PREMIUM">Double Premium Room</option>
-                        <option value="STUDIO">Studio</option>
-                        <option value="APARTMENT">Apartment</option>
-                        <option value="VIP">VIP Apartment</option>
-                        <option value="PRESIDENT">President Apartment</option>
+                        <option th:value="${roomType}" selected th:text="${roomType}"></option>
                     </select>
                     <small id="roomTypeError" class="invalid-feedback bg-danger text-light rounded">You must select a room type</small>
                 </div>
@@ -83,6 +77,7 @@
                     <label for="email">Email</label>
                     <input name="email"
                            id="email"
+                           th:value="${user.email}"
                            th:field="*{email}"
                            th:errorclass="is-invalid"
                            type="text"
