@@ -58,7 +58,7 @@ public class ReservationController {
         model.addAttribute("checkIn", checkIn);
         model.addAttribute("checkOut", checkOut);
 
-        System.out.println(roomId);
+        System.out.println("I AM IN GET MAPPING " + roomId);
 //        System.out.println(checkIn);
 //        System.out.println(checkOut);
 
@@ -77,10 +77,8 @@ public class ReservationController {
 
 
 
-        System.out.println(roomId);
+        System.out.println("In post mapping " + roomId);
 
-
-        System.out.println("In post mapping");
 
         if(bindingResult.hasErrors() || !this.reservationService.saveReservation(reservationDTO, userDetails.getUsername()) ){
 
@@ -90,6 +88,10 @@ public class ReservationController {
             model.addAttribute("id", roomId);
             model.addAttribute("checkIn", checkIn);
             model.addAttribute("checkOut", checkOut);
+
+            String redirectURL = "redirect:/reservations/add?id=" + roomId + "&from=" + checkIn + "&to=" + checkOut;
+            //?id=4&from=2023-03-30&to=2023-03-31
+            System.out.println(redirectURL);
 
             return "redirect:/reservations/add";
         }
