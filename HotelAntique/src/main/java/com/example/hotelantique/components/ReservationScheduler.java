@@ -13,8 +13,6 @@ public class ReservationScheduler {
         this.reservationService = reservationService;
     }
 
-
-
     @Scheduled(cron = "0 0 1 * * ?")
     public void deactivatePastReservations(){
         this.reservationService.deactivatePastReservations();

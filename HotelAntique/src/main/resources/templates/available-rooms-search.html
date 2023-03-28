@@ -14,7 +14,6 @@
                 th:method="post"
                 th:action="@{/rooms/available/search}"
                 th:object="${availableRoomDTO}"
-
                 class="form-inline"
                 style="justify-content: center; margin-top: 20px;"
         >
@@ -87,7 +86,8 @@
         <a th:each="r: ${availableRooms}" th:object="${r}"
            class="btn btn-primary btn-rounded room-btn mb-2"
            th:text="|${r.name},   №${r.getRoomNumber()}|"
-           th:href="@{/reservations/add/{id}(id = *{id})}"></a>
+
+           th:href="@{/reservations/add(id=${r.id},from=${r.checkIn},to=${r.checkOut})}"></a>
 
     </div>
 

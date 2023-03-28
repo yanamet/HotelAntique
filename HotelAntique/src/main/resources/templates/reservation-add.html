@@ -5,12 +5,13 @@
 <body class="logo-background">
 
 <nav th:replace="fragments/commons::nav"></nav>
-
+<!--              (id=${roomId})-->
+<!--th:action="@{/reservations/add(from=${roomId},to=${roomId})}"-->
 
 <main class="p-5  text-center my-main">
 
     <div class="d-flex justify-content-center">
-        <form th:action="@{/reservations/add}"
+        <form th:action="@{/reservations/add(id=${roomId},from=${roomId},to=${roomId})}"
               th:method="POST"
               th:object="${reservationDTO}"
               class="text-light bg-secondary form-container">
@@ -23,11 +24,11 @@
                     <label for="fullName">Guest full name</label>
                     <input name="fullName"
                            id="fullName"
-                           th:value="${user.fullName}"
+                           th:text="${user.fullName}"
                            th:field="*{fullName}"
                            th:errorclass="is-invalid"
                            type="text"
-                           class="form-control" th:placeholder="${user.fullName}">
+                           class="form-control">
                     <small id="fullNameError" class="invalid-feedback bg-danger text-light rounded">Name must be between 3 and 20
                         characters</small>
                 </div>
@@ -63,6 +64,7 @@
                     <label for="checkOut">Check out</label>
                     <input name="checkOut"
                            id="checkOut"
+                           th:value="${checkOut}"
                            th:field="*{checkOut}"
                            th:errorclass="is-invalid"
                            type="date"

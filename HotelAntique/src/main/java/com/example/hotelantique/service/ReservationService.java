@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -67,15 +68,25 @@ public class ReservationService {
             List<Room> byTypeAndCheckInAndCheckOut = this.reservationRepository
                     .getByCheckInLessThanAndCheckOutGreaterThan(checkIn, checkOut, roomType);
 
-            return mapListRoomToFoundAvailableDTOList(byTypeAndCheckInAndCheckOut);
+            return mapListRoomToFoundAvailableDTOList(byTypeAndCheckInAndCheckOut, checkIn, checkOut);
         }
-        return mapListRoomToFoundAvailableDTOList(roomToReserve);
+        return mapListRoomToFoundAvailableDTOList(roomToReserve, checkIn, checkOut);
     }
 
-    private List<AvailableRoomFoundDTO> mapListRoomToFoundAvailableDTOList(List<Room> rooms){
-       return  rooms.stream()
-                .map(r -> this.modelMapper.map(r, AvailableRoomFoundDTO.class))
-                .collect(Collectors.toList());
+    private List<AvailableRoomFoundDTO> mapListRoomToFoundAvailableDTOList(List<Room> rooms,
+                                                                           LocalDate checkIn, LocalDate checkOut){
+        List<AvailableRoomFoundDTO> availableRoomFoundDTOList = new ArrayList<>();
+
+        for (Room room : rooms) {
+            AvailableRoomFoundDTO availableRoomFoundDTO = this.modelMapper.map(room, AvailableRoomFoundDTO.class);
+            availableRoomFoundDTO.setCheckIn(checkIn);
+            availableRoomFoundDTO.setCheckOut(checkOut);
+
+            availableRoomFoundDTOList.add(availableRoomFoundDTO);
+        }
+
+
+        return  availableRoomFoundDTOList;
     }
 
 

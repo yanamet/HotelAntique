@@ -13,14 +13,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ReservationController {
+
+
 
     private final ReservationService reservationService;
     private final RoomService roomService;
@@ -38,34 +37,59 @@ public class ReservationController {
         return new ReservationDTO();
     }
 
-    @GetMapping("/reservations/add/{id}")
-    public String addReserve(@PathVariable("id") long roomId,
+    @GetMapping("/reservations/add")
+    public String addReserve(
+                             @RequestParam(value = "id") long roomId,
+                             @RequestParam(value = "from") String checkIn,
+                             @RequestParam(value = "to") String checkOut,
                              @AuthenticationPrincipal UserDetails userDetails,
                              Model model){
+
+//            @RequestParam(value = "from") String checkIn,
+//            @RequestParam(value = "to") String checkOut,
+
         Room room = this.roomService.getRoomById(roomId);
         UserEntity user = this.userService.getByUsername(userDetails.getUsername()).get();
 
         model.addAttribute("user", user);
         model.addAttribute("roomType", room.getRoomType().name());
 
+        model.addAttribute("roomId", roomId);
+        model.addAttribute("checkIn", checkIn);
+        model.addAttribute("checkOut", checkOut);
+
+        System.out.println(roomId);
+//        System.out.println(checkIn);
+//        System.out.println(checkOut);
+
         return "reservation-add";
     }
 
-    @PostMapping("/reservations/add/{id}")
+    @PostMapping("/reservations/add")
     public String addReserve(@Valid ReservationDTO reservationDTO,
-                             @PathVariable("id") long roomId,
+                             @RequestParam(value = "id") long roomId,
+                             @RequestParam(value = "from") String checkIn,
+                             @RequestParam(value = "to") String checkOut,
                              BindingResult bindingResult,
+                             Model model,
                              RedirectAttributes redirectAttributes,
                              @AuthenticationPrincipal UserDetails userDetails){
 
-        System.out.println(reservationDTO);
+
+
+        System.out.println(roomId);
+
+
+        System.out.println("In post mapping");
 
         if(bindingResult.hasErrors() || !this.reservationService.saveReservation(reservationDTO, userDetails.getUsername()) ){
-
 
             redirectAttributes.addFlashAttribute("reservationDTO", reservationDTO);
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.registerDTO", bindingResult);
+            model.addAttribute("id", roomId);
+            model.addAttribute("checkIn", checkIn);
+            model.addAttribute("checkOut", checkOut);
 
             return "redirect:/reservations/add";
         }

@@ -3,6 +3,7 @@ package com.example.hotelantique.service;
 import com.example.hotelantique.model.entity.Role;
 import com.example.hotelantique.model.entity.UserEntity;
 import com.example.hotelantique.repository.UserRepository;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
