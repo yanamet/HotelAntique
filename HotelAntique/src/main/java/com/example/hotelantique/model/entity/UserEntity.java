@@ -54,6 +54,10 @@ public class UserEntity {
         this.roles.add(role);
     }
 
+    public boolean removeRole(Role role){
+        return this.roles.remove(role);
+    }
+
     public long getId() {
         return id;
     }

@@ -1,0 +1,47 @@
+<!DOCTYPE html >
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+
+<nav th:replace="fragments/commons::nav"></nav>
+
+<table class="table table-striped mb-4 ">
+    <h4 class="text-center mt-10">USER</h4>
+    <thead>
+    <tr>
+        <th scope="col" >ID</th>
+        <th scope="col" >USERNAME</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row" th:text="${user.id}"></th>
+        <td th:text="${user.username}"></td>
+        <td></td>
+        <td>
+            <a th:each="r: ${missingRoles}" th:object="${r}"
+               th:href="@{/roles/add/{id}/{id2}(id = *{id}, id2 = ${user.id})}" class="btn btn-secondary m-2"
+               th:text="|ADD ROLE ${r.name.name()}|"></a>
+
+        </td>
+
+        <td>
+            <a th:each="r: ${currentRoles}" th:object="${r}"
+               th:href="@{/roles/remove/{id}/{id2}(id = *{id}, id2 = ${user.id})}" class="btn btn-secondary m-2"
+               th:text="|REMOVE ROLE ${r.name.name()}|"></a>
+        </td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+
+
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

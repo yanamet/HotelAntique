@@ -107,4 +107,21 @@ public class UserService {
     public void deleteById(long id) {
         this.userRepository.deleteById(id);
     }
+
+    public void addRole(long roleId, long userId) {
+        UserEntity user = this.getUserById(userId).get();
+        Role role = this.roleService.getRoleById(roleId);
+        user.addRole(role);
+
+        this.userRepository.save(user);
+    }
+
+    public void removeRole(long roleId, long userId) {
+        UserEntity user = this.getUserById(userId).get();
+        Role role = this.roleService.getRoleById(roleId);
+
+        user.removeRole(role);
+
+        this.userRepository.save(user);
+    }
 }

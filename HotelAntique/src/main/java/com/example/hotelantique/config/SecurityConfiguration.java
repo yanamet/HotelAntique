@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 
                     .requestMatchers("/", "/login", "/register", "/login-error", "/aboutUs", "/home").permitAll()
-                    .requestMatchers("/pages/admin").hasRole(RoleEnum.ADMIN.name())
+                    .requestMatchers("/pages/admin", "/roles/**", "/pages/admin/**").hasRole(RoleEnum.ADMIN.name())
                 .requestMatchers("/scss/**", "/node_modules/**", "/assets/**").permitAll()
                 .anyRequest().authenticated()
                     .and()

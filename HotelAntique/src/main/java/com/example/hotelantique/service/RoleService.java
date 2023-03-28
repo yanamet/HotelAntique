@@ -5,6 +5,7 @@ import com.example.hotelantique.model.entity.Role;
 import com.example.hotelantique.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,4 +34,17 @@ public class RoleService {
        return this.roleRepository.findByName(name);
     }
 
+
+
+    public List<Role> getRolesToAdd(List<Role> userRoles) {
+        List<Role> all = this.roleRepository.findAll();
+
+        return all.stream()
+                .filter(r -> !userRoles.contains(r))
+                .collect(Collectors.toList());
+    }
+
+    public Role getRoleById(long roleId) {
+        return this.roleRepository.findById(roleId).get();
+    }
 }

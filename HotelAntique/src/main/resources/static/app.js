@@ -28,10 +28,11 @@ function reloadUsers(event){
             currentRoles.textContent = resultRoles;
 
             let rolesCol = document.createElement('td');
-            let changeRolesBtn = document.createElement('button')
+            let changeRolesBtn = document.createElement('a')
             changeRolesBtn.classList.add("btn");
             changeRolesBtn.classList.add("btn-secondary");
             changeRolesBtn.innerText = "Change Roles";
+            changeRolesBtn.href = `/roles/change/${user.id}`;
 
             rolesCol.appendChild(changeRolesBtn);
 
