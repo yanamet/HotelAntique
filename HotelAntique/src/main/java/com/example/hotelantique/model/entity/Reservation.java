@@ -25,7 +25,7 @@ public class Reservation {
     @Column(nullable = false)
     private LocalDate checkOut;
 
-    @ManyToOne(optional = false)
+    @ManyToOne()
     private Payment payment;
 
     @Column(nullable = false)

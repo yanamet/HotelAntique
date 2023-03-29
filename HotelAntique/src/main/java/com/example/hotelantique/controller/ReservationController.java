@@ -118,9 +118,5 @@ public class ReservationController {
         return "redirect:/user/profile";
     }
 
-    @GetMapping("/payment/card")
-    public String cardPayment(){
-        return "card-details";
-    }
 
 }

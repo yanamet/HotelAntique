@@ -1,44 +1,32 @@
-package com.example.hotelantique.model.entity;
+package com.example.hotelantique.model.dtos.reservationDTO;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+public class PaymentReservationDTO {
 
-@Entity
-@Table(name = "payments")
-public class Payment {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(nullable = false)
+    @Size(min = 5)
+    @NotEmpty
     private String owner;
 
-    @Column(nullable = false)
+    @Size(max = 3)
+    @NotEmpty
     private String cvv;
 
-    @Column(nullable = false)
+    @NotEmpty
     private String expirationMonth;
 
-    @Column(nullable = false)
+    @Min(2023)
     private int expirationYear;
 
-    @Column(nullable = false)
+    @Size(min = 5)
+    @NotEmpty
     private String cardNumber;
-    public Payment() {
 
-    }
-
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public PaymentReservationDTO() {
     }
 
     public String getOwner() {
@@ -79,5 +67,16 @@ public class Payment {
 
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentReservationDTO{" +
+                "owner='" + owner + '\'' +
+                ", cvv='" + cvv + '\'' +
+                ", expirationMonth='" + expirationMonth + '\'' +
+                ", expirationYear=" + expirationYear +
+                ", cardNumber='" + cardNumber + '\'' +
+                '}';
     }
 }

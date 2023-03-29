@@ -98,7 +98,11 @@ public class ReservationService {
             this.roomService.saveRoom(room);
 
             Payment payment = new Payment();
-            payment.setPaymentMethod(PaymentMethod.CASH);
+            payment.setCvv("cvv");
+            payment.setExpirationYear(1233);
+            payment.setOwner("OWNER");
+            payment.setCardNumber("cvv");
+            payment.setExpirationMonth("cvv");
 
             this.paymentService.savePayment(payment);
 
@@ -120,16 +124,13 @@ public class ReservationService {
             this.roomService.saveRoom(room2);
 
 
-            Payment payment2 = new Payment();
-            payment2.setPaymentMethod(PaymentMethod.CASH);
 
-            this.paymentService.savePayment(payment2);
 
             Reservation reservation2 = new Reservation();
             reservation2.setGuest(admin);
             reservation2.setCheckIn(LocalDate.of(2023, 4, 25));
             reservation2.setCheckOut(LocalDate.of(2023, 4, 28));
-            reservation2.setPayment(payment2);
+            reservation2.setPayment(payment);
             reservation2.setActive(true);
             reservation2.setCreatedOn(LocalDate.now());
             reservation2.setTotalValue(BigDecimal.valueOf(90.0));
@@ -146,7 +147,7 @@ public class ReservationService {
             reservation4.setGuest(admin);
             reservation4.setCheckIn(LocalDate.of(2023, 4, 22));
             reservation4.setCheckOut(LocalDate.of(2023, 4, 24));
-            reservation4.setPayment(payment2);
+            reservation4.setPayment(payment);
             reservation4.setActive(true);
             reservation4.setCreatedOn(LocalDate.now());
             reservation4.setTotalValue(BigDecimal.valueOf(90.0));
@@ -162,8 +163,8 @@ public class ReservationService {
 
             reservation5.setGuest(admin);
             reservation5.setCheckIn(LocalDate.of(2023, 3, 20));
-            reservation5.setCheckOut(LocalDate.of(2023, 3, 27));
-            reservation5.setPayment(payment2);
+            reservation5.setCheckOut(LocalDate.of(2023, 3, 28));
+            reservation5.setPayment(payment);
             reservation5.setActive(true);
             reservation5.setCreatedOn(LocalDate.now());
             reservation5.setTotalValue(BigDecimal.valueOf(90.0));
