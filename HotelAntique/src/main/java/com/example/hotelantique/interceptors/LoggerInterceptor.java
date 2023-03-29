@@ -18,6 +18,7 @@ public class LoggerInterceptor  implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        request.setAttribute("startingTime", System.currentTimeMillis());
         logger.info("Pre handle - method: {}, uri: {}", request.getMethod(), request.getRequestURI());
         return true;
     }
@@ -26,14 +27,21 @@ public class LoggerInterceptor  implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response,
                            Object handler, ModelAndView modelAndView) throws Exception {
 
-        logger.info("Post handle - response status: {}", response.getStatus());
+        long millisTookToHandle = System.currentTimeMillis() - (long )request.getAttribute("startingTime");
+
+        logger.info("Post handle - Generated response in completed in: {}ms, status: {}", millisTookToHandle,
+                response.getStatus());
         HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
                                 Object handler, Exception ex) throws Exception {
-        logger.info("After Completion - successful request method: {}, uri: {}", request.getMethod(), request.getRequestURI());
+
+        long millisTookToHandle = System.currentTimeMillis() - (long )request.getAttribute("startingTime");
+        logger.info("After Completion - successful request completed in {}ms, method: {}, uri: {}",
+                millisTookToHandle, request.getMethod(), request.getRequestURI());
+
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
 }
