@@ -2,9 +2,9 @@ package com.example.hotelantique.model.dtos.reservationDTO;
 
 import jakarta.validation.constraints.*;
 
-import java.time.LocalDate;
-
 public class ReservationDTO {
+
+    private int roomNumber;
 
     @Size(min = 3, max = 20)
     @NotEmpty
@@ -26,6 +26,14 @@ public class ReservationDTO {
     private String specialWishes;
 
     public ReservationDTO() {
+    }
+
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     public String getFullName() {
@@ -81,10 +89,11 @@ public class ReservationDTO {
     @Override
     public String toString() {
         return "ReservationDTO{" +
-                "fullName='" + fullName + '\'' +
+                "roomId=" + roomNumber +
+                ", fullName='" + fullName + '\'' +
                 ", roomType='" + roomType + '\'' +
-                ", checkIn=" + checkIn +
-                ", checkOut=" + checkOut +
+                ", checkIn='" + checkIn + '\'' +
+                ", checkOut='" + checkOut + '\'' +
                 ", email='" + email + '\'' +
                 ", specialWishes='" + specialWishes + '\'' +
                 '}';

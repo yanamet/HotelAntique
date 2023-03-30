@@ -47,30 +47,19 @@ public class ReservationController {
                              @AuthenticationPrincipal UserDetails userDetails,
                              Model model){
 
-//            @RequestParam(value = "from") String checkIn,
-//            @RequestParam(value = "to") String checkOut,
-
-
         Room room = this.roomService.getRoomById(roomId);
         UserEntity user = this.userService.getByUsername(userDetails.getUsername()).get();
 
-        model.addAttribute("user", user);
         model.addAttribute("roomType", room.getRoomType().name());
 
-        model.addAttribute("roomIdSearch", roomId);
+        model.addAttribute("roomNumberSearch", room.getRoomNumber());
         model.addAttribute("checkInSearch", checkIn);
         model.addAttribute("checkOutSearch", checkOut);
 
-        System.out.println("I AM IN GET MAPPING " + roomId);
-//        System.out.println(checkIn);
-//        System.out.println(checkOut);
 
         return "reservation-add";
     }
 
-//    @RequestParam(value = "id") long roomId,
-//    @RequestParam(value = "from") String checkIn,
-//    @RequestParam(value = "to") String checkOut,
 
     @PostMapping("/reservations/add")
     public String addReserve(@Valid ReservationDTO reservationDTO,
@@ -81,8 +70,9 @@ public class ReservationController {
                              @AuthenticationPrincipal UserDetails userDetails){
 
         System.out.println("ReservationDTO " + reservationDTO);
+// || !this.reservationService.saveReservation(reservationDTO, userDetails.getUsername()
 
-// || !this.reservationService.saveReservation(reservationDTO, userDetails.getUsername())
+//
         if(bindingResult.hasErrors()){
 
             redirectAttributes.addFlashAttribute("reservationDTO", reservationDTO);
@@ -90,6 +80,9 @@ public class ReservationController {
                     "org.springframework.validation.BindingResult.registerDTO", bindingResult);
             return "redirect:/reservations/error";
         }
+
+        this.reservationService.saveReservation(reservationDTO, userDetails.getUsername());
+
 
         System.out.println("RESERVATION DONE: " + reservationDTO);
 

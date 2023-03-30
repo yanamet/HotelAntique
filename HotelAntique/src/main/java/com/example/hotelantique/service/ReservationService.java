@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,20 +43,33 @@ public class ReservationService {
         this.emailService = emailService;
     }
 
-    public boolean saveReservation(ReservationDTO reservationDTO, String loggedUserUsername) {
+    public void saveReservation(ReservationDTO reservationDTO, String loggedUserUsername) {
+        System.out.println("ReservationDTO " + reservationDTO);
 
         UserEntity user = this.userService.getByUsername(loggedUserUsername).get();
 
+        Room room = this.roomService.getRoomByRoomNumber(reservationDTO.getRoomNumber());
+        room.setAvailable(false);
+        this.roomService.saveRoom(room);
+
+        LocalDate checkIn = LocalDate.parse(reservationDTO.getCheckIn());
+        LocalDate checkOut = LocalDate.parse(reservationDTO.getCheckOut());
+
         Reservation reservation = this.modelMapper.map(reservationDTO, Reservation.class);
+        reservation.setGuest(user);
+        reservation.setRoom(room);
+        reservation.setTotalValue(room.getPrice());
+        reservation.setCreatedOn(LocalDate.now());
+        reservation.setCheckIn(checkIn);
+        reservation.setCheckOut(checkOut);
+        reservation.setActive(true);
+
+        System.out.println("Reservation " + reservation);
+
+        this.reservationRepository.save(reservation);
 
         this.emailService.sendSuccessfulReservationEmail(user.getUsername(), user.getEmail(), reservation);
 
-        System.out.println(reservation.toString());
-
-//        roomToReserve.setAvailable(false);
-//        this.roomService.saveRoom(roomToReserve);
-
-        return true;
     }
 
 
