@@ -8,11 +8,16 @@
 <!--              (id=${roomId})-->
 <!--th:action="@{/reservations/add(from=${roomId},to=${roomId})}"-->
 
-<main class="p-5  text-center my-main">
+<!--th:text="${roomId}"-->
+<!--th:text="${checkIn}"-->
+<!--th:text="${checkOut}"-->
 
+<main class="p-5  text-center my-main" >
+<!--    (id=${roomId},from=${checkIn},to=${checkOut})-->
     <div class="d-flex justify-content-center">
-        <form th:action="@{/reservations/add(id=${roomId},from=${checkIn},to=${checkOut})}"
+        <form th:action="@{/reservations/add}"
               th:method="POST"
+
               th:object="${reservationDTO}"
               class="text-light bg-secondary form-container">
             <h1 class="text-light border-bottom">Reserve</h1>
@@ -24,7 +29,7 @@
                     <label for="fullName">Guest full name</label>
                     <input name="fullName"
                            id="fullName"
-                           th:text="${user.fullName}"
+                           th:value="${user.fullName}"
                            th:field="*{fullName}"
                            th:errorclass="is-invalid"
                            type="text"
@@ -48,31 +53,61 @@
 
                 <div class="col">
                     <label for="checkIn">Check in</label>
-                    <input
+                    <select
                             name="checkIn"
-                            id="checkIn"
                             th:field="*{checkIn}"
                             th:errorclass="is-invalid"
-                            type="date"
-                            class="form-control"
-                            placeholder="Check in">
-                    <small id="checkInError" class="invalid-feedback bg-danger text-light rounded">Check in date cannot
-                        be in the past</small>
+                            id="checkIn"
+                            class="form-select">
+                        <option th:value="${checkInSearch}" selected th:text="${checkInSearch}"></option>
+                    </select>
+                    <small id="checkInError" class="invalid-feedback bg-danger text-light rounded">You must select a room type</small>
                 </div>
+
+<!--                <div class="col">-->
+<!--                    <label for="checkIn">Check in</label>-->
+<!--                    <input-->
+<!--                            name="checkIn"-->
+<!--                            id="checkIn"-->
+<!--                            th:field="*{checkIn}"-->
+<!--                            th:text="${checkInSearch}"-->
+<!--                            th:value="${checkInSearch}"-->
+<!--                            th:errorclass="is-invalid"-->
+<!--                           -->
+<!--                            class="form-control"-->
+<!--                            placeholder="Check in">-->
+<!--                    <small id="checkInError" class="invalid-feedback bg-danger text-light rounded">Check in date cannot-->
+<!--                        be in the past</small>-->
+<!--                </div>-->
+
 
                 <div class="col">
                     <label for="checkOut">Check out</label>
-                    <input name="checkOut"
-                           id="checkOut"
-                           th:value="${checkOut}"
-                           th:field="*{checkOut}"
-                           th:errorclass="is-invalid"
-                           type="date"
-                           class="form-control"
-                           placeholder="Check out">
-                    <small id="checkOutError" class="invalid-feedback bg-danger text-light rounded">Check in date cannot be in the
-                        past</small>
+                    <select
+                            name="checkOut"
+                            th:field="*{checkOut}"
+                            th:errorclass="is-invalid"
+                            id="checkOut"
+                            class="form-select">
+                        <option th:value="${checkOutSearch}" selected th:text="${checkOutSearch}"></option>
+                    </select>
+                    <small id="checkOutSearchError" class="invalid-feedback bg-danger text-light rounded">
+                        You must select a room type</small>
                 </div>
+
+<!--                <div class="col">-->
+<!--                    <label for="checkOut">Check out</label>-->
+<!--                    <input name="checkOut"-->
+<!--                           id="checkOut"-->
+<!--                           th:value="${checkOut}"-->
+<!--                           th:field="*{checkOut}"-->
+<!--                           th:errorclass="is-invalid"-->
+<!--                           type="date"-->
+<!--                           class="form-control"-->
+<!--                           placeholder="Check out">-->
+<!--                    <small id="checkOutError" class="invalid-feedback bg-danger text-light rounded">Check in date cannot be in the-->
+<!--                        past</small>-->
+<!--                </div>-->
 
 
                 <div class="col">

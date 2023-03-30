@@ -37,16 +37,19 @@ public class ReservationController {
         return new ReservationDTO();
     }
 
+
+
+
     @GetMapping("/reservations/add")
-    public String addReserve(
-                             @RequestParam(value = "id") long roomId,
-                             @RequestParam(value = "from") String checkIn,
-                             @RequestParam(value = "to") String checkOut,
+    public String addReserve(    @RequestParam(value = "id") long roomId,
+                                 @RequestParam(value = "from") String checkIn,
+                                 @RequestParam(value = "to") String checkOut,
                              @AuthenticationPrincipal UserDetails userDetails,
                              Model model){
 
 //            @RequestParam(value = "from") String checkIn,
 //            @RequestParam(value = "to") String checkOut,
+
 
         Room room = this.roomService.getRoomById(roomId);
         UserEntity user = this.userService.getByUsername(userDetails.getUsername()).get();
@@ -54,9 +57,9 @@ public class ReservationController {
         model.addAttribute("user", user);
         model.addAttribute("roomType", room.getRoomType().name());
 
-        model.addAttribute("roomId", roomId);
-        model.addAttribute("checkIn", checkIn);
-        model.addAttribute("checkOut", checkOut);
+        model.addAttribute("roomIdSearch", roomId);
+        model.addAttribute("checkInSearch", checkIn);
+        model.addAttribute("checkOutSearch", checkOut);
 
         System.out.println("I AM IN GET MAPPING " + roomId);
 //        System.out.println(checkIn);
@@ -65,38 +68,37 @@ public class ReservationController {
         return "reservation-add";
     }
 
+//    @RequestParam(value = "id") long roomId,
+//    @RequestParam(value = "from") String checkIn,
+//    @RequestParam(value = "to") String checkOut,
+
     @PostMapping("/reservations/add")
     public String addReserve(@Valid ReservationDTO reservationDTO,
-                             @RequestParam(value = "id") long roomId,
-                             @RequestParam(value = "from") String checkIn,
-                             @RequestParam(value = "to") String checkOut,
+
                              BindingResult bindingResult,
                              Model model,
                              RedirectAttributes redirectAttributes,
                              @AuthenticationPrincipal UserDetails userDetails){
 
+        System.out.println("ReservationDTO " + reservationDTO);
 
-
-        System.out.println("In post mapping " + roomId);
-
-
-        if(bindingResult.hasErrors() || !this.reservationService.saveReservation(reservationDTO, userDetails.getUsername()) ){
+// || !this.reservationService.saveReservation(reservationDTO, userDetails.getUsername())
+        if(bindingResult.hasErrors()){
 
             redirectAttributes.addFlashAttribute("reservationDTO", reservationDTO);
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.registerDTO", bindingResult);
-            model.addAttribute("id", roomId);
-            model.addAttribute("checkIn", checkIn);
-            model.addAttribute("checkOut", checkOut);
-
-            String redirectURL = "redirect:/reservations/add?id=" + roomId + "&from=" + checkIn + "&to=" + checkOut;
-            //?id=4&from=2023-03-30&to=2023-03-31
-            System.out.println(redirectURL);
-
-            return "redirect:/reservations/add";
+            return "redirect:/reservations/error";
         }
 
+        System.out.println("RESERVATION DONE: " + reservationDTO);
+
         return "successful-reservation";
+    }
+
+    @GetMapping("/reservations/error")
+    public String reservationErrorMissedField(){
+        return "error-reservation-missed-field";
     }
 
     @GetMapping("/reservations/successful")

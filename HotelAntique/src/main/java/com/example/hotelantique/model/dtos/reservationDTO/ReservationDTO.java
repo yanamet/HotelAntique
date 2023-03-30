@@ -13,11 +13,11 @@ public class ReservationDTO {
     @NotEmpty
     private String roomType;
 
-    @FutureOrPresent
-    private LocalDate checkIn;
 
-    @Future
-    private LocalDate checkOut;
+    private String checkIn;
+
+
+    private String checkOut;
 
     @Email
     private String email;
@@ -44,19 +44,19 @@ public class ReservationDTO {
         this.roomType = roomType;
     }
 
-    public LocalDate getCheckIn() {
+    public String getCheckIn() {
         return checkIn;
     }
 
-    public void setCheckIn(LocalDate checkIn) {
+    public void setCheckIn(String checkIn) {
         this.checkIn = checkIn;
     }
 
-    public LocalDate getCheckOut() {
+    public String getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(LocalDate checkOut) {
+    public void setCheckOut(String checkOut) {
         this.checkOut = checkOut;
     }
 
