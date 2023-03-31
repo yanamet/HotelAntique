@@ -41,14 +41,12 @@ public class ReservationController {
 
 
     @GetMapping("/reservations/add")
-    public String addReserve(    @RequestParam(value = "id") long roomId,
-                                 @RequestParam(value = "from") String checkIn,
-                                 @RequestParam(value = "to") String checkOut,
-                             @AuthenticationPrincipal UserDetails userDetails,
+    public String addReserve(
+                             @RequestParam(value = "id") long roomId,
+                             @RequestParam(value = "from") String checkIn,
+                             @RequestParam(value = "to") String checkOut,
                              Model model){
-
         Room room = this.roomService.getRoomById(roomId);
-        UserEntity user = this.userService.getByUsername(userDetails.getUsername()).get();
 
         model.addAttribute("roomType", room.getRoomType().name());
 
@@ -70,21 +68,18 @@ public class ReservationController {
                              @AuthenticationPrincipal UserDetails userDetails){
 
         System.out.println("ReservationDTO " + reservationDTO);
-// || !this.reservationService.saveReservation(reservationDTO, userDetails.getUsername()
 
-//
         if(bindingResult.hasErrors()){
 
             redirectAttributes.addFlashAttribute("reservationDTO", reservationDTO);
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.registerDTO", bindingResult);
+//            return "redirect:/reservations/add";
+
             return "redirect:/reservations/error";
         }
 
         this.reservationService.saveReservation(reservationDTO, userDetails.getUsername());
-
-
-        System.out.println("RESERVATION DONE: " + reservationDTO);
 
         return "successful-reservation";
     }

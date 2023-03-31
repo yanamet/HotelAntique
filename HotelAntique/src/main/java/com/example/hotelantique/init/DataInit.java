@@ -27,8 +27,7 @@ public class DataInit implements CommandLineRunner {
     private final ReservationService reservationService;
 
     public DataInit(RoleService roleService, UserService userService,
-                    PasswordEncoder passwordEncoder,
-                    @Value("${app.default.password}") String defaultPassword, RoomService roomService,
+                    PasswordEncoder passwordEncoder, RoomService roomService,
                     ReservationService reservationService) {
         this.roleService = roleService;
         this.userService = userService;

@@ -68,7 +68,7 @@ public class ReservationService {
 
         this.reservationRepository.save(reservation);
 
-        this.emailService.sendSuccessfulReservationEmail(user.getUsername(), user.getEmail(), reservation);
+        this.emailService.sendSuccessfulReservationEmail(user.getFullName(), user.getEmail(), reservation);
 
     }
 
@@ -255,6 +255,10 @@ public class ReservationService {
     public void anulateReservation(long id) {
         Reservation reservation = this.reservationRepository.findById(id).get();
         reservation.setActive(false);
+
+        Room room = reservation.getRoom();
+        room.setAvailable(true);
+        this.roomService.saveRoom(room);
 
         this.reservationRepository.save(reservation);
     }

@@ -41,8 +41,15 @@
 
                 <div th:if="${bad_credentials}" class="bg-danger text-light rounded mb-4 mt-2">Incorrect username or password!</div>
 
+
                 <div class="d-grid gap-2 mt-4">
                     <button type="submit" class="btn btn-primary btn-rounded">LOGIN</button>
+
+                    <div class="form-check">
+                        <input name='remember' type='checkbox' />
+                        <label class="form-check-label">Remember me</label>
+                    </div>
+
                     <p>Don't have an account? <a href="/register">Register here</a></p>
                 </div>
             </form>

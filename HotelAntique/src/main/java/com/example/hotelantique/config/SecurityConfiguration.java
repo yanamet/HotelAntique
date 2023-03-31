@@ -51,8 +51,14 @@ public class SecurityConfiguration {
                      .deleteCookies("JSESSIONID")
                      .clearAuthentication(true)
                 .and()
-                .securityContext()
-                .securityContextRepository(securityContextRepository);
+                    .securityContext()
+                    .securityContextRepository(securityContextRepository)
+                .and()
+                    .rememberMe()
+                    .rememberMeParameter("remember")
+                    .key("remember Me Encryption Key")
+                    .rememberMeCookieName("rememberMeCookieName")
+                    .tokenValiditySeconds(10000);
 
         return http.build();
 

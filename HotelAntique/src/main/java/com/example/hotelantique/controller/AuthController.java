@@ -52,7 +52,7 @@ public class AuthController {
             return "redirect:/register";
         }
 
-        return "home";
+        return "redirect:/home";
     }
 
 
