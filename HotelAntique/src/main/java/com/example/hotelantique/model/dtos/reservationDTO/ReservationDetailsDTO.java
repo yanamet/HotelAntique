@@ -15,8 +15,17 @@ public class ReservationDetailsDTO {
     private LocalDate checkOut;
 
     private boolean isActive;
+    private boolean isPaid;
 
     public ReservationDetailsDTO() {
+    }
+
+    public boolean isPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(boolean paid) {
+        isPaid = paid;
     }
 
     public long getId() {

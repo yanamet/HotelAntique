@@ -17,7 +17,7 @@
         <h3 th:text="|Status: ${reservation.reservationStatus()}|"></h3>
         <div th:if="${reservation.isActive()}" class="d-grid gap-2">
             <a th:href="@{/user/reservations/anulate/{id}(id = *{id})}" class="btn btn-primary btn-rounded">ANULATE</a>
-            <a th:href="@{/user/reservations/pay/{id}(id = *{id})}" class="btn btn-primary btn-rounded">PAY</a>
+            <a th:if="${!reservation.isPaid()}" th:href="@{/user/reservations/pay/{id}(id = *{id})}" class="btn btn-primary btn-rounded">PAY</a>
         </div>
     </div>
 

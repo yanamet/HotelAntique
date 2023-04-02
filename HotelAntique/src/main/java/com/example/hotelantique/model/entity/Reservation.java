@@ -33,13 +33,19 @@ public class Reservation {
     private LocalDate createdOn;
 
     private boolean isActive;
+    private boolean isPaid;
 
     public Reservation() {
     }
 
 
+    public boolean isPaid() {
+        return isPaid;
+    }
 
-
+    public void setPaid(boolean paid) {
+        isPaid = paid;
+    }
 
     public BigDecimal getTotalValue() {
         return totalValue;

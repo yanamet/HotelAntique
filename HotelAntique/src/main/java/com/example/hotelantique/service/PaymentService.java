@@ -37,7 +37,11 @@ public class PaymentService {
         Payment payment = this.modelMapper.map(paymentReservationDTO, Payment.class);
         payment.setCardNumber(passwordEncoder.encode(paymentReservationDTO.getCardNumber()));
         payment.setCvv(passwordEncoder.encode(paymentReservationDTO.getCvv()));
+
         Reservation reservation = this.reservationService.getReservation(reservationId);
+        reservation.setPaid(true);
+        this.reservationService.updateReservation(reservation);
+
         payment.setReservation(reservation);
         this.paymentRepository.save(payment);
 
