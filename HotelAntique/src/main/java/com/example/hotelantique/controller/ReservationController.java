@@ -94,19 +94,7 @@ public class ReservationController {
         return "successful-reservation";
     }
 
-    @GetMapping("/reservations/details/{id}")
-    public String reservationsDetails(@PathVariable("id") long id,
-                                      Model model){
-        ReservationDetailsDTO reservation =  this.reservationService.getReservationById(id);
-        model.addAttribute("reservation", reservation);
-        return "reservation-details";
-    }
 
-    @GetMapping("/reservations/anulate/{id}")
-    public String anulateReservation(@PathVariable("id") long id){
-        this.reservationService.anulateReservation(id);
-        return "redirect:/user/profile";
-    }
 
 
 }

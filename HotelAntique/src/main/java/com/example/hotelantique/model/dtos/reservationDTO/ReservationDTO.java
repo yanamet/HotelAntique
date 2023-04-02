@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 
 public class ReservationDTO {
 
+
     private int roomNumber;
 
     @Size(min = 3, max = 20)
@@ -27,6 +28,8 @@ public class ReservationDTO {
 
     public ReservationDTO() {
     }
+
+
 
     public int getRoomNumber() {
         return roomNumber;

@@ -1,5 +1,6 @@
 package com.example.hotelantique.controller;
 
+import com.example.hotelantique.model.dtos.reservationDTO.ReservationDetailsDTO;
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewDTO;
 import com.example.hotelantique.model.dtos.userDTO.UserAdminPageDTO;
 import com.example.hotelantique.model.entity.UserEntity;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -63,5 +65,22 @@ public class UserController {
 
         return "admin-page";
     }
+
+    @GetMapping("/user/reservations/details/{id}")
+    public String reservationsDetails(@PathVariable("id") long id,
+                                      Model model){
+        ReservationDetailsDTO reservation =  this.reservationService.getReservationById(id);
+        model.addAttribute("reservation", reservation);
+        return "reservation-details";
+    }
+
+    @GetMapping("/user/reservations/anulate/{id}")
+    public String anulateReservation(@PathVariable("id") long id){
+        this.reservationService.anulateReservation(id);
+        return "redirect:/user/profile";
+    }
+
+
+
 
 }

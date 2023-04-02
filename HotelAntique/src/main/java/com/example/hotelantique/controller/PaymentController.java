@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,8 +25,12 @@ public class PaymentController {
         return new PaymentReservationDTO();
     }
 
-    @GetMapping("/payment/card")
-    public String cardPayment(){
+    @GetMapping("/user/reservations/pay/{id}")
+    public String cardPayment(@PathVariable("id") long id,
+                              PaymentReservationDTO paymentReservationDTO){
+        paymentReservationDTO.setReservationId(id);
+        System.out.println(paymentReservationDTO);
+
         return "card-details";
     }
 
@@ -48,5 +53,12 @@ public class PaymentController {
 
         return "home";
     }
+
+//    @GetMapping("/user/reservations/pay/{id}")
+//    public String payForReservation(@PathVariable("id") long id){
+//        this.reservationService.
+//        this.reservationService.anulateReservation(id);
+//        return "redirect:/user/profile";
+//    }
 
 }

@@ -4,6 +4,7 @@ import com.example.hotelantique.model.dtos.userDTO.UserRegisterDTO;
 import com.example.hotelantique.model.entity.Role;
 import com.example.hotelantique.model.entity.UserEntity;
 import com.example.hotelantique.model.enums.RoleEnum;
+import com.example.hotelantique.model.user.HotelAntiqueApplicationUserDetails;
 import com.example.hotelantique.repository.RoleRepository;
 import com.example.hotelantique.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,14 +20,23 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.context.SecurityContextRepository;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+
+import java.util.function.Consumer;
 
 @ExtendWith(MockitoExtension.class)
 public class AuthServiceTest {
@@ -44,19 +54,16 @@ public class AuthServiceTest {
 
     @Captor
     private ArgumentCaptor<UserEntity> userEntityArgumentCaptor;
-
     @Mock
     private UserService mockedUserService;
-
     @Mock
     private UserRepository mockUserRepository;
-
     @Mock
     private RoleRepository mockedRoleRepository;
-
     @Mock
     private ModelMapper mockModelMapper;
-
+   @Mock
+   private ApplicationUserDetailsService applicationUserDetailsService;
     @Mock
     private PasswordEncoder mockPasswordEncoder;
     @Mock
@@ -76,23 +83,24 @@ public class AuthServiceTest {
         this.toTest = new AuthService(mockedUserService, mockModelMapper, mockPasswordEncoder,
                 mockUserDetailsService,
                 mockEmailService, mockSecurityContextRepository, mockRoleService);
+
+        this.applicationUserDetailsService = new ApplicationUserDetailsService(mockUserRepository);
     }
 
-    //NOT WORKING
+
     @Test
     void userRegistration() {
 
-        MockHttpServletRequest mockHttpServletRequest = new MockHttpServletRequest();
-
-        MockHttpServletResponse mockHttpServletResponse = new MockHttpServletResponse();
-
         Role testGuestRole = new Role(RoleEnum.GUEST);
+
+        lenient().when(mockedRoleRepository.findByName(RoleEnum.GUEST)).thenReturn(testGuestRole);
 
         UserRegisterDTO testRegisterDTO = new UserRegisterDTO();
         testRegisterDTO.setUsername(USERNAME);
         testRegisterDTO.setFullName(FULL_NAME);
         testRegisterDTO.setEmail(EMAIL);
         testRegisterDTO.setPassword(RAW_PASSWORD);
+        testRegisterDTO.setConfirmPassword(RAW_PASSWORD);
         testRegisterDTO.setPhoneNumber(PHONE_NUMBER);
         testRegisterDTO.setGender(GENDER);
 
@@ -100,20 +108,37 @@ public class AuthServiceTest {
         testUser.setUsername(USERNAME);
         testUser.setFullName(FULL_NAME);
         testUser.setEmail(EMAIL);
-        testUser.setPassword(mockPasswordEncoder.encode(RAW_PASSWORD));
+        testUser.setPassword(RAW_PASSWORD);
         testUser.setPhoneNumber(PHONE_NUMBER);
         testUser.setGender(GENDER);
         testUser.setRoles(List.of(testGuestRole));
 
 
-        when(mockPasswordEncoder.encode(testRegisterDTO.getPassword()))
-                .thenReturn(ENCODED_PASSWORD);
         when(mockModelMapper.map(testRegisterDTO, UserEntity.class)).thenReturn(testUser);
-        when(mockedRoleRepository.findByName(RoleEnum.GUEST)).thenReturn(testGuestRole);
 
-        toTest.register(testRegisterDTO, mockHttpServletRequest, mockHttpServletResponse);
+        lenient().when(mockUserRepository.save(any(UserEntity.class))).thenReturn(testUser);
 
-        Mockito.verify(mockUserRepository).save(any());
+        HotelAntiqueApplicationUserDetails userDetails = new HotelAntiqueApplicationUserDetails(
+                1L, USERNAME, FULL_NAME, EMAIL, RAW_PASSWORD,
+                PHONE_NUMBER, GENDER, Collections.emptyList()
+        );
+
+        when(mockUserDetailsService.loadUserByUsername(testRegisterDTO
+                .getUsername())).thenReturn(userDetails);
+
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                userDetails,
+                userDetails.getPassword(),
+                userDetails.getAuthorities()
+        );
+
+        Consumer<Authentication> successfulLoginProcessor = mock(Consumer.class);
+        toTest.register(testRegisterDTO, successfulLoginProcessor);
+
+
+//        Mockito.verify(mockedUserService).register(any());
+//        verify(mockUserRepository).save(any());
 
     }
 

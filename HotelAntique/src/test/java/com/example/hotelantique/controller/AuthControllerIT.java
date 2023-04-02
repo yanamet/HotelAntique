@@ -32,6 +32,13 @@ public class AuthControllerIT {
     }
 
     @Test
+    void testLoginPageIsShown() throws Exception {
+        mockMvc.perform(get("/login"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("login"));
+    }
+
+    @Test
     void testRegisterUser() throws Exception {
         mockMvc.perform(post("/register")
                         .param("username", "Anna")
@@ -42,12 +49,49 @@ public class AuthControllerIT {
                         .param("confirmPassword", "12345")
                         .param("phoneNumber", "0870000000")
                         .with(csrf()))
+
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/home"));
 
         verify(mockedEmailService)
                 .sendRegistrationEmail("Anna", "anna@mail.com");
         //String username, String userEmail
+
+    }
+
+    @Test
+    void testRegisterAlreadyExistingUser() throws Exception {
+        mockMvc.perform(post("/register")
+                        .param("username", "Test")
+                        .param("fullName", "Test Testingov")
+                        .param("email", "some@mail.com")
+                        .param("password", "topsecret")
+                        .param("confirmPassword", "topsecret")
+                        .param("phoneNumber", "0870000000")
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/register"));
+    }
+
+    @Test
+    void testLoginRightCredentials() throws Exception {
+        mockMvc.perform(post("/login")
+                  .param("username", "Test")
+                  .param("password", "topsecret")
+                  .with(csrf()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void testLoginFailureRedirect() throws Exception {
+        mockMvc.perform(post("/login-error")
+                        .param("username", "test")
+                        .param("password", "wrongPass")
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/login"));
+
+
 
     }
 

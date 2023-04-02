@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Size;
 
 public class PaymentReservationDTO {
 
+    private long reservationId;
+
 
     @Size(min = 5)
     @NotEmpty
@@ -27,6 +29,14 @@ public class PaymentReservationDTO {
     private String cardNumber;
 
     public PaymentReservationDTO() {
+    }
+
+    public long getReservationId() {
+        return reservationId;
+    }
+
+    public void setReservationId(long reservationId) {
+        this.reservationId = reservationId;
     }
 
     public String getOwner() {

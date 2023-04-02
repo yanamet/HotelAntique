@@ -47,4 +47,8 @@ public class RoleService {
     public Role getRoleById(long roleId) {
         return this.roleRepository.findById(roleId).get();
     }
+
+    public List<Role> getListOfRole(RoleEnum guest) {
+        return List.of(this.roleRepository.findByName(guest));
+    }
 }

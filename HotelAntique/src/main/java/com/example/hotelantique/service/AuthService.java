@@ -3,14 +3,11 @@ package com.example.hotelantique.service;
 import com.example.hotelantique.model.dtos.userDTO.UserRegisterDTO;
 import com.example.hotelantique.model.entity.UserEntity;
 import com.example.hotelantique.model.enums.RoleEnum;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.SecurityContextHolderStrategy;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +15,7 @@ import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 @Service
 public class AuthService {
@@ -44,8 +42,7 @@ public class AuthService {
     }
 
     public boolean register(UserRegisterDTO registerDTO,
-                            HttpServletRequest request,
-                            HttpServletResponse response) {
+                            Consumer<Authentication> successfulLoginProcessor) {
 
         if(!registerDTO.getPassword().equals(registerDTO.getConfirmPassword())){
             return false;
@@ -63,7 +60,7 @@ public class AuthService {
 
         UserEntity user = this.modelMapper.map(registerDTO, UserEntity.class);
         user.setPassword(this.passwordEncoder.encode(user.getPassword()));
-        user.addRole(this.roleService.getRoleByName(RoleEnum.GUEST));
+        user.setRoles (this.roleService.getListOfRole(RoleEnum.GUEST));
 
         this.userService.register(user);
 
@@ -77,13 +74,7 @@ public class AuthService {
                 userDetails.getAuthorities()
         );
 
-        SecurityContextHolderStrategy strategy = SecurityContextHolder.getContextHolderStrategy();
-        SecurityContext context = strategy.createEmptyContext();
-        context.setAuthentication(authentication);
-
-        strategy.setContext(context);
-
-        securityContextRepository.saveContext(context, request, response);
+        successfulLoginProcessor.accept(authentication);
 
         return true;
     }

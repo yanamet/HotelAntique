@@ -31,7 +31,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User with name " + username + " is not found!"));
     }
 
-    private UserDetails map(UserEntity user){
+    public UserDetails map(UserEntity user){
        return new User(
                 user.getUsername(),
                 user.getPassword(),
