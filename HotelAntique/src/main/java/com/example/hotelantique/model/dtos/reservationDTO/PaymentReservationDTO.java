@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 
 public class PaymentReservationDTO {
 
-    private long reservationId;
+
 
 
     @Size(min = 5)
@@ -27,6 +27,8 @@ public class PaymentReservationDTO {
     @Size(min = 5)
     @NotEmpty
     private String cardNumber;
+
+    private long reservationId;
 
     public PaymentReservationDTO() {
     }
@@ -82,7 +84,8 @@ public class PaymentReservationDTO {
     @Override
     public String toString() {
         return "PaymentReservationDTO{" +
-                "owner='" + owner + '\'' +
+                "reservationId=" + reservationId +
+                ", owner='" + owner + '\'' +
                 ", cvv='" + cvv + '\'' +
                 ", expirationMonth='" + expirationMonth + '\'' +
                 ", expirationYear=" + expirationYear +

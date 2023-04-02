@@ -25,8 +25,6 @@ public class Reservation {
     @Column(nullable = false)
     private LocalDate checkOut;
 
-    @ManyToOne()
-    private Payment payment;
 
     @Column(nullable = false)
     private BigDecimal totalValue;
@@ -41,13 +39,7 @@ public class Reservation {
 
 
 
-    public Payment getPayment() {
-        return payment;
-    }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
-    }
 
     public BigDecimal getTotalValue() {
         return totalValue;
@@ -122,7 +114,7 @@ public class Reservation {
                 ", guest=" + guest +
                 ", checkIn=" + checkIn +
                 ", checkOut=" + checkOut +
-                ", payment=" + payment +
+
                 ", totalValue=" + totalValue +
                 ", createdOn=" + createdOn +
                 ", isActive=" + isActive +

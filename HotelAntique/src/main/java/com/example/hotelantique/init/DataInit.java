@@ -43,7 +43,7 @@ public class DataInit implements CommandLineRunner {
         this.roleService.seedRoleData();
         this.userService.initFirstUser();
         this.roomService.initRoomsData();
-        this.reservationService.initReservationTries();
+//        this.reservationService.initReservationTries();
 
 
     }

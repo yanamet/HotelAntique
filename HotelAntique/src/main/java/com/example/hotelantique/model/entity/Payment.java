@@ -13,25 +13,31 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
     private String owner;
 
-    @Column(nullable = false)
     private String cvv;
 
-    @Column(nullable = false)
     private String expirationMonth;
 
-    @Column(nullable = false)
     private int expirationYear;
 
-    @Column(nullable = false)
     private String cardNumber;
+
+    @OneToOne
+    private Reservation reservation;
+
+
     public Payment() {
 
     }
 
+    public Reservation getReservation() {
+        return reservation;
+    }
 
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
 
     public long getId() {
         return id;
