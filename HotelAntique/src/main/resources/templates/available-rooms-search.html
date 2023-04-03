@@ -87,8 +87,9 @@
            class="btn btn-primary btn-rounded room-btn mb-2"
            th:text="|${r.name},   №${r.getRoomNumber()}|"
 
-           th:href="@{/reservations/add(id=${r.id},from=${r.checkIn},to=${r.checkOut})}"></a>
-
+           th:href="@{/reservations/add/{id}/{checkIn}/{checkOut}(id = ${r.id}, checkIn = ${r.checkIn}, checkOut = ${r.checkOut})}"></a>
+<!--        /reservations/add(id=${r.id},from=${r.checkIn},to=${r.checkOut})}-->
+<!--        th:href="@{/roles/add/{id}/{id2}(id = *{id}, id2 = ${user.id})}"-->
     </div>
 
 </div>

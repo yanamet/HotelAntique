@@ -276,4 +276,14 @@ public class ReservationService {
     public void updateReservation(Reservation reservation) {
         this.reservationRepository.save(reservation);
     }
+
+    public ReservationDTO createReservationDTO(Room room, String checkIn, String checkOut) {
+        ReservationDTO reservationDTO = new ReservationDTO();
+        reservationDTO.setRoomType(room.getRoomType().name());
+        reservationDTO.setRoomNumber(room.getRoomNumber());
+        reservationDTO.setRoomId(room.getId());
+        reservationDTO.setCheckIn(checkIn);
+        reservationDTO.setCheckOut(checkOut);
+        return reservationDTO;
+    }
 }

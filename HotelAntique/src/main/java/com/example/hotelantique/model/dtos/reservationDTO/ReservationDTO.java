@@ -6,6 +6,7 @@ public class ReservationDTO {
 
 
     private int roomNumber;
+    private long roomId;
 
     @Size(min = 3, max = 20)
     @NotEmpty
@@ -15,12 +16,14 @@ public class ReservationDTO {
     private String roomType;
 
 
+    @NotEmpty
     private String checkIn;
 
-
+    @NotEmpty
     private String checkOut;
 
     @Email
+    @NotEmpty
     private String email;
 
 
@@ -30,6 +33,13 @@ public class ReservationDTO {
     }
 
 
+    public long getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(long roomId) {
+        this.roomId = roomId;
+    }
 
     public int getRoomNumber() {
         return roomNumber;

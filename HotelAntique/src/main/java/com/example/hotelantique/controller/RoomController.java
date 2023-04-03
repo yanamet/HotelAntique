@@ -54,7 +54,6 @@ public class RoomController {
 
     @GetMapping("/rooms/available/search")
     public String availableRooms(){
-
         return "available-rooms-search";
     }
 
@@ -78,6 +77,7 @@ public class RoomController {
         LocalDate checkIn = availableRoomDTO.getCheckIn();
         LocalDate checkOut = availableRoomDTO.getCheckOut();
         String roomType = availableRoomDTO.getRoomType();
+
         List<AvailableRoomFoundDTO> availableRooms = this.reservationService
                 .getAvailableRoomsInPeriod(checkIn, checkOut, roomType);
 
