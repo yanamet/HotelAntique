@@ -21,13 +21,11 @@ public class ReservationController {
 
     private final ReservationService reservationService;
     private final RoomService roomService;
-    private final UserService userService;
 
     public ReservationController(ReservationService reservationService,
-                                 RoomService roomService, UserService userService) {
+                                 RoomService roomService) {
         this.reservationService = reservationService;
         this.roomService = roomService;
-        this.userService = userService;
     }
 
     @ModelAttribute("reservationDTO")

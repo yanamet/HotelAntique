@@ -262,5 +262,23 @@ public class ReservationServiceTest {
 
     }
 
+    @Test
+    void createReservationReturnTheCorrectReservationDTO(){
+
+        ReservationDTO reservationDTO1 = this.toTest
+                .createReservationDTO(room, "2023-04-04", "2023-04-05");
+        Assertions.assertEquals(101, reservationDTO1.getRoomNumber());
+        Assertions.assertEquals("STANDARD", reservationDTO1.getRoomType());
+        Assertions.assertEquals(1L, reservationDTO1.getRoomId());
+    }
+
+    @Test
+    void getReservationReturnsTheRightReservation(){
+        when(this.reservationRepository.findById(1L))
+                .thenReturn(Optional.of(reservation));
+       Reservation  toTestReservation = toTest.getReservation(1L);
+       Assertions.assertEquals(reservation, toTestReservation);
+    }
+
 
 }

@@ -62,8 +62,7 @@ public class AuthServiceTest {
     private RoleRepository mockedRoleRepository;
     @Mock
     private ModelMapper mockModelMapper;
-   @Mock
-   private ApplicationUserDetailsService applicationUserDetailsService;
+
     @Mock
     private PasswordEncoder mockPasswordEncoder;
     @Mock
@@ -84,7 +83,6 @@ public class AuthServiceTest {
                 mockUserDetailsService,
                 mockEmailService, mockSecurityContextRepository, mockRoleService);
 
-        this.applicationUserDetailsService = new ApplicationUserDetailsService(mockUserRepository);
     }
 
 

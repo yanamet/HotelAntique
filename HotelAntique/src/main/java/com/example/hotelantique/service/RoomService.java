@@ -25,11 +25,7 @@ public class RoomService {
         this.modelMapper = modelMapper;
     }
 
-//    public List<Room> findAvailableRooms(LocalDate checkIn, LocalDate checkOut, String roomType){
-//        return this.reservationService.getAvailableRoomsInPeriod(checkIn, checkOut, roomType);
-//
-//
-//    }
+
 
     public List<RoomViewDTO> getAllRoomTypes(){
 
