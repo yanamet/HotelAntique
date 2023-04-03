@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
+<th:block th:fragment="head">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,19 @@
     <link rel="stylesheet" href="/assets/css/fontawesome.css">
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/details.css">
-</head>
+</th:block>
+
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <title>HotelAntique</title>-->
+<!--    <link rel="stylesheet" href="/assets/css/style.css">-->
+<!--    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">-->
+<!--    <link rel="stylesheet" href="/assets/css/fontawesome.css">-->
+<!--    <link rel="stylesheet" href="/css/global.css">-->
+<!--    <link rel="stylesheet" href="/css/details.css">-->
+<!--</head>-->
 
 <nav class="navbar navbar-expand-lg bg-primary menu">
     <div class="container">
@@ -29,7 +41,10 @@
 
                 <th:block sec:authorize="isAuthenticated()">
 
-                    <div class="text-white nav-link welcome-message">Welcome, <th:block sec:authentication="name"></th:block>!</div>
+                    <div class="text-white nav-link welcome-message">Welcome,
+                        <th:block sec:authentication="name"></th:block>
+                        !
+                    </div>
 
                     <li class="nav-item">
                         <a class="nav-link" href="/aboutUs">ABOUT US</a>
@@ -53,19 +68,18 @@
 
                     <li class="nav-item">
                         <a class="nav-link" onclick="document.getElementById('myLogoutForm').submit();"
-                            type="submit">LOGOUT</a>
+                           type="submit">LOGOUT</a>
                     </li>
 
                 </th:block>
 
 
-
                 <th:block sec:authorize="!isAuthenticated()">
-                    <li class="nav-item"  >
-                        <a class="nav-link" href="/login" >LOGIN</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">LOGIN</a>
                     </li>
 
-                    <li class="nav-item"  >
+                    <li class="nav-item">
                         <a class="nav-link" href="/register">REGISTER</a>
                     </li>
 
@@ -165,9 +179,15 @@
 
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
 
 </th:block>

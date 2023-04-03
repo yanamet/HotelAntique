@@ -39,8 +39,7 @@ public class ReservationServiceTest {
     ReservationRepository reservationRepository;
     @Mock
     UserService userService;
-    @Mock
-    PaymentService mockPaymentService;
+
     @Mock
     ModelMapper mockModelMapper;
     @Mock
@@ -59,7 +58,7 @@ public class ReservationServiceTest {
     @BeforeEach
     void setUp() {
         toTest = new ReservationService(reservationRepository, roomService,
-                userService, mockPaymentService, mockModelMapper, mockEmailService);
+                userService,  mockModelMapper, mockEmailService);
 
         user = new UserEntity();
         user.setRoles(Collections.emptyList());
@@ -83,7 +82,6 @@ public class ReservationServiceTest {
         reservation.setCheckIn(LocalDate.of(2023, 4, 10));
         reservation.setCheckOut(LocalDate.of(2023, 4, 12));
         reservation.setRoom(room);
-        reservation.setPayment(new Payment());
         reservation.setCreatedOn(LocalDate.now());
         reservation.setGuest(user);
         reservation.setId(1L);
