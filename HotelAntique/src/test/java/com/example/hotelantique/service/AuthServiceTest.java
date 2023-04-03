@@ -23,6 +23,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -114,14 +115,16 @@ public class AuthServiceTest {
 
         when(mockModelMapper.map(testRegisterDTO, UserEntity.class)).thenReturn(testUser);
 
-        lenient().when(mockUserRepository.save(any(UserEntity.class))).thenReturn(testUser);
+
+        GrantedAuthority authority = new SimpleGrantedAuthority
+                ("ROLE_" + testGuestRole.getName().name());
 
         HotelAntiqueApplicationUserDetails userDetails = new HotelAntiqueApplicationUserDetails(
                 1L, USERNAME, FULL_NAME, EMAIL, RAW_PASSWORD,
-                PHONE_NUMBER, GENDER, Collections.emptyList()
+                PHONE_NUMBER, GENDER, List.of(authority)
         );
 
-        when(mockUserDetailsService.loadUserByUsername(testRegisterDTO
+        when(mockUserDetailsService.loadUserByUsername(testUser
                 .getUsername())).thenReturn(userDetails);
 
 
@@ -135,8 +138,10 @@ public class AuthServiceTest {
         toTest.register(testRegisterDTO, successfulLoginProcessor);
 
 
-//        Mockito.verify(mockedUserService).register(any());
-//        verify(mockUserRepository).save(any());
+        Mockito.verify(mockedUserService).register(userEntityArgumentCaptor.capture()); //Това работи
+        Mockito.verify(mockUserRepository).save(userEntityArgumentCaptor.capture()); //Това не
+        //userService.register() просто изпълнява this.userRepository.save(userEntity)
+        //Едното гърми, а другото не
 
     }
 

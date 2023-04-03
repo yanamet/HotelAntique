@@ -55,7 +55,7 @@ public class AuthControllerIT {
 
         verify(mockedEmailService)
                 .sendRegistrationEmail("Anna", "anna@mail.com");
-        //String username, String userEmail
+
 
     }
 
