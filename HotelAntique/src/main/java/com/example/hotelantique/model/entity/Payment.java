@@ -2,8 +2,6 @@ package com.example.hotelantique.model.entity;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "payments")
@@ -13,15 +11,22 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false)
     private String owner;
 
+    @Column(nullable = false)
     private String cvv;
 
+    @Column(nullable = false)
     private String expirationMonth;
 
+    @Column(nullable = false)
     private int expirationYear;
 
+    @Column(nullable = false)
     private String cardNumber;
+
+
 
     @OneToOne
     private Reservation reservation;

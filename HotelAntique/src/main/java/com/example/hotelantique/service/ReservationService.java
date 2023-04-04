@@ -9,9 +9,12 @@ import com.example.hotelantique.model.entity.Reservation;
 import com.example.hotelantique.model.entity.Room;
 import com.example.hotelantique.model.entity.UserEntity;
 import com.example.hotelantique.model.enums.PaymentMethod;
+import com.example.hotelantique.model.enums.RoleEnum;
 import com.example.hotelantique.model.enums.RoomType;
 import com.example.hotelantique.repository.ReservationRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -195,6 +198,26 @@ public class ReservationService {
 //        }
 //
 //    }
+
+    public boolean isOwner(UserDetails userDetails, long id){
+
+        if (userDetails == null) {
+            return  false;
+        }
+
+        Reservation reservation = this.getReservation(id);
+
+        return (reservation.getGuest().getUsername().equals(userDetails.getUsername())) ||
+                this.isUserAdmin(userDetails);
+
+    }
+
+    private boolean isUserAdmin(UserDetails userDetails){
+        return userDetails.getAuthorities().
+                stream().
+                map(GrantedAuthority::getAuthority).
+                anyMatch(a -> a.equals("ROLE_" + RoleEnum.ADMIN.name()));
+    }
 
     public List<ReservationViewDTO> getAllReservations() {
         List<Reservation> reservations = this.reservationRepository.findByIsActiveOrderByCheckInAsc(true);

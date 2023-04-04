@@ -6,6 +6,7 @@ import com.example.hotelantique.model.dtos.userDTO.UserAdminPageDTO;
 import com.example.hotelantique.model.entity.UserEntity;
 import com.example.hotelantique.service.ReservationService;
 import com.example.hotelantique.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -29,21 +30,21 @@ public class UserController {
 
     @GetMapping("/user/profile")
     public String myProfile(@AuthenticationPrincipal UserDetails userDetails,
-                            Model model){
+                            Model model) {
 
         String username = userDetails.getUsername();
         UserEntity user = this.userService.getByUsername(username).get();
 
         model.addAttribute("user", user);
 
-       List<ReservationViewDTO> previousReservations = this.reservationService
-               .getPreviousReservations(user, LocalDate.now());
+        List<ReservationViewDTO> previousReservations = this.reservationService
+                .getPreviousReservations(user, LocalDate.now());
 
-       List<ReservationViewDTO> upcomingReservations = this.reservationService
-               .getUpcomingReservations(user, LocalDate.now());
+        List<ReservationViewDTO> upcomingReservations = this.reservationService
+                .getUpcomingReservations(user, LocalDate.now());
 
-       model.addAttribute("previousReservations", previousReservations);
-       model.addAttribute("upcomingReservations", upcomingReservations);
+        model.addAttribute("previousReservations", previousReservations);
+        model.addAttribute("upcomingReservations", upcomingReservations);
 
 
         return "my-profile";
@@ -51,7 +52,7 @@ public class UserController {
 
     @GetMapping("/pages/admin")
     public String adminPage(@AuthenticationPrincipal UserDetails userDetails
-            , Model model){
+            , Model model) {
 
         UserEntity adminUser = this.userService
                 .getByUsername(userDetails.getUsername()).get();
@@ -66,21 +67,23 @@ public class UserController {
         return "admin-page";
     }
 
+    @PreAuthorize("@reservationService.isOwner(#userDetails, #id)")
     @GetMapping("/user/reservations/details/{id}")
-    public String reservationsDetails(@PathVariable("id") long id,
-                                      Model model){
-        ReservationDetailsDTO reservation =  this.reservationService.getReservationById(id);
+    public String reservationsDetails(@AuthenticationPrincipal UserDetails userDetails,
+                                      @PathVariable("id") long id,
+                                      Model model) {
+        ReservationDetailsDTO reservation = this.reservationService.getReservationById(id);
         model.addAttribute("reservation", reservation);
         return "reservation-details";
     }
 
+    @PreAuthorize("@reservationService.isOwner(#userDetails, #id)")
     @GetMapping("/user/reservations/anulate/{id}")
-    public String anulateReservation(@PathVariable("id") long id){
+    public String anulateReservation(@AuthenticationPrincipal UserDetails userDetails,
+                                     @PathVariable("id") long id) {
         this.reservationService.anulateReservation(id);
         return "redirect:/user/profile";
     }
-
-
 
 
 }
