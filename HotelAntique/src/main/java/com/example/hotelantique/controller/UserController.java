@@ -78,10 +78,10 @@ public class UserController {
     }
 
     @PreAuthorize("@reservationService.isOwner(#userDetails, #id)")
-    @GetMapping("/user/reservations/anulate/{id}")
-    public String anulateReservation(@AuthenticationPrincipal UserDetails userDetails,
-                                     @PathVariable("id") long id) {
-        this.reservationService.anulateReservation(id);
+    @GetMapping("/user/reservations/cancel/{id}")
+    public String cancelReservation(@AuthenticationPrincipal UserDetails userDetails,
+                                    @PathVariable("id") long id) {
+        this.reservationService.cancelReservation(id);
         return "redirect:/user/profile";
     }
 

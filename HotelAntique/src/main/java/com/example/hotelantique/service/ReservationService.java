@@ -4,11 +4,9 @@ import com.example.hotelantique.model.dtos.reservationDTO.ReservationDTO;
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationDetailsDTO;
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewDTO;
 import com.example.hotelantique.model.dtos.roomDTO.AvailableRoomFoundDTO;
-import com.example.hotelantique.model.entity.Payment;
 import com.example.hotelantique.model.entity.Reservation;
 import com.example.hotelantique.model.entity.Room;
 import com.example.hotelantique.model.entity.UserEntity;
-import com.example.hotelantique.model.enums.PaymentMethod;
 import com.example.hotelantique.model.enums.RoleEnum;
 import com.example.hotelantique.model.enums.RoomType;
 import com.example.hotelantique.repository.ReservationRepository;
@@ -17,9 +15,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -111,94 +107,6 @@ public class ReservationService {
     }
 
 
-//    public void initReservationTries() {
-//        if(this.reservationRepository.count() == 0){
-//
-//            Room room = this.roomService.getRoomByRoomNumber(101);
-//            room.setAvailable(false);
-//            this.roomService.saveRoom(room);
-//
-//            Payment payment = new Payment();
-//            payment.setCvv("cvv");
-//            payment.setExpirationYear(1233);
-//            payment.setOwner("OWNER");
-//            payment.setCardNumber("cvv");
-//            payment.setExpirationMonth("cvv");
-//
-//            this.paymentService.savePayment(payment);
-//
-//            UserEntity admin = this.userService.getByUsername("Admin").get();
-//            Reservation reservation = new Reservation();
-//            reservation.setGuest(admin);
-//            reservation.setCheckIn(LocalDate.of(2023, 4, 23));
-//            reservation.setCheckOut(LocalDate.of(2023, 4, 27));
-//            reservation.setPayment(payment);
-//            reservation.setActive(true);
-//            reservation.setCreatedOn(LocalDate.now());
-//            reservation.setTotalValue(BigDecimal.valueOf(90.0));
-//            reservation.setRoom(room);
-//
-//            this.reservationRepository.save(reservation);
-//
-//            Room room2 = this.roomService.getRoomByRoomNumber(102);
-//            room2.setAvailable(false);
-//            this.roomService.saveRoom(room2);
-//
-//
-//
-//
-//            Reservation reservation2 = new Reservation();
-//            reservation2.setGuest(admin);
-//            reservation2.setCheckIn(LocalDate.of(2023, 4, 25));
-//            reservation2.setCheckOut(LocalDate.of(2023, 4, 28));
-//            reservation2.setPayment(payment);
-//            reservation2.setActive(true);
-//            reservation2.setCreatedOn(LocalDate.now());
-//            reservation2.setTotalValue(BigDecimal.valueOf(90.0));
-//            reservation2.setRoom(room2);
-//
-//            this.reservationRepository.save(reservation2);
-//
-//            Room room4 = this.roomService.getRoomByRoomNumber(303);
-//            room4.setAvailable(false);
-//            this.roomService.saveRoom(room4);
-//
-//
-//            Reservation reservation4 = new Reservation();
-//            reservation4.setGuest(admin);
-//            reservation4.setCheckIn(LocalDate.of(2023, 4, 22));
-//            reservation4.setCheckOut(LocalDate.of(2023, 4, 24));
-//            reservation4.setPayment(payment);
-//            reservation4.setActive(true);
-//            reservation4.setCreatedOn(LocalDate.now());
-//            reservation4.setTotalValue(BigDecimal.valueOf(90.0));
-//            reservation4.setRoom(room4);
-//
-//            this.reservationRepository.save(reservation4);
-//
-//            Reservation reservation5 = new Reservation();
-//
-//            Room room5 = this.roomService.getRoomByRoomNumber(103);
-//            room5.setAvailable(false);
-//            this.roomService.saveRoom(room5);
-//
-//            reservation5.setGuest(admin);
-//            reservation5.setCheckIn(LocalDate.of(2023, 3, 20));
-//            reservation5.setCheckOut(LocalDate.of(2023, 3, 28));
-//            reservation5.setPayment(payment);
-//            reservation5.setActive(true);
-//            reservation5.setCreatedOn(LocalDate.now());
-//            reservation5.setTotalValue(BigDecimal.valueOf(90.0));
-//            reservation5.setRoom(room5);
-//
-//            this.reservationRepository.save(reservation5);
-//
-//
-//
-//        }
-//
-//    }
-
     public boolean isOwner(UserDetails userDetails, long id){
 
         if (userDetails == null) {
@@ -279,7 +187,7 @@ public class ReservationService {
                 .map(reservation, ReservationDetailsDTO.class);
     }
 
-    public void anulateReservation(long id) {
+    public void cancelReservation(long id) {
         Reservation reservation = this.reservationRepository.findById(id).get();
         reservation.setActive(false);
 

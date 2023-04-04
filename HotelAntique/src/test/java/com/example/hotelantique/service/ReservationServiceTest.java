@@ -3,7 +3,6 @@ package com.example.hotelantique.service;
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationDTO;
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationDetailsDTO;
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationViewDTO;
-import com.example.hotelantique.model.entity.Payment;
 import com.example.hotelantique.model.entity.Reservation;
 import com.example.hotelantique.model.entity.Room;
 import com.example.hotelantique.model.entity.UserEntity;
@@ -226,12 +225,12 @@ public class ReservationServiceTest {
     }
 
     @Test
-    void anulateReservationChangesTheReservationAndRoomStatus(){
+    void cancelReservationChangesTheReservationAndRoomStatus(){
 
         when(this.reservationRepository.findById(1L))
                 .thenReturn(Optional.of(reservation));
 
-        this.toTest.anulateReservation(1L);
+        this.toTest.cancelReservation(1L);
         Assertions.assertTrue(reservation.getRoom().isAvailable());
         Assertions.assertFalse(reservation.isActive());
 
