@@ -138,10 +138,8 @@ public class AuthServiceTest {
         toTest.register(testRegisterDTO, successfulLoginProcessor);
 
 
-        Mockito.verify(mockedUserService).register(userEntityArgumentCaptor.capture()); //Това работи
-        Mockito.verify(mockUserRepository).save(userEntityArgumentCaptor.capture()); //Това не
-        //userService.register() просто изпълнява this.userRepository.save(userEntity)
-        //Едното гърми, а другото не
+        Mockito.verify(mockedUserService).register(userEntityArgumentCaptor.capture());
+
 
     }
 

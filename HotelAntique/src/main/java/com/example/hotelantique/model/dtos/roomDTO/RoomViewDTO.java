@@ -1,6 +1,8 @@
 package com.example.hotelantique.model.dtos.roomDTO;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 public class RoomViewDTO {
 
@@ -11,7 +13,18 @@ public class RoomViewDTO {
 
     private String type;
 
+    private List<String> description;
+
     public RoomViewDTO() {
+    }
+
+    public List<String> getDescription() {
+        return description;
+    }
+
+    public void setDescription(String descriptionString) {
+        String[] split = descriptionString.split(", ");
+        this.description = Arrays.stream(split).toList();
     }
 
     public long getId() {

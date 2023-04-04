@@ -53,12 +53,13 @@
         <tr>
             <th scope="row" style="text-align: center;">
                 <h2 style=" color: black;">Description:</h2>
-                <h6>Room size: 24m2</h6>
-                <h6>Bathroom</h6>
-                <h6>AirConditioning</h6>
-                <h6>Wifi</h6>
-                <h6>Parking with 24-hour video surveillance and controlled electronic access</h6>
-                <h6>Smart Tv</h6>
+                <h6 th:each="r: ${room.getDescription()}"
+                    th:object="${r}" th:text="${r}"></h6>
+<!--                <h6>Bathroom</h6>-->
+<!--                <h6>AirConditioning</h6>-->
+<!--                <h6>Wifi</h6>-->
+<!--                <h6>Parking with 24-hour video surveillance and controlled electronic access</h6>-->
+<!--                <h6>Smart Tv</h6>-->
 
             </th>
         </tr>

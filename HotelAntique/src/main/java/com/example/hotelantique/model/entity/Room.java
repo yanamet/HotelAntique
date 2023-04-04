@@ -4,6 +4,7 @@ import com.example.hotelantique.model.enums.RoomType;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "rooms")
@@ -29,8 +30,19 @@ public class Room {
     @Column(nullable = false)
     private BigDecimal price;
 
+    @Column(nullable = false)
+    private String description;
+
 
     public Room() {
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public long getId() {
