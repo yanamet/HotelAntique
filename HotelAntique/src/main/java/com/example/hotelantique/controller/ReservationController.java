@@ -75,7 +75,7 @@ public class ReservationController {
 
         this.reservationService.saveReservation(reservationDTO, userDetails.getUsername());
 
-        return "successful-reservation";
+        return "redirect:/reservations/successful";
     }
 
 

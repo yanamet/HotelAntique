@@ -4,21 +4,15 @@ import com.example.hotelantique.model.dtos.reservationDTO.ReservationDTO;
 import com.example.hotelantique.model.entity.Room;
 import com.example.hotelantique.model.enums.RoomType;
 import com.example.hotelantique.model.user.HotelAntiqueApplicationUserDetails;
-import com.example.hotelantique.repository.ReservationRepository;
 import com.example.hotelantique.repository.RoomRepository;
 import com.example.hotelantique.service.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,9 +21,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
-
+import static org.mockito.Mockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -43,21 +36,12 @@ public class ReservationControllerIT {
     @MockBean
     private ReservationService reservationService;
 
-
-    @MockBean
-    private EmailService emailService;
-
     @MockBean
     private RoomService roomService;
 
     @MockBean
     private RoomRepository roomRepository;
 
-    @MockBean
-    private ModelMapper modelMapper;
-
-    @MockBean
-    private UserService userService;
 
     @MockBean
     HotelAntiqueApplicationUserDetails userDetails;
@@ -65,6 +49,9 @@ public class ReservationControllerIT {
     RoomType roomType;
 
     ReservationDTO reservationDTO;
+
+
+
 
     @BeforeEach
     void setUp() {
@@ -85,6 +72,8 @@ public class ReservationControllerIT {
         reservationDTO.setRoomNumber(room.getRoomNumber());
 
         this.roomRepository.save(room);
+
+
 
 
         GrantedAuthority authority = new SimpleGrantedAuthority
@@ -129,6 +118,7 @@ public class ReservationControllerIT {
 
         mockMvc.perform(post("/reservations/add/{id}/{checkIn}/{checkOut}",
                         1L, "2023-04-06", "2023-04-08")
+                        .with(csrf())
                         .param("fullName", "Full Name")
                         .param("roomType", "STANDARD")
                         .param("roomNumber", String.valueOf(101))
@@ -138,7 +128,28 @@ public class ReservationControllerIT {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/reservations/successful"));
 
+
     }
+
+    @Test
+    @WithMockUser(username = "GUEST", roles = {"GUEST"})
+    void testReservationPostWithErrorsRedirectsToTheSamePage() throws Exception {
+
+
+        mockMvc.perform(post("/reservations/add/{id}/{checkIn}/{checkOut}",
+                        1L, "2023-04-06", "2023-04-08")
+                        .with(csrf())
+                        .param("fullName", "")
+                        .param("roomType", "STANDARD")
+                        .param("roomNumber", String.valueOf(101))
+                        .param("checkIn", "2023-04-06")
+                        .param("checkOut", "2023-04-08")
+                        .param("email", ""))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/reservations/add/1/2023-04-06/2023-04-08"));
+
+    }
+
 
     @Test
     @WithMockUser(username = "GUEST", roles = {"GUEST"})

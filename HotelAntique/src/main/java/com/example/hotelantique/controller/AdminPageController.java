@@ -41,23 +41,5 @@ public class AdminPageController {
         return ResponseEntity.ok(this.reservationService.getAllReservations());
     }
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<UserAdminPageDTO> getUserWithId(@PathVariable("id") long id){
-       Optional<UserAdminPageDTO> user = this.userService.getUserAdminDTOById(id);
-
-       return user.map(ResponseEntity::ok)
-               .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @DeleteMapping("/users/{id}")
-    public ResponseEntity<UserAdminPageDTO> deleteUserById(@PathVariable("id") long id){
-        this.userService.deleteById(id);
-
-        return  ResponseEntity.noContent().build();
-    }
-
-
-
-
 
 }

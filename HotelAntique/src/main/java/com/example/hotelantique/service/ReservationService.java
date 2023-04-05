@@ -26,12 +26,8 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final RoomService roomService;
     private final UserService userService;
-//    private final PaymentService paymentService;
     private final ModelMapper modelMapper;
     private final EmailService emailService;
-
-//    PaymentService paymentService,]
-//        this.paymentService = paymentService;
 
 
     public ReservationService(ReservationRepository reservationRepository,
