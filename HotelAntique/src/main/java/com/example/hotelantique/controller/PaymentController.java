@@ -19,13 +19,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class PaymentController {
 
     private final PaymentService paymentService;
-    private final ReservationService reservationService;
     private final ModelMapper modelMapper;
 
-    public PaymentController(PaymentService paymentService,
-                             ReservationService reservationService, ModelMapper modelMapper) {
+    public PaymentController(PaymentService paymentService, ModelMapper modelMapper) {
         this.paymentService = paymentService;
-        this.reservationService = reservationService;
         this.modelMapper = modelMapper;
     }
 

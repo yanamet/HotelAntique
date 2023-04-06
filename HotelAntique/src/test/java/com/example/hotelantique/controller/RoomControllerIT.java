@@ -1,5 +1,6 @@
 package com.example.hotelantique.controller;
 
+import com.example.hotelantique.model.dtos.roomDTO.AvailableRoomFoundDTO;
 import com.example.hotelantique.model.dtos.roomDTO.RoomViewDTO;
 import com.example.hotelantique.service.ReservationService;
 import com.example.hotelantique.service.RoomService;
@@ -13,6 +14,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -34,6 +36,8 @@ public class RoomControllerIT {
 
     private RoomViewDTO roomViewDTO;
 
+    private AvailableRoomFoundDTO availableRoomFoundDTO;
+
     @BeforeEach
     void setUp(){
         roomViewDTO = new RoomViewDTO();
@@ -42,6 +46,13 @@ public class RoomControllerIT {
         roomViewDTO.setDescription("Descr");
         roomViewDTO.setPrice(BigDecimal.valueOf(90));
         roomViewDTO.setName("Double Standard");
+
+        availableRoomFoundDTO = new AvailableRoomFoundDTO();
+        availableRoomFoundDTO.setCheckIn(LocalDate.of(2023, 5,6));
+        availableRoomFoundDTO.setCheckOut(LocalDate.of(2023, 5, 8));
+        availableRoomFoundDTO.setName("DOUBLE STANDARD");
+        availableRoomFoundDTO.setRoomNumber(101);
+        availableRoomFoundDTO.setId(1L);
     }
 
 
@@ -65,5 +76,59 @@ public class RoomControllerIT {
                 .andExpect(model().attributeExists("room"))
                 .andExpect(view().name("details"));
     }
+
+    @Test
+    @WithMockUser(username = "GUEST", roles = {"GUEST"})
+    void availableRoomPageIsShown() throws Exception {
+        this.mockMvc.perform(get("/rooms/available/search"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("available-rooms-search"));
+    }
+
+    @Test
+    @WithMockUser(username = "GUEST", roles = {"GUEST"})
+    void findingAvailableRoomsWorks() throws Exception {
+
+        when(this.reservationService.getAvailableRoomsInPeriod(LocalDate.of(2023, 5,6),
+                LocalDate.of(2023, 5,8), "STANDARD"))
+                .thenReturn(List.of(availableRoomFoundDTO));
+
+        this.mockMvc.perform(get("/rooms/available/search")
+                        .param("checkIn", "2023-05-06")
+                        .param("checkOut", "2023-05-08")
+                        .param("roomType", "STANDARD"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("available-rooms-search"));
+    }
+
+    //      @PostMapping("/rooms/available/search")
+    //    public String availableRooms(@Valid AvailableRoomSearchDTO availableRoomDTO,
+    //                                 BindingResult bindingResult,
+    //                                 RedirectAttributes redirectAttributes,
+    //                                 Model model){
+    //
+    //
+    //        if (bindingResult.hasErrors()) {
+    //
+    //            redirectAttributes.addFlashAttribute("availableRoomDTO", availableRoomDTO);
+    //            redirectAttributes.addFlashAttribute(
+    //                    "org.springframework.validation.BindingResult.availableRoomDTO",
+    //                    bindingResult);
+    //            return "redirect:/rooms/available/search";
+    //        }
+    //
+    //        LocalDate checkIn = availableRoomDTO.getCheckIn();
+    //        LocalDate checkOut = availableRoomDTO.getCheckOut();
+    //        String roomType = availableRoomDTO.getRoomType();
+    //
+    //        List<AvailableRoomFoundDTO> availableRooms = this.reservationService
+    //                .getAvailableRoomsInPeriod(checkIn, checkOut, roomType);
+    //
+    //        model.addAttribute("availableRooms", availableRooms);
+    //
+    //        return "available-rooms-search";
+    //    }
+
+
 
 }

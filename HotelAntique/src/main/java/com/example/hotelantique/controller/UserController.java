@@ -85,5 +85,10 @@ public class UserController {
         return "redirect:/user/profile";
     }
 
+    @GetMapping("/access/denied")
+    public String accessDenied(){
+        return "access-denied";
+    }
+
 
 }

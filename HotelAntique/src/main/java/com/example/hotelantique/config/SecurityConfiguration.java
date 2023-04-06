@@ -60,7 +60,10 @@ public class SecurityConfiguration {
                     .rememberMeParameter("remember")
                     .key("remember Me Encryption Key")
                     .rememberMeCookieName("rememberMeCookieName")
-                    .tokenValiditySeconds(10000);
+                    .tokenValiditySeconds(10000)
+                .and()
+                    .exceptionHandling()
+                    .accessDeniedPage("/access/denied");
 
         return http.build();
 

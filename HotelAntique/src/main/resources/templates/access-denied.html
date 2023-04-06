@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragments/commons::head"></th:block>
+</head>
+<body>
+
+<nav th:replace="fragments/commons::nav"></nav>
+
+
+<div class="container rounded mt-5 welcome-page">
+    <h1>Sorry, you do not have access to this page.</h1>
+</div>
+
+<img style="height: 25rem; margin-left: 30%;" src="/images/access-denied.png" alt="image">
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>
