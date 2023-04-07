@@ -42,7 +42,7 @@ public class ReservationService {
     }
 
     public void saveReservation(ReservationDTO reservationDTO, String loggedUserUsername) {
-        System.out.println("ReservationDTO " + reservationDTO);
+
 
         UserEntity user = this.userService.getByUsername(loggedUserUsername).get();
 
@@ -62,8 +62,6 @@ public class ReservationService {
         reservation.setCheckOut(checkOut);
         reservation.setActive(true);
 
-
-        System.out.println("Reservation " + reservation);
 
         this.reservationRepository.save(reservation);
 
