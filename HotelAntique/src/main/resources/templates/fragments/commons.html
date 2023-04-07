@@ -14,17 +14,6 @@
     <link rel="stylesheet" href="/css/details.css">
 </th:block>
 
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <title>HotelAntique</title>-->
-<!--    <link rel="stylesheet" href="/assets/css/style.css">-->
-<!--    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">-->
-<!--    <link rel="stylesheet" href="/assets/css/fontawesome.css">-->
-<!--    <link rel="stylesheet" href="/css/global.css">-->
-<!--    <link rel="stylesheet" href="/css/details.css">-->
-<!--</head>-->
 
 <nav class="navbar navbar-expand-lg bg-primary menu">
     <div class="container">
@@ -32,20 +21,23 @@
             <img src="/images/hotelLogo.png" alt="logo image">
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler collapsed text-uppercase font-weight-bold  text-white rounded"
+                type="button" data-toggle="collapse" data-target="#navbarResponsive">
+
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
+
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive">
+            <ul class="nav navbar-nav">
 
                 <th:block sec:authorize="isAuthenticated()">
 
                     <div class="text-white nav-link welcome-message">Welcome,
                         <th:block sec:authentication="name"></th:block>
                         !
-                    </div>
 
+                    </div>
                     <li class="nav-item">
                         <a class="nav-link" href="/aboutUs">ABOUT US</a>
                     </li>

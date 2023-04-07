@@ -108,7 +108,6 @@ public class ReservationServiceTest {
 
         toTest.saveReservation(reservationDTO, "Username");
 
-
         Assertions.assertEquals(room, this.roomService.getRoomByRoomNumber(101));
         Assertions.assertEquals(reservation, mockModelMapper.map(reservationDTO, Reservation.class));
         Assertions.assertEquals(Optional.of(user), this.userService.getByUsername("Username"));

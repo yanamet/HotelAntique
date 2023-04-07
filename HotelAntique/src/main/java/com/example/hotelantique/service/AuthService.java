@@ -25,7 +25,6 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
     private final EmailService emailService;
-    private final SecurityContextRepository securityContextRepository;
     private final RoleService roleService;
 
     public AuthService(UserService userService, ModelMapper modelMapper,
@@ -37,7 +36,6 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
         this.emailService = emailService;
-        this.securityContextRepository = securityContextRepository;
         this.roleService = roleService;
     }
 

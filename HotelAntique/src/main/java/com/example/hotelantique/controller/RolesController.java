@@ -3,8 +3,6 @@ package com.example.hotelantique.controller;
 
 import com.example.hotelantique.model.dtos.userDTO.UserAdminPageDTO;
 import com.example.hotelantique.model.entity.Role;
-import com.example.hotelantique.model.entity.UserEntity;
-import com.example.hotelantique.model.enums.RoleEnum;
 import com.example.hotelantique.service.RoleService;
 import com.example.hotelantique.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;

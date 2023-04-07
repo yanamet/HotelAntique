@@ -11,7 +11,7 @@
 <main class="p-5  text-center my-main" >
 <!--    (id=${roomId},from=${checkIn},to=${checkOut})-->
     <div class="d-flex justify-content-center">
-        <form th:action="@{/reservations/add/{id}/{checkIn}/{checkOut}(id = ${roomId}, checkIn = ${checkIn}, checkOut = ${checkOut})}"
+        <form th:action="@{/reservations/add/{id}/{checkIn}/{checkOut}(id = ${reservationDTO.roomId}, checkIn = ${checkIn}, checkOut = ${checkOut})}"
               th:method="POST"
 
               th:object="${reservationDTO}"

@@ -1,12 +1,9 @@
 package com.example.hotelantique.controller;
 
 import com.example.hotelantique.model.dtos.reservationDTO.ReservationDTO;
-import com.example.hotelantique.model.dtos.reservationDTO.ReservationDetailsDTO;
 import com.example.hotelantique.model.entity.Room;
-import com.example.hotelantique.model.entity.UserEntity;
 import com.example.hotelantique.service.ReservationService;
 import com.example.hotelantique.service.RoomService;
-import com.example.hotelantique.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,10 +31,6 @@ public class ReservationController {
     }
 
 
-//    @RequestParam(value = "id") long roomId,
-//    @RequestParam(value = "from") String checkIn,
-//    @RequestParam(value = "to") String checkOut,
-
     @GetMapping("/reservations/add/{id}/{checkIn}/{checkOut}")
     public String addReserve(@PathVariable("id") long roomId,
                              @PathVariable("checkIn") String checkIn,
@@ -48,8 +41,6 @@ public class ReservationController {
 
        ReservationDTO reservationDTO =  this.reservationService
                .createReservationDTO(room, checkIn, checkOut);
-
-        model.addAttribute("roomId", room.getId());
 
         model.addAttribute("reservationDTO", reservationDTO);
 

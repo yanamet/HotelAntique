@@ -127,13 +127,6 @@ public class AuthServiceTest {
         when(mockUserDetailsService.loadUserByUsername(testUser
                 .getUsername())).thenReturn(userDetails);
 
-
-        Authentication authentication = new UsernamePasswordAuthenticationToken(
-                userDetails,
-                userDetails.getPassword(),
-                userDetails.getAuthorities()
-        );
-
         Consumer<Authentication> successfulLoginProcessor = mock(Consumer.class);
         toTest.register(testRegisterDTO, successfulLoginProcessor);
 

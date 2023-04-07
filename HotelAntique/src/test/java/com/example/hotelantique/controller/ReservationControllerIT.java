@@ -73,11 +73,9 @@ public class ReservationControllerIT {
 
         this.roomRepository.save(room);
 
-
-
-
         GrantedAuthority authority = new SimpleGrantedAuthority
                 ("ROLE_GUEST");
+
         userDetails = new HotelAntiqueApplicationUserDetails(
                 1L, "GUEST", "Guest Gestov", "email@abv.bg", "12345",
                 "0000000000", "MALE", List.of(authority)

@@ -10,101 +10,106 @@
 <div style="margin-bottom: 11%">
 
     <div class="container ">
-        <h2 class="text-secondary text-center">Search for available rooms</h2>
-        <h3 class="text-secondary text-center">Please enter check-in and check-out days</h3>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12"></div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <h2 class="text-secondary text-center">Search for available rooms</h2>
+                <h3 class="text-secondary text-center">Please enter check-in and check-out days</h3>
 
 
-        <form
-                th:method="post"
-                th:action="@{/rooms/available/search}"
-                th:object="${availableRoomDTO}"
-                class="form-inline"
-                style="justify-content: center; margin-top: 20px;"
-        >
-            <div class="justify-content-center d-flex">
+                <form
+                        th:method="post"
+                        th:action="@{/rooms/available/search}"
+                        th:object="${availableRoomDTO}"
+                        class="form-inline"
+                        style="justify-content: center; margin-top: 20px;"
+                >
+                    <div class="justify-content-center d-flex">
+                        <div>
+                            <input class="form-control mr-sm-2"
+                                   style="width: 280px;"
+                                   th:value="*{checkIn}"
+                                   th:errorclass="is-invalid"
+                                   type="date"
+                                   placeholder="CHECK-IN DATE"
+                                   aria-label="Search"
+                                   id="checkIn"
+                                   name="checkIn"/>
+                            <small th:each="error: ${#fields.hasAnyErrors()}"
+                                   class="invalid-feedback bg-danger text-light rounded">
+                                Check-in date must be in the present or in the future.
+                            </small>
+
+                        </div>
+
+                        <div>
+                            <input class="form-control mr-sm-2"
+                                   style="width: 280px;"
+                                   type="date"
+                                   th:field="*{checkOut}"
+                                   th:errorclass="is-invalid"
+                                   placeholder="CHECK-OUT DATE"
+                                   aria-label="Search"
+                                   id="checkOut"
+                                   name="checkOut"/>
+                            <small th:each="error: ${#fields.hasAnyErrors()}"
+                                   class="invalid-feedback bg-danger text-light rounded">
+                                Check-out date must be in the future.
+                            </small>
+                        </div>
+
+                        <div>
+                            <select
+                                    name="roomType"
+                                    th:field="*{roomType}"
+                                    th:errorclass="is-invalid"
+                                    style="width: 280px;"
+                                    id="roomType"
+                                    class="form-select">
+                                <option value="" selected>Select room type</option>
+                                <option value="STANDARD">Double Standard Room</option>
+                                <option value="DELUXE">Double Deluxe Room</option>
+                                <option value="PREMIUM">Double Premium Room</option>
+                                <option value="STUDIO">Studio</option>
+                                <option value="APARTMENT">Apartment</option>
+                                <option value="VIP">VIP Apartment</option>
+                                <option value="PRESIDENT">President Apartment</option>
+                            </select>
+                            <small th:each="error: ${#fields.hasAnyErrors()}"
+                                   class="invalid-feedback bg-danger text-light rounded">
+                                You must select a room type.
+                            </small>
+                        </div>
+
+                    </div>
+
+                    <div class="d-grid w-60 mt-4">
+                        <button type="submit" class="btn btn-secondary btn-rounded ">SEARCH</button>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class=" mt-5" th:if="${availableRooms != null}">
+                <h2 class="text-center text-secondary">AVAILABLE ROOMS:</h2>
                 <div>
-                    <input class="form-control mr-sm-2"
-                           style="width: 280px;"
-                           th:value="*{checkIn}"
-                           th:errorclass="is-invalid"
-                           type="date"
-                           placeholder="CHECK-IN DATE"
-                           aria-label="Search"
-                           id="checkIn"
-                           name="checkIn"/>
-                    <small th:each="error: ${#fields.hasAnyErrors()}"
-                           class="invalid-feedback bg-danger text-light rounded">
-                        Check-in date must be in the present or in the future.
-                    </small>
+                    <a th:each="r: ${availableRooms}" th:object="${r}"
+                       class="btn btn-primary btn-rounded room-btn mb-2"
+                       th:text="|${r.name},   №${r.getRoomNumber()}|"
 
-                </div>
-
-                <div>
-                    <input class="form-control mr-sm-2"
-                           style="width: 280px;"
-                           type="date"
-                           th:field="*{checkOut}"
-                           th:errorclass="is-invalid"
-                           placeholder="CHECK-OUT DATE"
-                           aria-label="Search"
-                           id="checkOut"
-                           name="checkOut"/>
-                    <small th:each="error: ${#fields.hasAnyErrors()}"
-                           class="invalid-feedback bg-danger text-light rounded">
-                        Check-out date must be in the future.
-                    </small>
-                </div>
-
-                <div>
-                    <select
-                            name="roomType"
-                            th:field="*{roomType}"
-                            th:errorclass="is-invalid"
-                            style="width: 280px;"
-                            id="roomType"
-                            class="form-select">
-                        <option value="" selected>Select room type</option>
-                        <option value="STANDARD">Double Standard Room</option>
-                        <option value="DELUXE">Double Deluxe Room</option>
-                        <option value="PREMIUM">Double Premium Room</option>
-                        <option value="STUDIO">Studio</option>
-                        <option value="APARTMENT">Apartment</option>
-                        <option value="VIP">VIP Apartment</option>
-                        <option value="PRESIDENT">President Apartment</option>
-                    </select>
-                    <small th:each="error: ${#fields.hasAnyErrors()}"
-                           class="invalid-feedback bg-danger text-light rounded">
-                        You must select a room type.
-                    </small>
+                       th:href="@{/reservations/add/{id}/{checkIn}/{checkOut}(id = ${r.id}, checkIn = ${r.checkIn}, checkOut = ${r.checkOut})}"></a>
+                    <!--        /reservations/add(id=${r.id},from=${r.checkIn},to=${r.checkOut})}-->
+                    <!--        th:href="@{/roles/add/{id}/{id2}(id = *{id}, id2 = ${user.id})}"-->
                 </div>
 
             </div>
 
-            <div class="d-grid w-60 mt-4">
-                <button type="submit" class="btn btn-secondary btn-rounded ">SEARCH</button>
-            </div>
-        </form>
-    </div>
+            <h3 th:if="${availableRooms != null && availableRooms.size == 0}"
+                class="text-center">There are no available rooms of this type for this period.
+            </h3>
 
-
-    <div class=" mt-5" th:if="${availableRooms != null}">
-        <h2 class="text-center text-secondary">AVAILABLE ROOMS:</h2>
-        <div>
-            <a th:each="r: ${availableRooms}" th:object="${r}"
-               class="btn btn-primary btn-rounded room-btn mb-2"
-               th:text="|${r.name},   №${r.getRoomNumber()}|"
-
-               th:href="@{/reservations/add/{id}/{checkIn}/{checkOut}(id = ${r.id}, checkIn = ${r.checkIn}, checkOut = ${r.checkOut})}"></a>
-            <!--        /reservations/add(id=${r.id},from=${r.checkIn},to=${r.checkOut})}-->
-            <!--        th:href="@{/roles/add/{id}/{id2}(id = *{id}, id2 = ${user.id})}"-->
         </div>
-
     </div>
-
-    <h3 th:if="${availableRooms != null && availableRooms.size == 0}"
-        class="text-center">There are no available rooms of this type for this period.
-    </h3>
-
 </div>
 
 <footer th:replace="fragments/commons::footer"></footer>

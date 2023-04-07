@@ -32,8 +32,7 @@ public class UserController {
     public String myProfile(@AuthenticationPrincipal UserDetails userDetails,
                             Model model) {
 
-        String username = userDetails.getUsername();
-        UserEntity user = this.userService.getByUsername(username).get();
+        UserEntity user = this.userService.getByUsername(userDetails.getUsername()).get();
 
         model.addAttribute("user", user);
 

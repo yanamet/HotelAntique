@@ -3,7 +3,6 @@ package com.example.hotelantique.controller;
 import com.example.hotelantique.model.dtos.reservationDTO.PaymentReservationDTO;
 import com.example.hotelantique.model.entity.Payment;
 import com.example.hotelantique.service.PaymentService;
-import com.example.hotelantique.service.ReservationService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
