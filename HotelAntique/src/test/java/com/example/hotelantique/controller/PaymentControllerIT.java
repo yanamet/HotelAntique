@@ -88,7 +88,7 @@ public class PaymentControllerIT {
                 .thenReturn(reservation);
 
         when(this.paymentService.createPayment(1L))
-                .thenReturn(payment);
+                .thenReturn(paymentReservationDTO);
 
         when(this.modelMapper.map(payment, PaymentReservationDTO.class))
                 .thenReturn(paymentReservationDTO);

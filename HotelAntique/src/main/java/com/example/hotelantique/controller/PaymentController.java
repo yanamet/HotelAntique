@@ -35,11 +35,7 @@ public class PaymentController {
                               Model model) {
 
 
-        Payment payment = this.paymentService.createPayment(reservationId);
-        PaymentReservationDTO paymentReservationDTO = this.modelMapper
-                .map(payment, PaymentReservationDTO.class);
-
-        paymentReservationDTO.setReservationId(reservationId);
+        PaymentReservationDTO paymentReservationDTO = this.paymentService.createPayment(reservationId);
 
         model.addAttribute("paymentReservationDTO", paymentReservationDTO);
 

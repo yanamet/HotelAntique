@@ -49,10 +49,16 @@ public class PaymentService {
 
     }
 
-    public Payment createPayment(long reservationId) {
+    public PaymentReservationDTO createPayment(long reservationId) {
         Payment payment = new Payment();
         Reservation reservation = this.reservationService.getReservation(reservationId);
         payment.setReservation(reservation);
-        return payment;
+
+        PaymentReservationDTO paymentReservationDTO = this.modelMapper
+                .map(payment, PaymentReservationDTO.class);
+
+        paymentReservationDTO.setReservationId(reservationId);
+
+        return paymentReservationDTO;
     }
 }
